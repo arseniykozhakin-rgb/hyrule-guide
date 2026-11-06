@@ -3,465 +3,495 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Hyrule Guide — Мир Хайрула</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hyrule Guide — Ocarina of Time</title>
+
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Roboto:wght@400;500&display=swap');
-
-:root {
-  --gold:#e8c77c;
-  --dark:#101a15;
-  --panel:#1b3025;
-  --cream:#f5edda;
+* {
+    box-sizing: border-box;
 }
-* { box-sizing:border-box; }
-html { scroll-behavior:smooth; }
+
 body {
-  margin:0;
-  background:var(--dark);
-  color:var(--cream);
-  font-family:Roboto,sans-serif;
+    margin: 0;
+    color: #f5e8c4;
+    font-family: Georgia, serif;
+    background:
+        radial-gradient(ellipse at top, #24452f 0%, #101d17 65%, #080e0b 100%);
 }
+
 header {
-  position:sticky;
-  top:0;
-  z-index:5;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:18px 7%;
-  background:#14251bf2;
-  border-bottom:1px solid #75633d;
+    text-align: center;
+    padding: 65px 20px 45px;
+    background: linear-gradient(#08130dcc, #142b20dd);
+    border-bottom: 2px solid #b99a50;
 }
-.logo {
-  color:var(--gold);
-  font:700 23px Cinzel,serif;
-}
-nav a {
-  color:var(--cream);
-  text-decoration:none;
-  margin-left:18px;
-  font-size:14px;
-}
-nav a:hover { color:var(--gold); }
 
-.hero {
-  min-height:470px;
-  display:grid;
-  place-items:center;
-  text-align:center;
-  padding:65px 8%;
-  background:
-    linear-gradient(#101a1570,#101a15e8),
-    url("https://images.unsplash.com/photo-1448375240586-882707db888b?w=1600")
-    center/cover;
+h1 {
+    color: #e7c66d;
+    font-size: clamp(36px, 7vw, 65px);
+    margin: 0 0 12px;
+    text-shadow: 0 0 20px #d4ad4c66;
 }
-.hero h1 {
-  color:var(--gold);
-  font:700 clamp(38px,6vw,68px) Cinzel,serif;
-  margin:20px 0;
+
+.subtitle {
+    color: #d5c69b;
+    font-size: 18px;
 }
-.hero p {
-  max-width:650px;
-  margin:auto;
-  font-size:18px;
-  line-height:1.8;
+
+.triforce {
+    color: #e8c75d;
+    font-size: 32px;
+    margin-bottom: 12px;
 }
-.eyebrow {
-  color:var(--gold);
-  letter-spacing:5px;
+
+main {
+    max-width: 1150px;
+    margin: auto;
+    padding: 35px 20px 70px;
 }
-.section { padding:65px 8%; }
-h2 {
-  color:var(--gold);
-  text-align:center;
-  font:700 30px Cinzel,serif;
-  margin-bottom:35px;
+
+.intro {
+    text-align: center;
+    max-width: 760px;
+    margin: 0 auto 35px;
+    line-height: 1.7;
+    color: #e0d5b8;
 }
-.cards {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(235px,1fr));
-  gap:22px;
+
+.section-title {
+    text-align: center;
+    color: #e7c66d;
+    font-size: 30px;
+    margin: 45px 0 25px;
 }
-.card {
-  overflow:hidden;
-  background:var(--panel);
-  border:1px solid #75633d;
-  border-radius:10px;
-  transition:.25s;
+
+.places {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 22px;
 }
-.card:hover {
-  transform:translateY(-6px);
-  border-color:var(--gold);
-  box-shadow:0 12px 35px #0008;
+
+.place-card {
+    overflow: hidden;
+    background: #17291f;
+    border: 1px solid #8f783e;
+    border-radius: 13px;
+    box-shadow: 0 8px 25px #0007;
+    transition: transform .25s, border-color .25s;
 }
-.card img {
-  width:100%;
-  height:190px;
-  object-fit:cover;
-  display:block;
+
+.place-card:hover {
+    transform: translateY(-6px);
+    border-color: #e7c66d;
 }
-.card-content { padding:20px; }
-.card h3 {
-  color:var(--gold);
-  font:700 20px Cinzel,serif;
+
+.place-image {
+    height: 190px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 15px;
+    background:
+        radial-gradient(circle at center, #466b43, #14271d 75%);
+    color: #e8d18b;
+    position: relative;
+    overflow: hidden;
 }
-.card p {
-  color:#d0c9b5;
-  line-height:1.7;
+
+.place-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    inset: 0;
 }
+
+.image-placeholder {
+    position: relative;
+    z-index: 1;
+    text-shadow: 0 2px 8px #000;
+    line-height: 1.5;
+}
+
+.place-content {
+    padding: 18px;
+}
+
+.place-content h3 {
+    color: #e7c66d;
+    font-size: 23px;
+    margin: 0 0 10px;
+}
+
+.place-content p {
+    color: #d5ccb3;
+    line-height: 1.55;
+    min-height: 70px;
+}
+
 button {
-  cursor:pointer;
-  border:1px solid #f5d995;
-  background:var(--gold);
-  color:#17251b;
-  border-radius:6px;
-  padding:12px 19px;
-  font-weight:bold;
-  transition:.2s;
+    cursor: pointer;
+    font-family: Georgia, serif;
+    font-size: 16px;
+    border: 1px solid #d5b45e;
+    border-radius: 7px;
+    padding: 11px 18px;
+    color: #fff0c6;
+    background: linear-gradient(#80652d, #4e3c1b);
+    transition: .2s;
 }
-button:hover {
-  background:#fff0bd;
-  transform:scale(1.04);
-}
-.details {
-  display:none;
-  margin-top:18px;
-  padding:20px;
-  background:#22382a;
-  border:1px solid #75633d;
-  border-radius:8px;
-  line-height:1.8;
-}
-.details.open { display:block; }
-.details h3 {
-  color:var(--gold);
-  font-family:Cinzel,serif;
-}
-.fairy-area { text-align:center; }
-.fairy-area p {
-  color:#d0c9b5;
-  line-height:1.8;
-}
-.fairy-button { font-size:17px; padding:16px 27px; }
 
-/* Герои и диалог */
-.overlay {
-  display:none;
-  position:fixed;
-  inset:0;
-  z-index:20;
-  background:#030805e8;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
-  overflow:hidden;
-  perspective:1000px;
+button:hover {
+    background: linear-gradient(#a98940, #705322);
+    transform: scale(1.03);
 }
-.overlay.active { display:flex; }
-.dialog {
-  position:relative;
-  width:min(720px,100%);
-  margin-top:110px;
-  padding:60px 25px 30px;
-  text-align:center;
-  background:linear-gradient(145deg,#294332,#101b15);
-  border:2px solid var(--gold);
-  border-radius:12px;
-  box-shadow:0 0 55px #d7b45c55,0 25px 80px #000;
-  animation:dialogIn .5s ease-out;
+
+.details {
+    display: none;
+    padding: 15px;
+    margin-top: 14px;
+    border-top: 1px solid #806b3d;
+    color: #e1d7bd;
+    line-height: 1.65;
 }
-@keyframes dialogIn {
-  from { opacity:0; transform:translateY(60px) scale(.75); }
-  to { opacity:1; transform:translateY(0) scale(1); }
+
+.details.open {
+    display: block;
 }
-.heroes {
-  position:absolute;
-  top:-190px;
-  left:0;
-  right:0;
-  display:flex;
-  justify-content:space-around;
-  align-items:end;
-  pointer-events:none;
+
+.hero-section {
+    text-align: center;
+    margin: 55px 0 20px;
+    padding: 30px 15px;
+    background: #14271dcc;
+    border: 1px solid #9a8043;
+    border-radius: 14px;
 }
-.hero-character {
-  width:180px;
-  height:210px;
-  object-fit:contain;
-  filter:drop-shadow(0 15px 15px #000c);
-  animation:heroRun .8s cubic-bezier(.2,.9,.2,1.3) both;
+
+.hero-section h2 {
+    color: #e7c66d;
+    font-size: 28px;
 }
-.hero-character.link { animation-delay:.15s; }
-@keyframes heroRun {
-  0% { opacity:0; transform:translateY(140px) scale(.25) rotate(-8deg); }
-  65% { opacity:1; transform:translateY(-12px) scale(1.15); }
-  100% { opacity:1; transform:translateY(0) scale(1); }
+
+.hero-section p {
+    color: #d8ceb2;
+    line-height: 1.6;
 }
-.character-fallback {
-  font-size:95px;
-  filter:drop-shadow(0 10px 15px #000);
-  animation:heroRun .8s both;
+
+.hero-button {
+    font-size: 19px;
+    padding: 14px 25px;
+    margin-top: 10px;
 }
-.dialog h3 {
-  color:var(--gold);
-  font:700 25px Cinzel,serif;
-}
-#dialogText {
-  min-height:75px;
-  line-height:1.8;
-  font-size:17px;
-}
-.dialog-actions {
-  display:flex;
-  justify-content:center;
-  flex-wrap:wrap;
-  gap:12px;
-}
-.close {
-  position:absolute;
-  right:12px;
-  top:12px;
-  padding:7px 12px;
-}
+
 footer {
-  text-align:center;
-  padding:30px;
-  background:#09100c;
-  color:#aaa18d;
-  font-size:13px;
-  line-height:1.8;
+    text-align: center;
+    padding: 25px;
+    border-top: 1px solid #8f783e;
+    color: #b9aa83;
 }
-@media(max-width:600px) {
-  header { flex-direction:column; gap:12px; }
-  nav a { margin:0 6px; }
-  .hero-character { width:125px; height:160px; }
-  .heroes { top:-140px; }
-  .dialog { padding:50px 16px 25px; }
+
+/* Окно героев */
+
+.hero-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 10;
+    background: #030806ed;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+}
+
+.hero-overlay.show {
+    display: flex;
+}
+
+.hero-window {
+    width: 100%;
+    max-width: 700px;
+    max-height: 90vh;
+    overflow-y: auto;
+    text-align: center;
+    padding: 25px;
+    background: linear-gradient(145deg, #203b2b, #0b1710);
+    border: 2px solid #d2ad56;
+    border-radius: 15px;
+    box-shadow: 0 0 45px #c9a64a33;
+}
+
+.hero-window h2 {
+    color: #e7c66d;
+}
+
+.characters {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 25px;
+    min-height: 230px;
+    margin: 15px 0;
+}
+
+.character {
+    width: min(40%, 210px);
+    height: 220px;
+    object-fit: contain;
+    animation: appear .8s ease-out both;
+}
+
+.character.link {
+    animation-delay: .2s;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(100px) scale(.65);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.advice {
+    color: #f0e4c5;
+    font-size: 18px;
+    line-height: 1.65;
+    min-height: 65px;
+    margin: 15px 0;
+}
+
+.close-button {
+    margin-left: 8px;
+    background: #343a2b;
+}
+
+@media (max-width: 500px) {
+    .characters {
+        gap: 8px;
+    }
+
+    .character {
+        height: 160px;
+    }
+
+    .hero-window {
+        padding: 15px;
+    }
 }
 </style>
 </head>
+
 <body>
 
 <header>
-  <div class="logo">✦ HYRULE GUIDE</div>
-  <nav>
-    <a href="#home">Главная</a>
-    <a href="#places">Локации</a>
-    <a href="#fairy">Герои</a>
-  </nav>
+    <div class="triforce">▲</div>
+    <h1>HYRULE GUIDE</h1>
+    <div class="subtitle">Путеводитель по The Legend of Zelda: Ocarina of Time</div>
 </header>
 
 <main>
-<section class="hero" id="home">
-  <div>
-    <div class="eyebrow">THE LEGEND OF ZELDA</div>
-    <h1>Добро пожаловать в Хайрул</h1>
-    <p>
-      Мир древних легенд, великих приключений
-      и загадочных сокровищ. Исследуй королевство
-      и стань настоящим Героем Времени!
-    </p>
-  </div>
-</section>
 
-<section class="section" id="places">
-  <h2>Исследуй Хайрул</h2>
-  <div class="cards">
+    <div class="intro">
+        Добро пожаловать в Хайрул, путешественник!
+        Здесь ты найдёшь описания важных мест, узнаешь,
+        куда отправиться дальше, и получишь советы от Линка и Нави.
+        Пусть твоё приключение начнётся!
+    </div>
 
-    <article class="card">
-      <img src="https://images.unsplash.com/photo-1448375240586-882707db888b?w=800"
-           alt="Зелёный лес">
-      <div class="card-content">
-        <h3>🌳 Лес Кокири</h3>
-        <p>Дом Линка и начало его большого приключения.</p>
-        <button onclick="toggleDetails('kokiri')">Исследовать</button>
-        <div class="details" id="kokiri">
-          <h3>Лес Кокири</h3>
-          Лес Кокири — уютное поселение народа Кокири,
-          окружённое густыми деревьями. Здесь живёт
-          Линк в начале истории.
-          <p><b>Что посмотреть:</b> дом Линка, тренировочную
-          площадку и лесные тропинки.</p>
-          <p><b>Совет:</b> поговори с жителями и исследуй
-          окрестности перед выходом из леса.</p>
-        </div>
-      </div>
-    </article>
+    <h2 class="section-title">✦ Мир Хайрула ✦</h2>
 
-    <article class="card">
-      <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=800"
-           alt="Старинный замок">
-      <div class="card-content">
-        <h3>🏰 Замок Хайрула</h3>
-        <p>Королевская резиденция и место важных событий.</p>
-        <button onclick="toggleDetails('castle')">Исследовать</button>
-        <div class="details" id="castle">
-          <h3>Замок Хайрула</h3>
-          Замок — сердце королевства и место, связанное
-          с принцессой Зельдой.
-          <p><b>Что посмотреть:</b> двор замка, сад и
-          окрестности королевской резиденции.</p>
-          <p><b>Совет:</b> внимательно следи за событиями
-          и не пропускай важные встречи.</p>
-        </div>
-      </div>
-    </article>
+    <div class="places">
 
-    <article class="card">
-      <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800"
-           alt="Горные вершины">
-      <div class="card-content">
-        <h3>⛰️ Гора Смерти</h3>
-        <p>Высокая гора, где живёт народ горонов.</p>
-        <button onclick="toggleDetails('mountain')">Исследовать</button>
-        <div class="details" id="mountain">
-          <h3>Гора Смерти</h3>
-          Это суровый горный регион с вулканическими
-          пейзажами. Здесь находится поселение горонов.
-          <p><b>Что посмотреть:</b> Город горонов и
-          горные тропы.</p>
-          <p><b>Совет:</b> подготовь нужное снаряжение
-          перед исследованием горячих областей.</p>
-        </div>
-      </div>
-    </article>
+        <!-- ЛЕС КОКИРИ -->
+        <article class="place-card">
+            <div class="place-image">
+                <img src="images/kokiri-forest.jpg"
+                     alt="Лес Кокири из Ocarina of Time"
+                     onerror="this.style.display='none'">
+                <div class="image-placeholder">
+                    🌳<br>
+                    Лес Кокири<br>
+                    <small>Добавь игровой скриншот</small>
+                </div>
+            </div>
+            <div class="place-content">
+                <h3>Лес Кокири</h3>
+                <p>Дом Линка и народа Кокири. Здесь начинается великое приключение.</p>
+                <button onclick="toggleDetails('kokiri')">Исследовать</button>
+                <div class="details" id="kokiri">
+                    Лес Кокири — тихое поселение, окружённое деревьями.
+                    Здесь живут Кокири, а Великий Деревянный Дух Деку
+                    хранит важную тайну. Именно отсюда Линк отправляется
+                    навстречу своей судьбе.
+                </div>
+            </div>
+        </article>
 
-    <article class="card">
-      <img src="https://images.unsplash.com/photo-1433086966358-54859d0ed716?w=800"
-           alt="Водопад">
-      <div class="card-content">
-        <h3>🌊 Домен Зора</h3>
-        <p>Водное королевство народа Зора.</p>
-        <button onclick="toggleDetails('zora')">Исследовать</button>
-        <div class="details" id="zora">
-          <h3>Домен Зора</h3>
-          Красивое водное королевство, окружённое
-          водопадами и скалами.
-          <p><b>Что посмотреть:</b> тронный зал, водопад
-          и бассейн.</p>
-          <p><b>Совет:</b> исследуй водные маршруты
-          и поговори с жителями Зора.</p>
-        </div>
-      </div>
-    </article>
+        <!-- ЗАМОК ХАЙРУЛА -->
+        <article class="place-card">
+            <div class="place-image">
+                <img src="images/hyrule-castle.jpg"
+                     alt="Замок Хайрула из Ocarina of Time"
+                     onerror="this.style.display='none'">
+                <div class="image-placeholder">
+                    🏰<br>
+                    Замок Хайрула<br>
+                    <small>Добавь игровой скриншот</small>
+                </div>
+            </div>
+            <div class="place-content">
+                <h3>Замок Хайрула</h3>
+                <p>Королевский замок, где живёт принцесса Зельда.</p>
+                <button onclick="toggleDetails('castle')">Исследовать</button>
+                <div class="details" id="castle">
+                    Замок Хайрула — сердце королевства.
+                    Здесь Линк впервые встречает принцессу Зельду.
+                    Внутри истории этого места скрывается начало
+                    большой борьбы за судьбу Хайрула.
+                </div>
+            </div>
+        </article>
 
-  </div>
-</section>
+        <!-- ГОРА СМЕРТИ -->
+        <article class="place-card">
+            <div class="place-image">
+                <img src="images/death-mountain.jpg"
+                     alt="Гора Смерти из Ocarina of Time"
+                     onerror="this.style.display='none'">
+                <div class="image-placeholder">
+                    🌋<br>
+                    Гора Смерти<br>
+                    <small>Добавь игровой скриншот</small>
+                </div>
+            </div>
+            <div class="place-content">
+                <h3>Гора Смерти</h3>
+                <p>Опасная вулканическая гора, где живёт народ горонов.</p>
+                <button onclick="toggleDetails('mountain')">Исследовать</button>
+                <div class="details" id="mountain">
+                    Гора Смерти находится рядом с деревней Какарико.
+                    Здесь можно встретить горонов и исследовать
+                    Огненный храм. Будь готов к жаре и непростым испытаниям!
+                </div>
+            </div>
+        </article>
 
-<section class="section fairy-area" id="fairy">
-  <h2>Совет от Нави и Линка</h2>
-  <p>
-    Герои Хайрула готовы помочь тебе!
-    Нажми на кнопку, чтобы позвать их.
-  </p>
-  <button class="fairy-button" onclick="openHeroes()">
-    ✨ Позвать героев
-  </button>
-</section>
+        <!-- ДОМЕН ЗОРА -->
+        <article class="place-card">
+            <div class="place-image">
+                <img src="images/zora-domain.jpg"
+                     alt="Домен Зора из Ocarina of Time"
+                     onerror="this.style.display='none'">
+                <div class="image-placeholder">
+                    💧<br>
+                    Домен Зора<br>
+                    <small>Добавь игровой скриншот</small>
+                </div>
+            </div>
+            <div class="place-content">
+                <h3>Домен Зора</h3>
+                <p>Водное королевство народа Зора, скрытое среди гор.</p>
+                <button onclick="toggleDetails('zora')">Исследовать</button>
+                <div class="details" id="zora">
+                    Домен Зора — прекрасное подводное королевство.
+                    Здесь находится трон короля Зора и путь к озеру Хилия.
+                    Линку предстоит помочь принцессе Руто.
+                </div>
+            </div>
+        </article>
+
+    </div>
+
+    <section class="hero-section">
+        <h2>✦ Нужен совет? ✦</h2>
+        <p>
+            Нави и Линк готовы помочь тебе в путешествии.
+            Позови героев и узнай полезные советы!
+        </p>
+        <button class="hero-button" onclick="openHeroes()">
+            ✨ Позвать героев
+        </button>
+    </section>
+
 </main>
 
-<div class="overlay" id="overlay">
-  <div class="dialog">
-    <button class="close" onclick="closeHeroes()">✕</button>
-
-    <div class="heroes">
-      <!-- Позже добавь сюда свои изображения:
-           images/navi.png и images/link.png -->
-      <img class="hero-character"
-           src="images/navi.png"
-           alt="Нави"
-           onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
-      <div class="character-fallback" style="display:none">🧚</div>
-
-      <img class="hero-character link"
-           src="images/link.png"
-           alt="Линк"
-           onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
-      <div class="character-fallback" style="display:none">🧝</div>
-    </div>
-
-    <h3 id="speaker">Нави</h3>
-    <p id="dialogText"></p>
-
-    <div class="dialog-actions">
-      <button onclick="nextAdvice()">Следующий совет</button>
-      <button onclick="closeHeroes()">Закрыть</button>
-    </div>
-  </div>
-</div>
-
 <footer>
-  Hyrule Guide · Фанатский путеводитель по Ocarina of Time
-  <br>
-  Неофициальный проект. Права на The Legend of Zelda
-  принадлежат Nintendo.
+    Hyrule Guide • Фанатский путеводитель по Ocarina of Time
 </footer>
+
+<!-- ОКНО С ЛИНКОМ И НАВИ -->
+
+<div class="hero-overlay" id="heroOverlay">
+    <div class="hero-window">
+        <h2>Герои Хайрула прибыли!</h2>
+
+        <div class="characters">
+            <img class="character"
+                 src="images/navi.png"
+                 alt="Нави">
+
+            <img class="character link"
+                 src="images/link.png"
+                 alt="Линк">
+        </div>
+
+        <div class="advice" id="advice">
+            Нави: Привет! Я готова помочь тебе!
+        </div>
+
+        <button onclick="nextAdvice()">Следующий совет</button>
+        <button class="close-button" onclick="closeHeroes()">Закрыть</button>
+    </div>
+</div>
 
 <script>
 function toggleDetails(id) {
-  const panel = document.getElementById(id);
-  panel.classList.toggle('open');
+    const details = document.getElementById(id);
+    details.classList.toggle('open');
 }
 
-const advice = [
-  [
-    ["Нави","Эй! Слушай! Исследуй Лес Кокири. Возможно, там найдётся что-то полезное!"],
-    ["Линк","Не забывай разговаривать с жителями. Они могут рассказать важные вещи."]
-  ],
-  [
-    ["Нави","Эй! Обрати внимание на необычные места и предметы. В Хайруле много секретов!"],
-    ["Линк","Перед путешествием проверь своё снаряжение. Подготовка очень важна."]
-  ],
-  [
-    ["Нави","Посмотри вокруг! Иногда подсказка находится прямо перед тобой!"],
-    ["Линк","Если не знаешь, куда идти, попробуй вернуться в уже знакомую локацию."]
-  ],
-  [
-    ["Нави","Не пропускай разговоры с персонажами. Они знают больше, чем кажется!"],
-    ["Линк","И помни: даже маленькое открытие может привести к большому приключению."]
-  ],
-  [
-    ["Нави","Внимательно слушай музыку. Иногда она помогает найти правильный путь!"],
-    ["Линк","Не торопись. Исследуй мир в своём темпе и наслаждайся путешествием."]
-  ]
+const advices = [
+    "Нави: Эй! Не забывай внимательно исследовать каждый уголок Хайрула!",
+    "Линк: Разговаривай с жителями. Иногда они знают больше, чем кажется.",
+    "Нави: Заглядывай в пещеры и проверяй подозрительные места!",
+    "Линк: Не забывай использовать свою окарину. Музыка может открыть новые пути.",
+    "Нави: Если не знаешь, куда идти, посмотри на карту!",
+    "Линк: Собирай сердца и находи полезные предметы. Они пригодятся в путешествии.",
+    "Нави: Слушай внимательно! Иногда важные подсказки совсем рядом."
 ];
 
-let currentAdvice = [];
-let adviceStep = 0;
+let adviceIndex = 0;
 
 function openHeroes() {
-  currentAdvice = advice[Math.floor(Math.random()*advice.length)];
-  adviceStep = 0;
-  document.getElementById('overlay').classList.add('active');
-  showAdvice();
-}
-
-function showAdvice() {
-  const line = currentAdvice[adviceStep];
-  document.getElementById('speaker').textContent = line[0];
-  document.getElementById('dialogText').textContent = line[1];
-}
-
-function nextAdvice() {
-  adviceStep++;
-  if(adviceStep >= currentAdvice.length) {
-    closeHeroes();
-    return;
-  }
-  showAdvice();
+    document.getElementById('heroOverlay').classList.add('show');
+    adviceIndex = 0;
+    showAdvice();
 }
 
 function closeHeroes() {
-  document.getElementById('overlay').classList.remove('active');
+    document.getElementById('heroOverlay').classList.remove('show');
 }
 
-document.getElementById('overlay').addEventListener('click',e=>{
-  if(e.target.id === 'overlay') closeHeroes();
-});
-document.addEventListener('keydown',e=>{
-  if(e.key === 'Escape') closeHeroes();
+function nextAdvice() {
+    adviceIndex = (adviceIndex + 1) % advices.length;
+    showAdvice();
+}
+
+function showAdvice() {
+    document.getElementById('advice').textContent = advices[adviceIndex];
+}
+
+document.getElementById('heroOverlay').addEventListener('click', function(event) {
+    if (event.target === this) {
+        closeHeroes();
+    }
 });
 </script>
+
 </body>
 </html>
