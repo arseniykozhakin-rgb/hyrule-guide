@@ -1,0 +1,239 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hyrule Guide — Путеводитель по Хайрулу</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Roboto:wght@300;400;500&display=swap');
+
+:root {
+  --gold: #e5c477;
+  --green: #172b20;
+  --light: #f3e9ce;
+  --muted: #c6c0a8;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: #101a16;
+  color: var(--light);
+  font-family: Roboto, sans-serif;
+}
+
+header {
+  padding: 22px 8%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #75633d;
+  background: #14231b;
+}
+
+.logo {
+  color: var(--gold);
+  font: 700 23px Cinzel, serif;
+}
+
+nav a {
+  color: var(--light);
+  text-decoration: none;
+  margin-left: 22px;
+  font-size: 14px;
+}
+
+nav a:hover { color: var(--gold); }
+
+.hero {
+  min-height: 440px;
+  padding: 90px 10%;
+  text-align: center;
+  background:
+    linear-gradient(#101a16a8, #101a16ed),
+    url("https://images.unsplash.com/photo-1448375240586-882707db888b?w=1600")
+    center/cover;
+}
+
+.hero h1 {
+  font: 700 clamp(36px, 6vw, 65px) Cinzel, serif;
+  color: var(--gold);
+  margin: 25px 0;
+}
+
+.hero p {
+  max-width: 650px;
+  margin: auto;
+  line-height: 1.8;
+  color: #eee6d2;
+  font-size: 17px;
+}
+
+.section {
+  padding: 65px 8%;
+}
+
+h2 {
+  font: 600 30px Cinzel, serif;
+  color: var(--gold);
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 22px;
+}
+
+.card {
+  background: #1b3025;
+  border: 1px solid #75633d;
+  border-radius: 9px;
+  padding: 25px;
+  transition: .2s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  border-color: var(--gold);
+}
+
+.card h3 {
+  color: var(--gold);
+  font: 600 20px Cinzel, serif;
+}
+
+.card p {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.fairy {
+  max-width: 700px;
+  margin: auto;
+  padding: 30px;
+  text-align: center;
+  background: #233a2d;
+  border: 1px solid var(--gold);
+  border-radius: 12px;
+}
+
+.fairy button {
+  background: var(--gold);
+  color: #17251b;
+  border: 0;
+  border-radius: 5px;
+  padding: 13px 22px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.fairy button:hover { background: #f5d995; }
+
+#hint {
+  min-height: 55px;
+  line-height: 1.7;
+  color: #fff1c8;
+  margin-top: 20px;
+}
+
+footer {
+  padding: 30px;
+  text-align: center;
+  background: #0b120f;
+  color: #a9a18c;
+  font-size: 13px;
+}
+
+@media(max-width:600px) {
+  header { flex-direction: column; gap: 15px; }
+  nav a { margin: 0 7px; }
+  .hero { padding: 65px 7%; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">✦ HYRULE GUIDE</div>
+  <nav>
+    <a href="#home">Главная</a>
+    <a href="#places">Локации</a>
+    <a href="#tips">Советы</a>
+  </nav>
+</header>
+
+<main>
+<section class="hero" id="home">
+  <div style="color:#e5c477;font-size:15px;letter-spacing:5px">
+    THE LEGEND OF ZELDA
+  </div>
+  <h1>Добро пожаловать в Хайрул</h1>
+  <p>
+    Твоё приключение начинается здесь.
+    Исследуй мир, открывай тайны, находи сокровища
+    и стань настоящим героем времени!
+  </p>
+</section>
+
+<section class="section" id="places">
+  <h2>Места, которые стоит посетить</h2>
+  <div class="cards">
+    <article class="card">
+      <h3>🌳 Лес Кокири</h3>
+      <p>Начало большого путешествия. Познакомься с жителями леса и найди свой первый меч.</p>
+    </article>
+    <article class="card">
+      <h3>🏰 Замок Хайрула</h3>
+      <p>Королевский замок хранит важные секреты. Здесь начинается история принцессы Зельды.</p>
+    </article>
+    <article class="card">
+      <h3>⛰️ Гора Смерти</h3>
+      <p>Жаркое и опасное место, где живёт народ горонов. Не забудь подготовиться к путешествию!</p>
+    </article>
+    <article class="card">
+      <h3>🌊 Домен Зора</h3>
+      <p>Водное королевство народа Зора. Исследуй водопады и поговори с его обитателями.</p>
+    </article>
+  </div>
+</section>
+
+<section class="section" id="tips">
+  <h2>Совет от феи ✨</h2>
+  <div class="fairy">
+    <p>Не знаешь, что делать дальше? Позволь фее подсказать!</p>
+    <button onclick="newHint()">Получить совет</button>
+    <div id="hint">Нажми на кнопку — и фея поделится мудростью.</div>
+  </div>
+</section>
+</main>
+
+<footer>
+  Hyrule Guide · Фанатский путеводитель по The Legend of Zelda: Ocarina of Time
+  <br><br>
+  Неофициальный проект поклонников. Все права на оригинальную игру принадлежат Nintendo.
+</footer>
+
+<script>
+const hints = [
+  "Исследуй каждый уголок локации. Иногда полезные предметы спрятаны совсем рядом.",
+  "Разговаривай с жителями Хайрула. Они могут дать важные подсказки.",
+  "Если видишь подозрительную стену или необычный объект, попробуй внимательно его изучить.",
+  "Не забывай сохранять прогресс и проверять своё снаряжение.",
+  "Исследуй мир в разное время суток. Некоторые события происходят только в определённое время.",
+  "Заглядывай в магазины. Иногда там можно найти именно то, что нужно для приключения.",
+  "Внимательно слушай музыку и звуки вокруг. Они могут подсказать, что делать дальше."
+];
+
+function newHint() {
+  const hint = hints[Math.floor(Math.random() * hints.length)];
+  document.getElementById("hint").textContent = "✨ " + hint;
+}
+</script>
+
+</body>
+</html>
