@@ -1,997 +1,919 @@
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Hyrule Guide — Ocarina of Time</title>
-
 <style>
-:root {
-  --gold: #e7c66b;
-  --panel: rgba(12, 25, 23, .94);
-  --green: #91bd78;
-}
-* { box-sizing: border-box; }
-
-body {
-  margin: 0;
-  color: #f4edda;
-  font-family: Georgia, serif;
-  background: #14211b url("./images/hyrule-field.jpg.webp") center/cover fixed;
-  min-height: 100vh;
-}
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background: rgba(5,13,10,.72);
-  z-index: -1;
-}
-header {
-  text-align: center;
-  padding: 30px 16px 24px;
-  background: linear-gradient(#07120de8,#10251acc);
-  border-bottom: 2px solid var(--gold);
-}
-h1 {
-  color: var(--gold);
-  font-size: clamp(30px,6vw,52px);
-  margin: 5px 0;
-  text-shadow: 0 3px 12px #000;
-}
-.subtitle { color: #d8d0b5; }
-
-nav {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 9px;
-  padding: 14px;
-  background: #09130fe8;
-  position: sticky;
-  top: 0;
-  z-index: 5;
-}
-button {
-  cursor: pointer;
-  border: 1px solid var(--gold);
-  color: #fff3d1;
-  background: #243b2b;
-  padding: 10px 14px;
-  border-radius: 7px;
-  font-family: inherit;
-  font-size: 15px;
-}
-button:hover { background: #49663a; }
-button:disabled {
-  opacity: .45;
-  cursor: not-allowed;
-}
-main {
-  width: min(1100px,94%);
-  margin: 25px auto;
-}
-.panel {
-  background: var(--panel);
-  border: 1px solid #a58b4b;
-  border-radius: 12px;
-  padding: 22px;
-  margin-bottom: 22px;
-  box-shadow: 0 8px 25px #0007;
-}
-h2,h3 { color: var(--gold); }
-
-.hero {
-  min-height: 260px;
-  display: grid;
-  place-items: center;
-  text-align: center;
-  background:
-    linear-gradient(#09150b88,#09150bdd),
-    url("./images/hyrule-field.jpg.webp") center/cover;
-  border: 1px solid var(--gold);
-  border-radius: 12px;
-  padding: 25px;
-}
-.hero p {
-  max-width: 650px;
-  line-height: 1.7;
-}
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
-  gap: 16px;
-}
-.location {
-  background: #17291feF;
-  border: 1px solid #8b7948;
-  border-radius: 9px;
-  overflow: hidden;
-}
-.location img {
-  width: 100%;
-  height: 145px;
-  object-fit: cover;
-  display: block;
-}
-.image-placeholder {
-  height: 145px;
-  display: grid;
-  place-items: center;
-  text-align: center;
-  color: #d8c58a;
-  background: #25372a;
-  padding: 15px;
-}
-.location-content { padding: 14px; }
-.location-content h3 { margin-top: 0; }
-.location-content p { line-height: 1.5; }
-
-.map {
-  min-height: 340px;
-  background:
-    linear-gradient(#17271b88,#17271b88),
-    url("./images/hyrule-map.jpg.webp") center/cover;
-  border: 2px solid var(--gold);
-  border-radius: 10px;
-  padding: 20px;
-  display: flex;
-  flex-wrap: wrap;
-  align-content: center;
-  justify-content: center;
-  gap: 12px;
-}
-.map button { background: #253d29ed; }
-
-.list-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin: 10px 0;
-  padding: 11px;
-  background: #203428;
-  border-radius: 7px;
-}
-.list-item input { accent-color: #a9d17b; }
-
-.hidden { display: none !important; }
-footer {
-  text-align: center;
-  padding: 25px;
-  color: #c7bd9e;
-}
-
-/* Игровая панель */
-
-.stats {
-  display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(150px,1fr));
-  gap: 12px;
-  margin-bottom: 20px;
-}
-.stat {
-  background: #17291f;
-  border: 1px solid #8b7948;
-  border-radius: 9px;
-  padding: 13px;
-  text-align: center;
-}
-.stat-title {
-  color: #d8c58a;
-  font-size: 14px;
-  margin-bottom: 7px;
-}
-.stat-value {
-  font-size: 23px;
-  color: #fff0bd;
-}
-.hearts {
-  color: #ff6b78;
-  letter-spacing: 3px;
-  font-size: 22px;
-  overflow-wrap: anywhere;
-}
-.progress-track {
-  height: 10px;
-  background: #101a15;
-  border-radius: 10px;
-  overflow: hidden;
-  margin-top: 10px;
-}
-.progress-fill {
-  height: 100%;
-  width: 0;
-  background: #91bd78;
-  transition: width .3s;
-}
-.item-card {
-  background: #17291f;
-  border: 1px solid #8b7948;
-  border-radius: 10px;
-  padding: 15px;
-  text-align: center;
-}
-.item-icon {
-  font-size: 36px;
-  margin-bottom: 8px;
-}
-.item-card p {
-  color: #d8d0b5;
-  line-height: 1.4;
-  font-size: 14px;
-}
-.item-card button { margin-top: 8px; }
-.dungeon-card {
-  background: #17291f;
-  border: 1px solid #8b7948;
-  border-radius: 10px;
-  padding: 16px;
-  margin: 14px 0;
-}
-.dungeon-card p { line-height: 1.5; }
-.dungeon-card.completed {
-  border-color: #91bd78;
-  box-shadow: 0 0 12px #91bd7833;
-}
-.reward {
-  color: #e7c66b;
-  font-size: 14px;
-}
-.action-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 12px;
-}
-.notice {
-  color: #c6dcae;
-  min-height: 22px;
-  margin: 10px 0;
-}
-
-/* Нави */
-
-#navi {
-  position: fixed;
-  right: 22px;
-  bottom: 20px;
-  width: 85px;
-  height: 85px;
-  object-fit: contain;
-  z-index: 11;
-  cursor: pointer;
-  filter: drop-shadow(0 0 12px #a8eaff);
-  animation: navi-float 2.5s ease-in-out infinite,
-             navi-glow 2s ease-in-out infinite alternate;
-}
-#navi:hover { transform: scale(1.15); }
-#navi:focus-visible {
-  outline: 2px solid #a8eaff;
-  border-radius: 50%;
-}
-#navi-message {
-  position: fixed;
-  right: 120px;
-  bottom: 35px;
-  width: min(260px,calc(100vw - 145px));
-  background: #10291fef;
-  border: 1px solid #9bd8e8;
-  border-radius: 12px;
-  padding: 14px;
-  z-index: 10;
-  display: none;
-  box-shadow: 0 0 18px #80dfff55;
-  line-height: 1.5;
-}
-#navi-message strong {
-  display: block;
-  color: #a8eaff;
-  margin-bottom: 5px;
-}
-@keyframes navi-float {
-  0%,100% { transform: translateY(0); }
-  50% { transform: translateY(-13px); }
-}
-@keyframes navi-glow {
-  from { filter: drop-shadow(0 0 7px #83dfff); }
-  to { filter: drop-shadow(0 0 19px #b8f3ff); }
-}
-
-@media(max-width:600px) {
-  nav { position: static; }
-  .panel { padding: 15px; }
-  #navi { width: 65px; height: 65px; }
-  #navi-message {
-    right: 90px;
-    bottom: 25px;
-    width: min(230px,calc(100vw - 110px));
-  }
+:root{--gold:#e7c66b;--gold2:#9e8240;--panel:rgba(10,22,19,.96);--green:#91bd78;--ink:#09130f;--blue:#142d43}
+*{box-sizing:border-box}
+body{margin:0;color:#f4edda;font-family:Georgia,serif;background:#14211b url("./images/hyrule-field.jpg.webp") center/cover fixed;min-height:100vh}
+body:before{content:"";position:fixed;inset:0;background:rgba(5,13,10,.76);z-index:-1}
+header{text-align:center;padding:28px 16px 22px;background:linear-gradient(#07120def,#10251ad9);border-bottom:2px solid var(--gold)}
+h1{color:var(--gold);font-size:clamp(30px,6vw,52px);margin:5px 0;text-shadow:0 3px 12px #000}
+.subtitle{color:#d8d0b5}
+nav{display:flex;justify-content:center;flex-wrap:wrap;gap:9px;padding:13px;background:#09130ff0;position:sticky;top:0;z-index:5}
+button{cursor:pointer;border:1px solid var(--gold2);color:#fff3d1;background:linear-gradient(#34513a,#1c3325);padding:10px 14px;border-radius:5px;font-family:inherit;font-size:15px;transition:.18s}
+button:hover{background:linear-gradient(#587449,#304b31);border-color:#ffe59a}
+button:disabled{opacity:.45;cursor:not-allowed}
+button:focus-visible{outline:2px solid #fff0a8;outline-offset:2px}
+main{width:min(1120px,94%);margin:25px auto}
+.panel{background:var(--panel);border:1px solid var(--gold2);border-radius:9px;padding:22px;margin-bottom:22px;box-shadow:0 8px 25px #0008}
+h2,h3{color:var(--gold)}
+.hero{min-height:260px;display:grid;place-items:center;text-align:center;background:linear-gradient(#09150b99,#09150be8),url("./images/hyrule-field.jpg.webp") center/cover;border:1px solid var(--gold);border-radius:9px;padding:25px}
+.hero p{max-width:660px;line-height:1.7}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.location{background:#17291fee;border:1px solid #8b7948;border-radius:8px;overflow:hidden}
+.location img{width:100%;height:145px;object-fit:cover;display:block}
+.image-placeholder{height:145px;display:grid;place-items:center;text-align:center;color:#d8c58a;background:#25372a;padding:15px}
+.location-content{padding:14px}
+.location-content h3{margin-top:0}
+.location-content p{line-height:1.5}
+.map{min-height:340px;background:linear-gradient(#17271b88,#17271b88),url("./images/hyrule-map.jpg.webp") center/cover;border:2px solid var(--gold);border-radius:8px;padding:20px;display:flex;flex-wrap:wrap;align-content:center;justify-content:center;gap:12px}
+.list-item{display:flex;align-items:center;gap:10px;margin:10px 0;padding:11px;background:#203428;border-radius:6px}
+.list-item input{accent-color:#a9d17b}
+.hidden{display:none!important}
+footer{text-align:center;padding:25px;color:#c7bd9e}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:20px}
+.stat{background:#17291f;border:1px solid #8b7948;border-radius:8px;padding:13px;text-align:center}
+.stat-title{color:#d8c58a;font-size:14px;margin-bottom:7px}
+.stat-value{font-size:23px;color:#fff0bd}
+.hearts{color:#ff6b78;letter-spacing:2px;font-size:19px;overflow-wrap:anywhere}
+.action-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+.notice{color:#c6dcae;min-height:22px;margin:10px 0}
+.progress-track{height:10px;background:#101a15;border-radius:10px;overflow:hidden;margin-top:10px}
+.progress-fill{height:100%;background:linear-gradient(90deg,#638c4d,#b8d78b);transition:width .3s}
+.game-window{background:linear-gradient(145deg,#10233a,#172b43 55%,#0c1c30);border:3px ridge #b99a52;border-radius:8px;padding:16px;box-shadow:inset 0 0 30px #0008,0 8px 22px #0008}
+.game-heading{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;border-bottom:1px solid #8f7846;padding-bottom:10px;margin-bottom:14px}
+.game-heading h2{margin:0;color:#f1d783;letter-spacing:1px}
+.tab-row{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0}
+.tab-button{background:#1b3550;border-color:#8194a5}
+.tab-button.active{background:#755c2e;border-color:#ffe39a;box-shadow:0 0 10px #e7c66b66}
+.inventory-layout{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(230px,.9fr);gap:15px}
+.inventory-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;padding:12px;background:#091728;border:2px inset #60738a;border-radius:5px}
+.inv-slot{min-height:91px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;background:linear-gradient(145deg,#29435b,#14283e);border:2px solid #52677a;border-radius:4px;color:#dce7e9;padding:7px;text-align:center}
+.inv-slot .slot-icon{font-size:30px;filter:drop-shadow(0 2px 2px #000)}
+.inv-slot .slot-name{font-size:12px;line-height:1.2}
+.inv-slot.selected{border:2px solid #ffe58a;box-shadow:inset 0 0 12px #e7c66b66,0 0 9px #e7c66b88;background:linear-gradient(145deg,#5a512f,#263b43)}
+.inv-slot.locked{filter:grayscale(1);opacity:.48;background:#172431}
+.item-detail{background:linear-gradient(160deg,#1a334b,#0d1d30);border:1px solid #8294a4;border-radius:5px;padding:15px;min-height:260px}
+.detail-icon{font-size:58px;text-align:center;margin:8px}
+.item-detail p{line-height:1.55;color:#d8e1e5}
+.detail-meta{color:#e7c66b;font-size:13px}
+.dungeon-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:13px;margin-top:14px}
+.dungeon-card{background:linear-gradient(145deg,#1b3027,#101e19);border:1px solid #8b7948;border-radius:8px;padding:15px}
+.dungeon-card.completed{border-color:#91bd78;box-shadow:0 0 12px #91bd7833}
+.dungeon-card h3{margin:3px 0 8px}
+.dungeon-card p{line-height:1.5}
+.dungeon-top{display:flex;justify-content:space-between;gap:8px;align-items:center}
+.difficulty{color:#f0d17d;white-space:nowrap;font-size:14px}
+.dungeon-detail{background:linear-gradient(145deg,#172b25,#0c1915);border:1px solid #b19552;border-radius:8px;padding:18px;margin-top:16px}
+.dungeon-detail h3{margin-top:0}
+.info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px}
+.info-box{background:#0b1915;border:1px solid #655b39;border-radius:6px;padding:12px}
+.info-box strong{color:#e7c66b;display:block;margin-bottom:6px}
+.checklist{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:5px}
+.small{font-size:13px;color:#c8c2aa}
+.reward{color:#e7c66b;font-size:14px}
+#navi{position:fixed;right:22px;bottom:20px;width:85px;height:85px;object-fit:contain;z-index:11;cursor:pointer;filter:drop-shadow(0 0 12px #a8eaff);animation:navi-float 2.5s ease-in-out infinite,navi-glow 2s ease-in-out infinite alternate}
+#navi:hover{transform:scale(1.15)}
+#navi:focus-visible{outline:2px solid #a8eaff;border-radius:50%}
+#navi-message{position:fixed;right:120px;bottom:35px;width:min(260px,calc(100vw - 145px));background:#10291fef;border:1px solid #9bd8e8;border-radius:10px;padding:14px;z-index:10;display:none;box-shadow:0 0 18px #80dfff55;line-height:1.5}
+#navi-message strong{display:block;color:#a8eaff;margin-bottom:5px}
+@keyframes navi-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-13px)}}
+@keyframes navi-glow{from{filter:drop-shadow(0 0 7px #83dfff)}to{filter:drop-shadow(0 0 19px #b8f3ff)}}
+@media(max-width:680px){
+nav{position:static}
+.panel{padding:15px}
+.inventory-layout{grid-template-columns:1fr}
+.inventory-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+#navi{width:65px;height:65px}
+#navi-message{right:90px;bottom:25px;width:min(230px,calc(100vw - 110px))}
 }
 </style>
 </head>
-
 <body>
 
 <header>
-  <h1>Hyrule Guide</h1>
-  <div class="subtitle">
-    Путеводитель по The Legend of Zelda: Ocarina of Time
-  </div>
+<h1>Hyrule Guide</h1>
+<div class="subtitle">Путеводитель по The Legend of Zelda: Ocarina of Time</div>
 </header>
 
 <nav>
-  <button onclick="showSection('home')">Главная</button>
-  <button onclick="showSection('places')">Локации</button>
-  <button onclick="showSection('map-section')">Карта</button>
-  <button onclick="showSection('quests')">Задания</button>
-  <button onclick="showSection('inventory')">Инвентарь</button>
-  <button onclick="showSection('dungeons')">Подземелья</button>
-  <button onclick="toggleMusic()" id="music-button">♫ Включить музыку</button>
+<button onclick="showSection('home')">Главная</button>
+<button onclick="showSection('places')">Локации</button>
+<button onclick="showSection('map-section')">Карта</button>
+<button onclick="showSection('quests')">Задания</button>
+<button onclick="showSection('inventory')">Инвентарь</button>
+<button onclick="showSection('dungeons')">Подземелья</button>
+<button onclick="toggleMusic()" id="music-button">♫ Включить музыку</button>
 </nav>
 
 <main>
 
 <section id="home" class="page">
-  <div class="hero">
-    <div>
-      <h2>Добро пожаловать в Хайрул!</h2>
-      <p>
-        Отправляйся в путешествие по королевству, исследуй загадочные
-        места, выполняй задания и собирай полезные предметы.
-        Пусть твоя Окарина укажет путь!
-      </p>
-      <button onclick="showSection('places')">Начать путешествие</button>
-    </div>
-  </div>
+<div class="hero">
+<div>
+<h2>Добро пожаловать в Хайрул!</h2>
+<p>Отправляйся в путешествие по королевству, исследуй загадочные места, выполняй задания и собирай полезные предметы. Пусть твоя Окарина укажет путь!</p>
+<button onclick="showSection('places')">Начать путешествие</button>
+</div>
+</div>
 
-  <div class="panel">
-    <h2>Твои приключения</h2>
-    <div class="stats">
-      <div class="stat">
-        <div class="stat-title">Здоровье</div>
-        <div class="hearts" id="heart-display">❤️❤️❤️</div>
-        <div class="stat-title" id="heart-count">3 / 10</div>
-      </div>
-      <div class="stat">
-        <div class="stat-title">Рупии</div>
-        <div class="stat-value">💎 <span id="rupee-display">0</span></div>
-      </div>
-      <div class="stat">
-        <div class="stat-title">Найдено предметов</div>
-        <div class="stat-value" id="item-count">0 / 8</div>
-      </div>
-      <div class="stat">
-        <div class="stat-title">Пройдено подземелий</div>
-        <div class="stat-value" id="dungeon-count">0 / 6</div>
-      </div>
-    </div>
-    <div class="action-row">
-      <button onclick="restAtHome()">🌿 Отдохнуть и восстановить сердца</button>
-    </div>
-    <p class="notice" id="home-notice"></p>
-  </div>
+<div class="panel">
+<h2>Твои приключения</h2>
+<div class="stats">
+<div class="stat">
+<div class="stat-title">Здоровье</div>
+<div class="hearts" id="heart-display">❤️❤️❤️</div>
+<div class="stat-title" id="heart-count">3 / 10</div>
+</div>
+<div class="stat">
+<div class="stat-title">Рупии</div>
+<div class="stat-value">💎 <span id="rupee-display">0</span></div>
+</div>
+<div class="stat">
+<div class="stat-title">Найдено предметов</div>
+<div class="stat-value" id="item-count">0 / 8</div>
+</div>
+<div class="stat">
+<div class="stat-title">Пройдено подземелий</div>
+<div class="stat-value" id="dungeon-count">0 / 6</div>
+</div>
+</div>
+<div class="action-row">
+<button onclick="restAtHome()">🌿 Отдохнуть и восстановить сердца</button>
+</div>
+<p class="notice" id="home-notice"></p>
+</div>
 
-  <div class="panel">
-    <h2>О путеводителе</h2>
-    <p>
-      Здесь собраны известные места Хайрула, карта, список заданий,
-      инвентарь и подземелья.
-    </p>
-    <p>Исследуй мир и собирай награды!</p>
-  </div>
+<div class="panel">
+<h2>О путеводителе</h2>
+<p>Здесь собраны известные места Хайрула, карта, задания, игровой инвентарь и справочник подземелий.</p>
+<p>Исследуй мир и собирай награды!</p>
+</div>
 </section>
 
 <section id="places" class="page hidden">
-  <div class="panel">
-    <h2>Локации Хайрула</h2>
-    <div id="locations" class="grid"></div>
-  </div>
+<div class="panel">
+<h2>Локации Хайрула</h2>
+<div id="locations" class="grid"></div>
+</div>
 </section>
 
 <section id="map-section" class="page hidden">
-  <div class="panel">
-    <h2>Карта Хайрула</h2>
-    <p>Нажми на название места, чтобы узнать о нём подробнее.</p>
-    <div class="map" id="map-buttons"></div>
-  </div>
+<div class="panel">
+<h2>Карта Хайрула</h2>
+<p>Нажми на название места, чтобы узнать о нём подробнее.</p>
+<div class="map" id="map-buttons"></div>
+</div>
 </section>
 
 <section id="quests" class="page hidden">
-  <div class="panel">
-    <h2>Задания путешественника</h2>
-    <p>За каждое выполненное задание ты получишь 20 рупий.</p>
-    <div id="quest-list"></div>
-  </div>
+<div class="panel">
+<h2>Задания путешественника</h2>
+<p>За каждое выполненное задание начисляется 20 рупий.</p>
+<div id="quest-list"></div>
+</div>
 </section>
 
 <section id="inventory" class="page hidden">
-  <div class="panel">
-    <h2>Инвентарь Линка</h2>
-    <p>Отмечай предметы, которые уже нашёл.</p>
-    <div id="inventory-list" class="grid"></div>
-  </div>
+<div class="panel">
+<div class="game-window">
+<div class="game-heading">
+<h2>ИНВЕНТАРЬ ЛИНКА</h2>
+<span class="small">Выбери предмет в ячейке</span>
+</div>
+
+<div class="tab-row" id="inventory-tabs">
+<button class="tab-button active" data-tab="items" onclick="setInventoryTab('items')">Предметы</button>
+<button class="tab-button" data-tab="equipment" onclick="setInventoryTab('equipment')">Снаряжение</button>
+<button class="tab-button" data-tab="quest" onclick="setInventoryTab('quest')">Квестовые вещи</button>
+</div>
+
+<div class="inventory-layout">
+<div>
+<div class="inventory-grid" id="inventory-grid"></div>
+<p class="small">Затемнённые ячейки — предметы, которые ещё не отмечены как найденные.</p>
+</div>
+<aside class="item-detail" id="item-detail">
+<div class="detail-icon">🎒</div>
+<h3>Сумка героя</h3>
+<p>Выбери ячейку, чтобы посмотреть описание предмета.</p>
+</aside>
+</div>
+</div>
+</div>
 </section>
 
 <section id="dungeons" class="page hidden">
-  <div class="panel">
-    <h2>Подземелья Хайрула</h2>
-    <p>
-      Исследуй храмы, отмечай прохождение и получай награды.
-      За каждый пройденный храм начисляется 50 рупий.
-    </p>
-    <div id="dungeon-list"></div>
-  </div>
+<div class="panel">
+<h2>Подземелья Хайрула</h2>
+<p>Изучи особенности каждого подземелья, подготовь нужные предметы и отметь выполненные цели. За прохождение каждого подземелья начисляется 50 рупий.</p>
+<div id="dungeon-list" class="dungeon-list"></div>
+<div id="dungeon-detail" class="dungeon-detail hidden"></div>
+</div>
 </section>
 
 </main>
 
 <div id="navi-message" role="status" aria-live="polite">
-  <strong>Нави</strong>
-  Эй! Слушай!
+<strong>Нави</strong>
+Эй! Слушай!
 </div>
 
-<img
-  id="navi"
-  src="./images/navi.png.jpg"
-  alt="Нави — нажми, чтобы поговорить"
-  role="button"
-  tabindex="0"
-  title="Поговорить с Нави"
->
+<img id="navi" src="./images/navi.png.jpg" alt="Нави — нажми, чтобы поговорить" role="button" tabindex="0" title="Поговорить с Нави">
 
-<footer>
-  Hyrule Guide · Фанатский путеводитель по Ocarina of Time
-</footer>
+<footer>Hyrule Guide · Фанатский путеводитель по Ocarina of Time</footer>
 
-<!-- Музыка сохранена -->
 <audio id="background-music" loop preload="auto">
-  <source src="./audio/hyrule-theme.mp3.mp3" type="audio/mpeg">
+<source src="./audio/hyrule-theme.mp3.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-
-/* Данные игры */
-
-const places = [
-  {
-    name: "Поле Хайрула",
-    file: "hyrule-field.jpg.webp",
-    description: "Большое открытое поле, соединяющее многие уголки королевства."
-  },
-  {
-    name: "Лес Кокири",
-    file: "kokiri-forest.jpg.jpg",
-    description: "Зелёный лесной дом народа Кокири."
-  },
-  {
-    name: "Замок Хайрула",
-    file: "hyrule-castle.jpg.webp",
-    description: "Королевский замок, в котором живёт принцесса Зельда."
-  },
-  {
-    name: "Деревня Какарико",
-    file: "kakariko.jpg.webp",
-    description: "Тихая деревня у подножия горы Смерти."
-  },
-  {
-    name: "Гора Смерти",
-    file: null,
-    description: "Высокая вулканическая гора, где живут гороны."
-  },
-  {
-    name: "Владения Зора",
-    file: "zora-domain.jpg.jpg",
-    description: "Водное королевство народа Зора."
-  },
-  {
-    name: "Озеро Хайлия",
-    file: "lake-hylia.jpg.webp",
-    description: "Большое озеро, окружённое природой."
-  },
-  {
-    name: "Долина Герудо",
-    file: "gerudo-valley.jpg.webp",
-    description: "Скалистая долина, ведущая к владениям Герудо."
-  }
+const places=[
+{name:"Поле Хайрула",file:"hyrule-field.jpg.webp",description:"Большое открытое поле, соединяющее многие уголки королевства."},
+{name:"Лес Кокири",file:"kokiri-forest.jpg.jpg",description:"Зелёный лесной дом народа Кокири."},
+{name:"Замок Хайрула",file:"hyrule-castle.jpg.webp",description:"Королевский замок, в котором живёт принцесса Зельда."},
+{name:"Деревня Какарико",file:"kakariko.jpg.webp",description:"Тихая деревня у подножия Горы Смерти."},
+{name:"Гора Смерти",file:null,description:"Высокая вулканическая гора, где живут гороны."},
+{name:"Владения Зора",file:"zora-domain.jpg.jpg",description:"Водное королевство народа Зора."},
+{name:"Озеро Хайлия",file:"lake-hylia.jpg.webp",description:"Большое озеро, окружённое природой."},
+{name:"Долина Герудо",file:"gerudo-valley.jpg.webp",description:"Скалистая долина, ведущая к владениям Герудо."}
 ];
 
-const quests = [
-  "Исследовать лес Кокири",
-  "Посетить замок Хайрула",
-  "Найти путь в деревню Какарико",
-  "Исследовать гору Смерти",
-  "Посетить владения Зора",
-  "Добраться до озера Хайлия",
-  "Исследовать долину Герудо"
+const quests=[
+"Исследовать лес Кокири",
+"Посетить замок Хайрула",
+"Найти путь в деревню Какарико",
+"Исследовать Гору Смерти",
+"Посетить владения Зора",
+"Добраться до озера Хайлия",
+"Исследовать долину Герудо"
 ];
 
-const items = [
-  {
-    name: "Меч Кокири",
-    icon: "⚔️",
-    description: "Первый меч Линка. Помогает в приключениях."
-  },
-  {
-    name: "Щит Деку",
-    icon: "🛡️",
-    description: "Деревянный щит для защиты."
-  },
-  {
-    name: "Окарина времени",
-    icon: "🎵",
-    description: "Волшебный инструмент, исполняющий особые мелодии."
-  },
-  {
-    name: "Бомбы",
-    icon: "💣",
-    description: "Полезный предмет для исследования мира."
-  },
-  {
-    name: "Лук",
-    icon: "🏹",
-    description: "Дальнобойный предмет Линка."
-  },
-  {
-    name: "Бумеранг",
-    icon: "🪃",
-    description: "Предмет, который возвращается после броска."
-  },
-  {
-    name: "Крюк",
-    icon: "🪝",
-    description: "Помогает добираться до новых мест."
-  },
-  {
-    name: "Магические стрелы",
-    icon: "✨",
-    description: "Особые стрелы с магическими свойствами."
-  }
+const items=[
+{name:"Меч Кокири",icon:"⚔️",category:"equipment",description:"Короткий меч, который Линк получает в лесу Кокири. Его можно найти в тренировочной зоне за лабиринтом валунов.",use:"Основное оружие ближнего боя.",location:"Лес Кокири"},
+{name:"Щит Деку",icon:"🛡️",category:"equipment",description:"Лёгкий деревянный щит народа Деку. Он помогает защищаться от многих атак, но может загореться.",use:"Защита от атак и снарядов.",location:"Магазин леса Кокири"},
+{name:"Окарина времени",icon:"🎼",category:"quest",description:"Священная окарина, связанная с Королевской семьёй и Храмом Времени.",use:"Исполнение мелодий, открывающих секреты и меняющих состояние мира.",location:"Получается по ходу сюжета"},
+{name:"Бомбы",icon:"💣",category:"items",description:"Взрывчатые цветки и бомбы помогают открывать проходы и справляться с некоторыми врагами.",use:"Разрушение треснувших стен и решение загадок.",location:"Пещера Додонго и другие места"},
+{name:"Лук героя",icon:"🏹",category:"items",description:"Лук, найденный в Лесном храме. Позволяет поражать цели на расстоянии.",use:"Стрельба по переключателям и врагам.",location:"Лесной храм"},
+{name:"Бумеранг",icon:"🪃",category:"items",description:"Предмет, который возвращается к Линку после броска. Особенно полезен в приключении ребёнка.",use:"Попадание по удалённым целям и оглушение некоторых врагов.",location:"Внутри живота Джабу-Джабу"},
+{name:"Крюк",icon:"🪝",category:"items",description:"Крюк-выстрел помогает цепляться за специальные поверхности и добираться до дальних платформ.",use:"Перемещение через пропасти и активация целей.",location:"Кладбище Какарико"},
+{name:"Магические стрелы",icon:"✨",category:"items",description:"Особые стрелы — огненные, ледяные и световые — обладают разными магическими свойствами.",use:"Решение загадок и воздействие на определённых врагов.",location:"Разные тайные места Хайрула"},
+{name:"Камень Кокири",icon:"🟢",category:"quest",description:"Духовный камень леса, получаемый после испытания в Дереве Деку.",use:"Один из трёх духовных камней, необходимых по сюжету.",location:"Дерево Деку"},
+{name:"Камень Горонов",icon:"🔴",category:"quest",description:"Духовный камень огня, который связан с народом горонов.",use:"Один из трёх духовных камней.",location:"Пещера Додонго"},
+{name:"Камень Зора",icon:"🔵",category:"quest",description:"Духовный камень воды, хранящийся у народа Зора.",use:"Один из трёх духовных камней.",location:"Владения Зора"},
+{name:"Молот Мегатон",icon:"🔨",category:"items",description:"Тяжёлый молот из Храма Огня. С его помощью можно разбивать особые преграды и нажимать мощные переключатели.",use:"Разрушение каменных препятствий и решение загадок.",location:"Храм Огня"}
 ];
 
-const dungeons = [
-  {
-    name: "Дерево Деку",
-    boss: "Королева Гохма",
-    description: "Первое большое подземелье в приключении Линка."
-  },
-  {
-    name: "Пещера Додонго",
-    boss: "Король Додонго",
-    description: "Пещера горонов, полная древних тайн."
-  },
-  {
-    name: "Внутри живота Джабу-Джабу",
-    boss: "Биг Октo",
-    description: "Необычное подземелье во владениях Зора."
-  },
-  {
-    name: "Лесной храм",
-    boss: "Фантом Ганон",
-    description: "Загадочный храм, полный призраков."
-  },
-  {
-    name: "Храм Огня",
-    boss: "Вольвагия",
-    description: "Храм в глубине Горы Смерти."
-  },
-  {
-    name: "Храм Воды",
-    boss: "Морфа",
-    description: "Водный храм с множеством загадок."
-  }
+const dungeons=[
+{
+name:"Дерево Деку",
+stage:"Детство Линка · Лес Кокири",
+boss:"Королева Гохма",
+difficulty:1,
+theme:"Лес, паутина и вертикальные проходы",
+description:"Первое подземелье игры — огромное древнее дерево, заражённое чудовищем. Оно знакомит с основами исследования: осмотром комнат, поиском карты и компаса, переключателями и использованием найденного предмета.",
+challenge:"Следи за паутиной, огненными факелами и паучьими врагами. Некоторые проходы открываются сверху или снизу, поэтому осматривай комнаты по вертикали.",
+enemies:"Деку-бабы, Большие скултулы, Голубые пузырьки и Гохма-личинки.",
+bossPlan:"Смотри на глаз Королевы Гохмы, чтобы заставить её опуститься. Когда она уязвима, атакуй. Если она забирается на потолок, будь готов разобраться с появившимися личинками.",
+items:"Рогатка фей, палка Деку и орехи Деку особенно полезны.",
+reward:"Изумруд Кокири — первый духовный камень.",
+goals:["Найти карту подземелья","Найти компас","Получить рогатку фей","Открыть путь к логову босса","Победить Королеву Гохму"],
+tip:"Смотри вверх: важные пути и цели могут находиться над головой."
+},
+{
+name:"Пещера Додонго",
+stage:"Детство Линка · Гора Смерти",
+boss:"Король Додонго",
+difficulty:2,
+theme:"Лава, каменные двери и взрывные загадки",
+description:"Огромная пещера, где живут додонго. Здесь много каменных преград, огненных опасностей и механизмов, связанных с бомбами.",
+challenge:"Придётся искать способ открывать каменные двери, использовать бомбы и перемещаться по многоуровневой пещере. Следи за огненными ловушками и платформами.",
+enemies:"Додонго, огненные кейзы, лизальфосы и беймосы.",
+bossPlan:"Король Додонго втягивает воздух перед огненной атакой. В этот момент можно использовать бомбу, а затем атаковать, пока босс уязвим.",
+items:"Бомбы — ключевой инструмент этого подземелья. Также пригодятся меч и щит.",
+reward:"Рубин Горонов — второй духовный камень.",
+goals:["Найти карту подземелья","Отыскать бомбы и применить их для прохода","Найти компас","Добраться до логова Короля Додонго","Победить Короля Додонго"],
+tip:"Взрывные цветы и бомбы помогают менять саму структуру пути."
+},
+{
+name:"Внутри живота Джабу-Джабу",
+stage:"Детство Линка · Владения Зора",
+boss:"Баранейд (Barinade)",
+difficulty:3,
+theme:"Водные комнаты, скользкие поверхности и электричество",
+description:"Необычное подземелье внутри огромного Джабу-Джабу. Вместо каменных коридоров здесь органические комнаты, водные участки и странные враги.",
+challenge:"Некоторые проходы требуют аккуратного перемещения по воде и работы с переключателями. Электрические враги делают бой особенно опасным.",
+enemies:"Окто, тентаклы, электрические враги и био-электрические организмы.",
+bossPlan:"Баранейд защищён вращающимися электрическими щупальцами. Сначала нужно нарушить их защиту, затем использовать бумеранг и атаковать открывшееся ядро, избегая электрических разрядов.",
+items:"Бумеранг — важнейший предмет этого подземелья. Пригодятся также орехи Деку.",
+reward:"Сапфир Зора — третий духовный камень.",
+goals:["Освободить принцессу Руту","Найти карту подземелья","Использовать бумеранг для решения загадок","Добраться до логова Баранейда","Победить Баранейда"],
+tip:"Бумеранг помогает попадать по удалённым целям и временно обездвиживать врагов."
+},
+{
+name:"Лесной храм",
+stage:"Взрослый Линк · Священный лес",
+boss:"Фантом Ганон",
+difficulty:4,
+theme:"Призраки, запутанные коридоры и четыре По",
+description:"Заброшенный храм в глубине леса. Его комнаты меняют ощущение направления, а продвижение связано с поиском четырёх призрачных сестёр По.",
+challenge:"Это первое взрослое подземелье с большой многоуровневой структурой. Нужно искать маленькие ключи, ориентироваться по карте и решать загадки с блоками и коридорами.",
+enemies:"По, скултулы, голубые пузырьки и другие призрачные противники.",
+bossPlan:"В битве с Фантомом Ганоном следи за изображениями на картинах и выбирай настоящую цель. Во второй части боя отражай энергетические атаки и бей босса, когда он оглушён.",
+items:"Лук героя — ключевой предмет храма. Также полезны крюк и обычные стрелы.",
+reward:"Лесной медальон. В храме также находится Лук героя.",
+goals:["Найти карту и компас","Отыскать маленькие ключи","Освободить четырёх сестёр По","Получить Лук героя","Победить Фантома Ганона"],
+tip:"Запоминай расположение дверей и проверяй карту после открытия новых комнат."
+},
+{
+name:"Храм Огня",
+stage:"Взрослый Линк · Кратер Горы Смерти",
+boss:"Вольвагия",
+difficulty:4,
+theme:"Лава, подвесные платформы и спасение горонов",
+description:"Жаркий храм внутри Горы Смерти. Гороны заточены в камерах, а Линку предстоит исследовать несколько уровней над лавой и найти путь к дракону Вольвагии.",
+challenge:"Опасность представляют лава, движущиеся платформы и сложные переходы между этажами. Важно внимательно исследовать боковые комнаты и не пропускать ключи.",
+enemies:"Огненные кейзы, файр-кейзы, лизальфосы и огненные ловушки.",
+bossPlan:"Вольвагия появляется из отверстий в арене. Следи за её появлением, используй Молот Мегатон, чтобы оглушить её, а затем атакуй мечом, когда она уязвима.",
+items:"Молот Мегатон находится в Храме Огня и необходим для ряда препятствий. Для босса он особенно важен.",
+reward:"Огненный медальон. В храме находится Молот Мегатон.",
+goals:["Освободить горонов по пути","Найти карту и компас","Отыскать Молот Мегатон","Открыть путь к логову Вольвагии","Победить Вольвагию"],
+tip:"Проверяй боковые камеры: за ними часто скрываются ключи и заключённые гороны."
+},
+{
+name:"Храм Воды",
+stage:"Взрослый Линк · Озеро Хайлия",
+boss:"Морфа",
+difficulty:5,
+theme:"Переключение уровня воды и многоэтажная навигация",
+description:"Один из самых запутанных храмов игры. Вода здесь поднимается и опускается, открывая одни пути и закрывая другие. Нужно внимательно следить за изменением комнат.",
+challenge:"Главная сложность — навигация. Запоминай места, где можно менять уровень воды, проверяй карту и возвращайся в уже посещённые комнаты после изменения уровня.",
+enemies:"Шипастые ракушки, водяные существа, стингеры и другие противники.",
+bossPlan:"Морфа управляет водяными щупальцами. Используй крюк или длинный крюк, чтобы вытянуть ядро из водяной массы, и атакуй его, когда оно доступно.",
+items:"Железные сапоги и туника Зора помогают исследовать воду. Длинный крюк можно получить в самом храме.",
+reward:"Водный медальон. Длинный крюк — важный предмет храма. Железные сапоги и туника Зора добываются отдельно.",
+goals:["Найти входы к переключателям уровня воды","Найти карту и компас","Открыть доступ к разным этажам","Получить Длинный крюк","Победить Морфу"],
+tip:"Если путь кажется закрытым, попробуй изменить уровень воды и вернуться в знакомую комнату."
+}
 ];
 
-const naviTips = [
-  "Эй! Слушай! Не забудь исследовать лес Кокири!",
-  "Линк, попробуй заглянуть в замок Хайрула!",
-  "Не забудь проверить свою карту!",
-  "Владения Зора скрывают много интересного!",
-  "Озеро Хайлия — прекрасное место!",
-  "Отмечай выполненные задания и получай рупии!",
-  "Загляни в инвентарь. Может, ты нашёл новый предмет?",
-  "Попробуй пройти одно из подземелий!",
-  "Эй! Ты уже собрал свои награды?",
-  "Хайрул полон секретов. Продолжай исследовать!"
+const naviTips=[
+"Эй! Слушай! Не забудь исследовать лес Кокири!",
+"Линк, попробуй заглянуть в замок Хайрула!",
+"Не забудь проверить свою карту!",
+"Владения Зора скрывают много интересного!",
+"Озеро Хайлия — прекрасное место!",
+"Отмечай выполненные задания и получай рупии!",
+"Загляни в инвентарь. Может, ты нашёл новый предмет?",
+"Попробуй пройти одно из подземелий!",
+"Эй! Ты уже собрал свои награды?",
+"Хайрул полон секретов. Продолжай исследовать!"
 ];
 
-const naviGreetings = [
-  "Эй! Слушай!",
-  "Линк! Я здесь!",
-  "Привет, герой Хайрула!",
-  "У меня есть для тебя подсказка!",
-  "Давай отправимся в приключение!"
+const naviGreetings=[
+"Эй! Слушай!",
+"Линк! Я здесь!",
+"Привет, герой Хайрула!",
+"У меня есть для тебя подсказка!",
+"Давай отправимся в приключение!"
 ];
 
 /* Сохранение игрового прогресса */
 
-function loadNumber(key, fallback) {
-  const value = Number(localStorage.getItem(key));
-  return Number.isFinite(value) && localStorage.getItem(key) !== null
-    ? value : fallback;
+function loadNumber(key,fallback){
+const raw=localStorage.getItem(key);
+const value=Number(raw);
+return raw!==null&&Number.isFinite(value)?value:fallback;
 }
 
-let hearts = Math.max(0, Math.min(10, loadNumber("hyrule-hearts", 3)));
-let rupees = Math.max(0, loadNumber("hyrule-rupees", 0));
+let hearts=Math.max(0,Math.min(10,loadNumber("hyrule-hearts",3)));
+let rupees=Math.max(0,loadNumber("hyrule-rupees",0));
 
-function saveGame() {
-  localStorage.setItem("hyrule-hearts", hearts);
-  localStorage.setItem("hyrule-rupees", rupees);
+function saveGame(){
+localStorage.setItem("hyrule-hearts",hearts);
+localStorage.setItem("hyrule-rupees",rupees);
 }
 
-function isDone(key) {
-  return localStorage.getItem(key) === "true";
+function isDone(key){
+return localStorage.getItem(key)==="true";
 }
 
-function setDone(key, value) {
-  localStorage.setItem(key, value ? "true" : "false");
+function setDone(key,value){
+localStorage.setItem(key,value?"true":"false");
 }
 
-function addRupees(amount) {
-  rupees += amount;
-  saveGame();
-  updateStats();
+function addRupees(amount){
+rupees=Math.max(0,rupees+amount);
+saveGame();
+updateStats();
 }
 
-function updateStats() {
-  document.getElementById("heart-display").textContent =
-    "❤️".repeat(hearts) + "🖤".repeat(10 - hearts);
+function updateStats(){
+document.getElementById("heart-display").textContent=
+"❤️".repeat(hearts)+"🖤".repeat(10-hearts);
 
-  document.getElementById("heart-count").textContent =
-    hearts + " / 10";
+document.getElementById("heart-count").textContent=
+hearts+" / 10";
 
-  document.getElementById("rupee-display").textContent = rupees;
+document.getElementById("rupee-display").textContent=rupees;
 
-  const foundItems = items.filter((item, i) =>
-    isDone("hyrule-item-" + i)
-  ).length;
+document.getElementById("item-count").textContent=
+items.filter((_,i)=>isDone("hyrule-item-"+i)).length+" / "+items.length;
 
-  const finishedDungeons = dungeons.filter((dungeon, i) =>
-    isDone("hyrule-dungeon-" + i)
-  ).length;
-
-  document.getElementById("item-count").textContent =
-    foundItems + " / " + items.length;
-
-  document.getElementById("dungeon-count").textContent =
-    finishedDungeons + " / " + dungeons.length;
+document.getElementById("dungeon-count").textContent=
+dungeons.filter((_,i)=>isDone("hyrule-dungeon-"+i)).length+" / "+dungeons.length;
 }
 
-function restAtHome() {
-  if (hearts === 10) {
-    document.getElementById("home-notice").textContent =
-      "У тебя уже полное здоровье!";
-    return;
-  }
-
-  hearts = 10;
-  saveGame();
-  updateStats();
-
-  document.getElementById("home-notice").textContent =
-    "Здоровье полностью восстановлено! ❤️";
-  naviMessage("Отлично! Теперь ты снова полон сил!");
+function restAtHome(){
+if(hearts===10){
+document.getElementById("home-notice").textContent="У тебя уже полное здоровье!";
+return;
+}
+hearts=10;
+saveGame();
+updateStats();
+document.getElementById("home-notice").textContent="Здоровье полностью восстановлено! ❤️";
+naviMessage("Отлично! Теперь ты снова полон сил!");
 }
 
 /* Навигация */
 
-function showSection(id) {
-  document.querySelectorAll(".page").forEach(page => {
-    page.classList.add("hidden");
-  });
-
-  document.getElementById(id).classList.remove("hidden");
-
-  window.scrollTo({ top: 0, behavior: "smooth" });
+function showSection(id){
+document.querySelectorAll(".page").forEach(p=>p.classList.add("hidden"));
+document.getElementById(id).classList.remove("hidden");
+window.scrollTo({top:0,behavior:"smooth"});
 }
 
-function openPlace(name) {
-  showSection("places");
-
-  const card = [...document.querySelectorAll(".location")].find(card =>
-    card.dataset.name === name
-  );
-
-  if (card) {
-    card.scrollIntoView({ behavior: "smooth", block: "center" });
-  }
-
-  naviMessage("Эй! Ты выбрал: " + name + "!");
+function openPlace(name){
+showSection("places");
+const card=[...document.querySelectorAll(".location")].find(c=>c.dataset.name===name);
+if(card)card.scrollIntoView({behavior:"smooth",block:"center"});
+naviMessage("Эй! Ты выбрал: "+name+"!");
 }
 
 /* Нави */
 
-let naviIndex = 0;
+let naviIndex=0;
 let naviTimer;
 let idleTimer;
 
-function naviMessage(message) {
-  const box = document.getElementById("navi-message");
-  box.replaceChildren();
+function naviMessage(message){
+const box=document.getElementById("navi-message");
+box.replaceChildren();
 
-  const title = document.createElement("strong");
-  title.textContent = "Нави";
+const title=document.createElement("strong");
+title.textContent="Нави";
 
-  const text = document.createElement("span");
-  text.textContent = message;
+const text=document.createElement("span");
+text.textContent=message;
 
-  box.append(title, text);
-  box.style.display = "block";
+box.append(title,text);
+box.style.display="block";
 
-  clearTimeout(naviTimer);
-
-  naviTimer = setTimeout(() => {
-    box.style.display = "none";
-  }, 5500);
+clearTimeout(naviTimer);
+naviTimer=setTimeout(()=>box.style.display="none",5500);
 }
 
-function talkToNavi() {
-  naviMessage(naviTips[naviIndex]);
-  naviIndex = (naviIndex + 1) % naviTips.length;
+function talkToNavi(){
+naviMessage(naviTips[naviIndex]);
+naviIndex=(naviIndex+1)%naviTips.length;
 
-  document.getElementById("navi").animate(
-    [
-      { transform: "scale(1) rotate(0deg)" },
-      { transform: "scale(1.2) rotate(-10deg)" },
-      { transform: "scale(1.2) rotate(10deg)" },
-      { transform: "scale(1) rotate(0deg)" }
-    ],
-    { duration: 500, easing: "ease-in-out" }
-  );
+document.getElementById("navi").animate(
+[
+{transform:"scale(1)"},
+{transform:"scale(1.2) rotate(-10deg)"},
+{transform:"scale(1.2) rotate(10deg)"},
+{transform:"scale(1)"}
+],
+{duration:500,easing:"ease-in-out"}
+);
 }
 
-const navi = document.getElementById("navi");
+const navi=document.getElementById("navi");
 
-navi.addEventListener("click", talkToNavi);
-navi.addEventListener("keydown", event => {
-  if (event.key === "Enter" || event.key === " ") {
-    event.preventDefault();
-    talkToNavi();
-  }
+navi.addEventListener("click",talkToNavi);
+
+navi.addEventListener("keydown",e=>{
+if(e.key==="Enter"||e.key===" "){
+e.preventDefault();
+talkToNavi();
+}
 });
 
-function startNaviIdle() {
-  clearTimeout(idleTimer);
+function startNaviIdle(){
+clearTimeout(idleTimer);
 
-  idleTimer = setTimeout(() => {
-    const greeting = naviGreetings[
-      Math.floor(Math.random() * naviGreetings.length)
-    ];
-
-    naviMessage(greeting);
-    startNaviIdle();
-  }, 45000);
+idleTimer=setTimeout(()=>{
+naviMessage(naviGreetings[Math.floor(Math.random()*naviGreetings.length)]);
+startNaviIdle();
+},45000);
 }
 
 /* Карточки локаций */
 
-function makeLocationCard(place) {
-  const card = document.createElement("article");
-  card.className = "location";
-  card.dataset.name = place.name;
+function makeLocationCard(place){
+const card=document.createElement("article");
+card.className="location";
+card.dataset.name=place.name;
 
-  const content = document.createElement("div");
-  content.className = "location-content";
+const content=document.createElement("div");
+content.className="location-content";
 
-  if (place.file) {
-    const img = document.createElement("img");
-    img.src = "./images/" + place.file;
-    img.alt = place.name;
+if(place.file){
+const img=document.createElement("img");
+img.src="./images/"+place.file;
+img.alt=place.name;
 
-    img.onerror = () => {
-      const placeholder = document.createElement("div");
-      placeholder.className = "image-placeholder";
-      placeholder.textContent = "Изображение не найдено: " + place.file;
-      img.replaceWith(placeholder);
-    };
+img.onerror=()=>{
+const ph=document.createElement("div");
+ph.className="image-placeholder";
+ph.textContent="Изображение не найдено: "+place.file;
+img.replaceWith(ph);
+};
 
-    card.appendChild(img);
-  } else {
-    const placeholder = document.createElement("div");
-    placeholder.className = "image-placeholder";
-    placeholder.textContent = "Изображение Горы Смерти пока не добавлено";
-    card.appendChild(placeholder);
-  }
-
-  const title = document.createElement("h3");
-  title.textContent = place.name;
-
-  const description = document.createElement("p");
-  description.textContent = place.description;
-
-  const button = document.createElement("button");
-  button.textContent = "Исследовать";
-  button.onclick = () => {
-    naviMessage("Нави: " + place.description);
-  };
-
-  content.append(title, description, button);
-  card.appendChild(content);
-
-  return card;
+card.append(img);
+}else{
+const ph=document.createElement("div");
+ph.className="image-placeholder";
+ph.textContent="Изображение Горы Смерти пока не добавлено";
+card.append(ph);
 }
 
-function renderPlaces() {
-  const container = document.getElementById("locations");
+const title=document.createElement("h3");
+title.textContent=place.name;
 
-  places.forEach(place => {
-    container.appendChild(makeLocationCard(place));
-  });
+const desc=document.createElement("p");
+desc.textContent=place.description;
 
-  const map = document.getElementById("map-buttons");
+const btn=document.createElement("button");
+btn.textContent="Исследовать";
+btn.onclick=()=>naviMessage(place.description);
 
-  places.forEach(place => {
-    const button = document.createElement("button");
-    button.textContent = place.name;
-    button.onclick = () => openPlace(place.name);
-    map.appendChild(button);
-  });
+content.append(title,desc,btn);
+card.append(content);
+
+return card;
+}
+
+function renderPlaces(){
+const container=document.getElementById("locations");
+const map=document.getElementById("map-buttons");
+
+places.forEach(p=>container.append(makeLocationCard(p)));
+
+places.forEach(p=>{
+const b=document.createElement("button");
+b.textContent=p.name;
+b.onclick=()=>openPlace(p.name);
+map.append(b);
+});
 }
 
 /* Задания с наградами */
 
-function renderQuests() {
-  const container = document.getElementById("quest-list");
+function renderQuests(){
+const container=document.getElementById("quest-list");
 
-  quests.forEach((entry, index) => {
-    const key = "hyrule-quest-" + index;
-    const label = document.createElement("label");
-    label.className = "list-item";
+quests.forEach((entry,i)=>{
+const key="hyrule-quest-"+i;
 
-    const checkbox = document.createElement("input");
-    checkbox.type = "checkbox";
-    checkbox.checked = isDone(key);
+const label=document.createElement("label");
+const check=document.createElement("input");
+const text=document.createElement("span");
 
-    const text = document.createElement("span");
-    text.textContent = entry + " — награда: 20 💎";
+label.className="list-item";
+check.type="checkbox";
+check.checked=isDone(key);
+text.textContent=entry+" — награда: 20 💎";
 
-    checkbox.addEventListener("change", () => {
-      const wasDone = isDone(key);
-      setDone(key, checkbox.checked);
+check.addEventListener("change",()=>{
+const was=isDone(key);
+setDone(key,check.checked);
 
-      if (checkbox.checked && !wasDone) {
-        addRupees(20);
-        naviMessage("Задание выполнено! Ты получил 20 рупий!");
-      } else if (!checkbox.checked && wasDone) {
-        addRupees(-20);
-        naviMessage("Отметка снята, награда возвращена.");
-      }
-    });
+if(check.checked&&!was){
+addRupees(20);
+naviMessage("Задание выполнено! Ты получил 20 рупий!");
+}else if(!check.checked&&was){
+addRupees(-20);
+naviMessage("Отметка снята, награда возвращена.");
+}
+});
 
-    label.append(checkbox, text);
-    container.appendChild(label);
-  });
+label.append(check,text);
+container.append(label);
+});
 }
 
-/* Инвентарь */
+/* Игровой инвентарь */
 
-function renderInventory() {
-  const container = document.getElementById("inventory-list");
+let inventoryTab="items";
+let selectedItem=0;
 
-  items.forEach((item, index) => {
-    const key = "hyrule-item-" + index;
-    const card = document.createElement("div");
-    card.className = "item-card";
+function setInventoryTab(tab){
+inventoryTab=tab;
 
-    const icon = document.createElement("div");
-    icon.className = "item-icon";
-    icon.textContent = item.icon;
+document.querySelectorAll("#inventory-tabs button").forEach(b=>{
+b.classList.toggle("active",b.dataset.tab===tab);
+});
 
-    const title = document.createElement("h3");
-    title.textContent = item.name;
-
-    const description = document.createElement("p");
-    description.textContent = item.description;
-
-    const button = document.createElement("button");
-
-    function updateButton() {
-      button.textContent = isDone(key) ? "✓ Найдено" : "Отметить найденным";
-    }
-
-    updateButton();
-
-    button.onclick = () => {
-      const newValue = !isDone(key);
-      setDone(key, newValue);
-      updateButton();
-      updateStats();
-
-      naviMessage(
-        newValue
-          ? "Отлично! " + item.name + " добавлен в твой инвентарь!"
-          : item.name + " убран из списка найденных предметов."
-      );
-    };
-
-    card.append(icon, title, description, button);
-    container.appendChild(card);
-  });
+renderInventory();
 }
 
-/* Подземелья и боссы */
+function renderInventory(){
+const grid=document.getElementById("inventory-grid");
+const detail=document.getElementById("item-detail");
 
-function renderDungeons() {
-  const container = document.getElementById("dungeon-list");
+grid.replaceChildren();
 
-  dungeons.forEach((dungeon, index) => {
-    const key = "hyrule-dungeon-" + index;
-    const card = document.createElement("article");
-    card.className = "dungeon-card";
+const filtered=items
+.map((item,index)=>({...item,index}))
+.filter(item=>
+inventoryTab==="items"
+?item.category==="items"
+:inventoryTab==="equipment"
+?item.category==="equipment"
+:item.category==="quest"
+);
 
-    const title = document.createElement("h3");
-    title.textContent = "🏯 " + dungeon.name;
+filtered.forEach(item=>{
+const found=isDone("hyrule-item-"+item.index);
+const slot=document.createElement("button");
 
-    const description = document.createElement("p");
-    description.textContent = dungeon.description;
+slot.className="inv-slot"+
+(found?"":" locked")+
+(selectedItem===item.index?" selected":"");
 
-    const boss = document.createElement("p");
-    boss.textContent = "Босс: " + dungeon.boss;
+slot.setAttribute(
+"aria-label",
+item.name+(found?" — найдено":" — не найдено")
+);
 
-    const reward = document.createElement("p");
-    reward.className = "reward";
-    reward.textContent = "Награда за прохождение: 50 💎";
+const icon=document.createElement("span");
+icon.className="slot-icon";
+icon.textContent=found?item.icon:"🔒";
 
-    const button = document.createElement("button");
+const name=document.createElement("span");
+name.className="slot-name";
+name.textContent=found?item.name:"???";
 
-    function updateButton() {
-      const done = isDone(key);
-      button.textContent = done ? "✓ Подземелье пройдено" : "Отметить прохождение";
-      card.classList.toggle("completed", done);
-    }
+slot.append(icon,name);
 
-    updateButton();
+slot.onclick=()=>{
+selectedItem=item.index;
+renderInventory();
+};
 
-    button.onclick = () => {
-      const wasDone = isDone(key);
-      const newValue = !wasDone;
+grid.append(slot);
+});
 
-      setDone(key, newValue);
-      addRupees(newValue ? 50 : -50);
-      updateButton();
-      updateStats();
+if(!filtered.some(x=>x.index===selectedItem)){
+selectedItem=filtered.length?filtered[0].index:0;
+}
 
-      naviMessage(
-        newValue
-          ? "Победа! Ты прошёл " + dungeon.name + " и получил 50 рупий!"
-          : "Отметка о прохождении снята. Награда возвращена."
-      );
-    };
+const chosen=items[selectedItem];
+const found=isDone("hyrule-item-"+selectedItem);
 
-    card.append(title, description, boss, reward, button);
-    container.appendChild(card);
-  });
+detail.replaceChildren();
+
+const icon=document.createElement("div");
+icon.className="detail-icon";
+icon.textContent=found?chosen.icon:"🔒";
+
+const title=document.createElement("h3");
+title.textContent=found?chosen.name:"Неизвестный предмет";
+
+const desc=document.createElement("p");
+desc.textContent=found
+?chosen.description
+:"Этот предмет пока не найден. Продолжай исследовать Хайрул, чтобы открыть его описание.";
+
+const meta=document.createElement("div");
+meta.className="detail-meta";
+meta.textContent=found
+?"Место получения: "+chosen.location
+:"Предмет скрыт";
+
+const use=document.createElement("p");
+use.textContent=found?"Использование: "+chosen.use:"";
+
+const toggle=document.createElement("button");
+toggle.textContent=found
+?"Убрать отметку о находке"
+:"Отметить как найденный";
+
+toggle.onclick=()=>{
+setDone("hyrule-item-"+selectedItem,!found);
+updateStats();
+renderInventory();
+
+naviMessage(
+found
+?chosen.name+" убран из списка найденного."
+:chosen.name+" добавлен в инвентарь!"
+);
+};
+
+detail.append(icon,title,desc,meta,use,toggle);
+}
+
+/* Подземелья */
+
+function dungeonDone(i){
+return isDone("hyrule-dungeon-"+i);
+}
+
+function renderDungeons(){
+const container=document.getElementById("dungeon-list");
+container.replaceChildren();
+
+dungeons.forEach((d,i)=>{
+const card=document.createElement("article");
+card.className="dungeon-card"+(dungeonDone(i)?" completed":"");
+
+const top=document.createElement("div");
+top.className="dungeon-top";
+
+const title=document.createElement("h3");
+title.textContent="🏯 "+d.name;
+
+const diff=document.createElement("span");
+diff.className="difficulty";
+diff.textContent="★".repeat(d.difficulty)+"☆".repeat(5-d.difficulty);
+diff.title="Сложность: "+d.difficulty+" из 5";
+
+top.append(title,diff);
+
+const stage=document.createElement("p");
+stage.className="small";
+stage.textContent=d.stage;
+
+const desc=document.createElement("p");
+desc.textContent=d.description;
+
+const boss=document.createElement("p");
+boss.textContent="Босс: "+d.boss;
+
+const reward=document.createElement("p");
+reward.className="reward";
+reward.textContent="Награда: "+d.reward;
+
+const open=document.createElement("button");
+open.textContent="Подробнее и цели";
+open.onclick=()=>showDungeonDetail(i);
+
+const status=document.createElement("p");
+status.className="small";
+status.textContent=dungeonDone(i)?"✓ Пройдено":"Пока не пройдено";
+
+card.append(top,stage,desc,boss,reward,open,status);
+container.append(card);
+});
+}
+
+function showDungeonDetail(index){
+const d=dungeons[index];
+const box=document.getElementById("dungeon-detail");
+
+box.classList.remove("hidden");
+box.replaceChildren();
+
+const heading=document.createElement("h3");
+heading.textContent="🏰 "+d.name;
+
+const intro=document.createElement("p");
+intro.textContent=d.description;
+
+const info=document.createElement("div");
+info.className="info-grid";
+
+const fields=[
+["Сложность",d.difficulty+" из 5 — "+"★".repeat(d.difficulty)+"☆".repeat(5-d.difficulty)],
+["Атмосфера",d.theme],
+["Что сложно",d.challenge],
+["Враги",d.enemies],
+["Босс",d.boss+" — "+d.bossPlan],
+["Что пригодится",d.items],
+["Награда",d.reward],
+["Совет Нави",d.tip]
+];
+
+fields.forEach(([label,value])=>{
+const el=document.createElement("div");
+const strong=document.createElement("strong");
+const p=document.createElement("span");
+
+el.className="info-box";
+strong.textContent=label;
+p.textContent=value;
+
+el.append(strong,p);
+info.append(el);
+});
+
+const goalTitle=document.createElement("h3");
+goalTitle.textContent="Цели прохождения";
+
+const goals=document.createElement("div");
+goals.className="checklist";
+
+d.goals.forEach((goal,j)=>{
+const label=document.createElement("label");
+const check=document.createElement("input");
+const span=document.createElement("span");
+
+label.className="list-item";
+check.type="checkbox";
+check.checked=isDone("hyrule-dungeon-goal-"+index+"-"+j);
+span.textContent=goal;
+
+check.addEventListener("change",()=>{
+setDone("hyrule-dungeon-goal-"+index+"-"+j,check.checked);
+});
+
+label.append(check,span);
+goals.append(label);
+});
+
+const actions=document.createElement("div");
+actions.className="action-row";
+
+const complete=document.createElement("button");
+
+function updateComplete(){
+complete.textContent=dungeonDone(index)
+?"✓ Подземелье пройдено — снять отметку"
+:"Отметить подземелье пройденным";
+}
+
+updateComplete();
+
+complete.onclick=()=>{
+const was=dungeonDone(index);
+
+setDone("hyrule-dungeon-"+index,!was);
+
+if(!was){
+addRupees(50);
+
+d.goals.forEach((_,j)=>{
+setDone("hyrule-dungeon-goal-"+index+"-"+j,true);
+});
+
+naviMessage("Победа! "+d.name+" пройдено. Награда — 50 рупий!");
+}else{
+addRupees(-50);
+naviMessage("Отметка о прохождении снята, 50 рупий возвращены.");
+}
+
+updateComplete();
+renderDungeons();
+updateStats();
+showDungeonDetail(index);
+};
+
+const close=document.createElement("button");
+close.textContent="Свернуть подробности";
+close.onclick=()=>box.classList.add("hidden");
+
+actions.append(complete,close);
+
+box.append(heading,intro,info,goalTitle,goals,actions);
+
+box.scrollIntoView({behavior:"smooth",block:"start"});
 }
 
 /* Музыка */
 
-const music = document.getElementById("background-music");
-const musicButton = document.getElementById("music-button");
+const music=document.getElementById("background-music");
+const musicButton=document.getElementById("music-button");
 
-async function toggleMusic() {
-  if (music.paused) {
-    try {
-      await music.play();
-      musicButton.textContent = "♫ Выключить музыку";
-    } catch (error) {
-      musicButton.textContent = "Не удалось включить музыку";
-      naviMessage("Не получается включить музыку. Проверь музыкальный файл!");
-    }
-  } else {
-    music.pause();
-    musicButton.textContent = "♫ Включить музыку";
-  }
+async function toggleMusic(){
+if(music.paused){
+try{
+await music.play();
+musicButton.textContent="♫ Выключить музыку";
+}catch(e){
+musicButton.textContent="Не удалось включить музыку";
+naviMessage("Не получается включить музыку. Проверь музыкальный файл!");
+}
+}else{
+music.pause();
+musicButton.textContent="♫ Включить музыку";
+}
 }
 
-music.addEventListener("ended", () => {
-  musicButton.textContent = "♫ Включить музыку";
+music.addEventListener("ended",()=>{
+musicButton.textContent="♫ Включить музыку";
 });
 
-music.addEventListener("error", () => {
-  musicButton.textContent = "Музыкальный файл не найден";
+music.addEventListener("error",()=>{
+musicButton.textContent="Музыкальный файл не найден";
 });
 
-/* Запуск */
+/* Запуск сайта */
 
 renderPlaces();
 renderQuests();
