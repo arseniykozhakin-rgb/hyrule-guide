@@ -9,10 +9,9 @@
 <style>
 :root {
   --gold: #e7c66b;
-  --panel: rgba(12, 25, 23, .92);
+  --panel: rgba(12, 25, 23, .94);
   --green: #91bd78;
 }
-
 * { box-sizing: border-box; }
 
 body {
@@ -22,63 +21,57 @@ body {
   background: #14211b url("./images/hyrule-field.jpg.webp") center/cover fixed;
   min-height: 100vh;
 }
-
 body::before {
   content: "";
   position: fixed;
   inset: 0;
-  background: rgba(5, 13, 10, .72);
+  background: rgba(5,13,10,.72);
   z-index: -1;
 }
-
 header {
   text-align: center;
-  padding: 35px 16px 25px;
-  background: linear-gradient(#07120de8, #10251acc);
+  padding: 30px 16px 24px;
+  background: linear-gradient(#07120de8,#10251acc);
   border-bottom: 2px solid var(--gold);
 }
-
 h1 {
   color: var(--gold);
-  font-size: clamp(30px, 6vw, 52px);
+  font-size: clamp(30px,6vw,52px);
   margin: 5px 0;
   text-shadow: 0 3px 12px #000;
 }
-
 .subtitle { color: #d8d0b5; }
 
 nav {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 9px;
   padding: 14px;
   background: #09130fe8;
   position: sticky;
   top: 0;
   z-index: 5;
 }
-
 button {
   cursor: pointer;
   border: 1px solid var(--gold);
   color: #fff3d1;
   background: #243b2b;
-  padding: 10px 15px;
+  padding: 10px 14px;
   border-radius: 7px;
   font-family: inherit;
   font-size: 15px;
 }
-
-button:hover {
-  background: #49663a;
+button:hover { background: #49663a; }
+button:disabled {
+  opacity: .45;
+  cursor: not-allowed;
 }
-
 main {
-  width: min(1100px, 94%);
+  width: min(1100px,94%);
   margin: 25px auto;
 }
-
 .panel {
   background: var(--panel);
   border: 1px solid #a58b4b;
@@ -87,8 +80,7 @@ main {
   margin-bottom: 22px;
   box-shadow: 0 8px 25px #0007;
 }
-
-h2, h3 { color: var(--gold); }
+h2,h3 { color: var(--gold); }
 
 .hero {
   min-height: 260px;
@@ -96,38 +88,33 @@ h2, h3 { color: var(--gold); }
   place-items: center;
   text-align: center;
   background:
-    linear-gradient(#09150b88, #09150bdd),
+    linear-gradient(#09150b88,#09150bdd),
     url("./images/hyrule-field.jpg.webp") center/cover;
   border: 1px solid var(--gold);
   border-radius: 12px;
   padding: 25px;
 }
-
 .hero p {
   max-width: 650px;
   line-height: 1.7;
 }
-
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
   gap: 16px;
 }
-
 .location {
   background: #17291feF;
   border: 1px solid #8b7948;
   border-radius: 9px;
   overflow: hidden;
 }
-
 .location img {
   width: 100%;
   height: 145px;
   object-fit: cover;
   display: block;
 }
-
 .image-placeholder {
   height: 145px;
   display: grid;
@@ -137,7 +124,6 @@ h2, h3 { color: var(--gold); }
   background: #25372a;
   padding: 15px;
 }
-
 .location-content { padding: 14px; }
 .location-content h3 { margin-top: 0; }
 .location-content p { line-height: 1.5; }
@@ -145,7 +131,7 @@ h2, h3 { color: var(--gold); }
 .map {
   min-height: 340px;
   background:
-    linear-gradient(#17271b88, #17271b88),
+    linear-gradient(#17271b88,#17271b88),
     url("./images/hyrule-map.jpg.webp") center/cover;
   border: 2px solid var(--gold);
   border-radius: 10px;
@@ -156,30 +142,115 @@ h2, h3 { color: var(--gold); }
   justify-content: center;
   gap: 12px;
 }
-
 .map button { background: #253d29ed; }
 
 .list-item {
   display: flex;
   align-items: center;
   gap: 10px;
-  margin: 12px 0;
-  padding: 10px;
+  margin: 10px 0;
+  padding: 11px;
   background: #203428;
   border-radius: 7px;
 }
-
 .list-item input { accent-color: #a9d17b; }
 
+.hidden { display: none !important; }
 footer {
   text-align: center;
   padding: 25px;
   color: #c7bd9e;
 }
 
-.hidden { display: none; }
+/* Игровая панель */
 
-/* Живая Нави */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(150px,1fr));
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.stat {
+  background: #17291f;
+  border: 1px solid #8b7948;
+  border-radius: 9px;
+  padding: 13px;
+  text-align: center;
+}
+.stat-title {
+  color: #d8c58a;
+  font-size: 14px;
+  margin-bottom: 7px;
+}
+.stat-value {
+  font-size: 23px;
+  color: #fff0bd;
+}
+.hearts {
+  color: #ff6b78;
+  letter-spacing: 3px;
+  font-size: 22px;
+  overflow-wrap: anywhere;
+}
+.progress-track {
+  height: 10px;
+  background: #101a15;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 10px;
+}
+.progress-fill {
+  height: 100%;
+  width: 0;
+  background: #91bd78;
+  transition: width .3s;
+}
+.item-card {
+  background: #17291f;
+  border: 1px solid #8b7948;
+  border-radius: 10px;
+  padding: 15px;
+  text-align: center;
+}
+.item-icon {
+  font-size: 36px;
+  margin-bottom: 8px;
+}
+.item-card p {
+  color: #d8d0b5;
+  line-height: 1.4;
+  font-size: 14px;
+}
+.item-card button { margin-top: 8px; }
+.dungeon-card {
+  background: #17291f;
+  border: 1px solid #8b7948;
+  border-radius: 10px;
+  padding: 16px;
+  margin: 14px 0;
+}
+.dungeon-card p { line-height: 1.5; }
+.dungeon-card.completed {
+  border-color: #91bd78;
+  box-shadow: 0 0 12px #91bd7833;
+}
+.reward {
+  color: #e7c66b;
+  font-size: 14px;
+}
+.action-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+}
+.notice {
+  color: #c6dcae;
+  min-height: 22px;
+  margin: 10px 0;
+}
+
+/* Нави */
 
 #navi {
   position: fixed;
@@ -193,24 +264,17 @@ footer {
   filter: drop-shadow(0 0 12px #a8eaff);
   animation: navi-float 2.5s ease-in-out infinite,
              navi-glow 2s ease-in-out infinite alternate;
-  transition: transform .25s;
 }
-
-#navi:hover {
-  transform: scale(1.18);
-}
-
+#navi:hover { transform: scale(1.15); }
 #navi:focus-visible {
   outline: 2px solid #a8eaff;
-  outline-offset: 5px;
   border-radius: 50%;
 }
-
 #navi-message {
   position: fixed;
   right: 120px;
   bottom: 35px;
-  width: min(260px, calc(100vw - 145px));
+  width: min(260px,calc(100vw - 145px));
   background: #10291fef;
   border: 1px solid #9bd8e8;
   border-radius: 12px;
@@ -219,43 +283,19 @@ footer {
   display: none;
   box-shadow: 0 0 18px #80dfff55;
   line-height: 1.5;
-  animation: bubble-in .25s ease-out;
 }
-
 #navi-message strong {
   display: block;
   color: #a8eaff;
   margin-bottom: 5px;
 }
-
 @keyframes navi-float {
-  0%, 100% { transform: translateY(0); }
+  0%,100% { transform: translateY(0); }
   50% { transform: translateY(-13px); }
 }
-
 @keyframes navi-glow {
-  from {
-    filter: drop-shadow(0 0 7px #83dfff);
-  }
-  to {
-    filter: drop-shadow(0 0 19px #b8f3ff);
-  }
-}
-
-@keyframes bubble-in {
-  from {
-    opacity: 0;
-    transform: translateY(8px) scale(.95);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-.music-status {
-  color: #c6dcae;
-  margin-left: 8px;
+  from { filter: drop-shadow(0 0 7px #83dfff); }
+  to { filter: drop-shadow(0 0 19px #b8f3ff); }
 }
 
 @media(max-width:600px) {
@@ -265,7 +305,7 @@ footer {
   #navi-message {
     right: 90px;
     bottom: 25px;
-    width: min(230px, calc(100vw - 110px));
+    width: min(230px,calc(100vw - 110px));
   }
 }
 </style>
@@ -286,80 +326,111 @@ footer {
   <button onclick="showSection('map-section')">Карта</button>
   <button onclick="showSection('quests')">Задания</button>
   <button onclick="showSection('inventory')">Инвентарь</button>
-  <button onclick="toggleMusic()" id="music-button">
-    ♫ Включить музыку
-  </button>
+  <button onclick="showSection('dungeons')">Подземелья</button>
+  <button onclick="toggleMusic()" id="music-button">♫ Включить музыку</button>
 </nav>
 
 <main>
 
-  <section id="home" class="page">
-    <div class="hero">
-      <div>
-        <h2>Добро пожаловать в Хайрул!</h2>
-        <p>
-          Отправляйся в путешествие по королевству, исследуй загадочные
-          места, выполняй задания и собирай полезные предметы.
-          Пусть твоя Окарина укажет путь!
-        </p>
-        <button onclick="showSection('places')">
-          Начать путешествие
-        </button>
+<section id="home" class="page">
+  <div class="hero">
+    <div>
+      <h2>Добро пожаловать в Хайрул!</h2>
+      <p>
+        Отправляйся в путешествие по королевству, исследуй загадочные
+        места, выполняй задания и собирай полезные предметы.
+        Пусть твоя Окарина укажет путь!
+      </p>
+      <button onclick="showSection('places')">Начать путешествие</button>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>Твои приключения</h2>
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-title">Здоровье</div>
+        <div class="hearts" id="heart-display">❤️❤️❤️</div>
+        <div class="stat-title" id="heart-count">3 / 10</div>
+      </div>
+      <div class="stat">
+        <div class="stat-title">Рупии</div>
+        <div class="stat-value">💎 <span id="rupee-display">0</span></div>
+      </div>
+      <div class="stat">
+        <div class="stat-title">Найдено предметов</div>
+        <div class="stat-value" id="item-count">0 / 8</div>
+      </div>
+      <div class="stat">
+        <div class="stat-title">Пройдено подземелий</div>
+        <div class="stat-value" id="dungeon-count">0 / 6</div>
       </div>
     </div>
-
-    <div class="panel">
-      <h2>О путеводителе</h2>
-      <p>
-        Здесь собраны известные места Хайрула, карта, список заданий
-        и личный инвентарь путешественника.
-      </p>
-      <p>
-        Выбирай локацию, читай описание и отмечай выполненные задания.
-      </p>
+    <div class="action-row">
+      <button onclick="restAtHome()">🌿 Отдохнуть и восстановить сердца</button>
     </div>
-  </section>
+    <p class="notice" id="home-notice"></p>
+  </div>
 
-  <section id="places" class="page hidden">
-    <div class="panel">
-      <h2>Локации Хайрула</h2>
-      <div id="locations" class="grid"></div>
-    </div>
-  </section>
+  <div class="panel">
+    <h2>О путеводителе</h2>
+    <p>
+      Здесь собраны известные места Хайрула, карта, список заданий,
+      инвентарь и подземелья.
+    </p>
+    <p>Исследуй мир и собирай награды!</p>
+  </div>
+</section>
 
-  <section id="map-section" class="page hidden">
-    <div class="panel">
-      <h2>Карта Хайрула</h2>
-      <p>Нажми на название места, чтобы узнать о нём подробнее.</p>
-      <div class="map" id="map-buttons"></div>
-    </div>
-  </section>
+<section id="places" class="page hidden">
+  <div class="panel">
+    <h2>Локации Хайрула</h2>
+    <div id="locations" class="grid"></div>
+  </div>
+</section>
 
-  <section id="quests" class="page hidden">
-    <div class="panel">
-      <h2>Задания путешественника</h2>
-      <p>Отмечай задания по мере прохождения игры.</p>
-      <div id="quest-list"></div>
-    </div>
-  </section>
+<section id="map-section" class="page hidden">
+  <div class="panel">
+    <h2>Карта Хайрула</h2>
+    <p>Нажми на название места, чтобы узнать о нём подробнее.</p>
+    <div class="map" id="map-buttons"></div>
+  </div>
+</section>
 
-  <section id="inventory" class="page hidden">
-    <div class="panel">
-      <h2>Инвентарь</h2>
-      <p>Отмечай предметы, которые уже нашёл.</p>
-      <div id="inventory-list"></div>
-    </div>
-  </section>
+<section id="quests" class="page hidden">
+  <div class="panel">
+    <h2>Задания путешественника</h2>
+    <p>За каждое выполненное задание ты получишь 20 рупий.</p>
+    <div id="quest-list"></div>
+  </div>
+</section>
+
+<section id="inventory" class="page hidden">
+  <div class="panel">
+    <h2>Инвентарь Линка</h2>
+    <p>Отмечай предметы, которые уже нашёл.</p>
+    <div id="inventory-list" class="grid"></div>
+  </div>
+</section>
+
+<section id="dungeons" class="page hidden">
+  <div class="panel">
+    <h2>Подземелья Хайрула</h2>
+    <p>
+      Исследуй храмы, отмечай прохождение и получай награды.
+      За каждый пройденный храм начисляется 50 рупий.
+    </p>
+    <div id="dungeon-list"></div>
+  </div>
+</section>
 
 </main>
 
-<!-- Окошко Нави -->
 <div id="navi-message" role="status" aria-live="polite">
   <strong>Нави</strong>
   Эй! Слушай!
 </div>
 
-<!-- Нави -->
 <img
   id="navi"
   src="./images/navi.png.jpg"
@@ -379,6 +450,8 @@ footer {
 </audio>
 
 <script>
+
+/* Данные игры */
 
 const places = [
   {
@@ -434,30 +507,91 @@ const quests = [
 ];
 
 const items = [
-  "Меч Кокири",
-  "Щит Деку",
-  "Окарина времени",
-  "Бомбы",
-  "Лук",
-  "Бумеранг",
-  "Крюк",
-  "Магические стрелы"
+  {
+    name: "Меч Кокири",
+    icon: "⚔️",
+    description: "Первый меч Линка. Помогает в приключениях."
+  },
+  {
+    name: "Щит Деку",
+    icon: "🛡️",
+    description: "Деревянный щит для защиты."
+  },
+  {
+    name: "Окарина времени",
+    icon: "🎵",
+    description: "Волшебный инструмент, исполняющий особые мелодии."
+  },
+  {
+    name: "Бомбы",
+    icon: "💣",
+    description: "Полезный предмет для исследования мира."
+  },
+  {
+    name: "Лук",
+    icon: "🏹",
+    description: "Дальнобойный предмет Линка."
+  },
+  {
+    name: "Бумеранг",
+    icon: "🪃",
+    description: "Предмет, который возвращается после броска."
+  },
+  {
+    name: "Крюк",
+    icon: "🪝",
+    description: "Помогает добираться до новых мест."
+  },
+  {
+    name: "Магические стрелы",
+    icon: "✨",
+    description: "Особые стрелы с магическими свойствами."
+  }
 ];
 
-/* Реплики Нави */
+const dungeons = [
+  {
+    name: "Дерево Деку",
+    boss: "Королева Гохма",
+    description: "Первое большое подземелье в приключении Линка."
+  },
+  {
+    name: "Пещера Додонго",
+    boss: "Король Додонго",
+    description: "Пещера горонов, полная древних тайн."
+  },
+  {
+    name: "Внутри живота Джабу-Джабу",
+    boss: "Биг Октo",
+    description: "Необычное подземелье во владениях Зора."
+  },
+  {
+    name: "Лесной храм",
+    boss: "Фантом Ганон",
+    description: "Загадочный храм, полный призраков."
+  },
+  {
+    name: "Храм Огня",
+    boss: "Вольвагия",
+    description: "Храм в глубине Горы Смерти."
+  },
+  {
+    name: "Храм Воды",
+    boss: "Морфа",
+    description: "Водный храм с множеством загадок."
+  }
+];
 
 const naviTips = [
   "Эй! Слушай! Не забудь исследовать лес Кокири!",
   "Линк, попробуй заглянуть в замок Хайрула!",
-  "Знаешь ли ты, что в деревне Какарико живут интересные персонажи?",
   "Не забудь проверить свою карту!",
   "Владения Зора скрывают много интересного!",
-  "Озеро Хайлия — прекрасное место для исследования!",
-  "Эй! Не забудь отмечать выполненные задания!",
-  "Посмотри в инвентарь! Может быть, ты уже нашёл новый предмет?",
-  "Хорошее путешествие начинается с любопытства!",
-  "Линк! Может, пора отправиться в новое приключение?",
-  "Не забывай слушать мелодии своей окарины!",
+  "Озеро Хайлия — прекрасное место!",
+  "Отмечай выполненные задания и получай рупии!",
+  "Загляни в инвентарь. Может, ты нашёл новый предмет?",
+  "Попробуй пройти одно из подземелий!",
+  "Эй! Ты уже собрал свои награды?",
   "Хайрул полон секретов. Продолжай исследовать!"
 ];
 
@@ -469,9 +603,77 @@ const naviGreetings = [
   "Давай отправимся в приключение!"
 ];
 
-let naviIndex = 0;
-let naviTimer;
-let idleTimer;
+/* Сохранение игрового прогресса */
+
+function loadNumber(key, fallback) {
+  const value = Number(localStorage.getItem(key));
+  return Number.isFinite(value) && localStorage.getItem(key) !== null
+    ? value : fallback;
+}
+
+let hearts = Math.max(0, Math.min(10, loadNumber("hyrule-hearts", 3)));
+let rupees = Math.max(0, loadNumber("hyrule-rupees", 0));
+
+function saveGame() {
+  localStorage.setItem("hyrule-hearts", hearts);
+  localStorage.setItem("hyrule-rupees", rupees);
+}
+
+function isDone(key) {
+  return localStorage.getItem(key) === "true";
+}
+
+function setDone(key, value) {
+  localStorage.setItem(key, value ? "true" : "false");
+}
+
+function addRupees(amount) {
+  rupees += amount;
+  saveGame();
+  updateStats();
+}
+
+function updateStats() {
+  document.getElementById("heart-display").textContent =
+    "❤️".repeat(hearts) + "🖤".repeat(10 - hearts);
+
+  document.getElementById("heart-count").textContent =
+    hearts + " / 10";
+
+  document.getElementById("rupee-display").textContent = rupees;
+
+  const foundItems = items.filter((item, i) =>
+    isDone("hyrule-item-" + i)
+  ).length;
+
+  const finishedDungeons = dungeons.filter((dungeon, i) =>
+    isDone("hyrule-dungeon-" + i)
+  ).length;
+
+  document.getElementById("item-count").textContent =
+    foundItems + " / " + items.length;
+
+  document.getElementById("dungeon-count").textContent =
+    finishedDungeons + " / " + dungeons.length;
+}
+
+function restAtHome() {
+  if (hearts === 10) {
+    document.getElementById("home-notice").textContent =
+      "У тебя уже полное здоровье!";
+    return;
+  }
+
+  hearts = 10;
+  saveGame();
+  updateStats();
+
+  document.getElementById("home-notice").textContent =
+    "Здоровье полностью восстановлено! ❤️";
+  naviMessage("Отлично! Теперь ты снова полон сил!");
+}
+
+/* Навигация */
 
 function showSection(id) {
   document.querySelectorAll(".page").forEach(page => {
@@ -480,18 +682,32 @@ function showSection(id) {
 
   document.getElementById(id).classList.remove("hidden");
 
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
-  });
-
-  naviMessage("Отлично! Давай исследуем этот раздел!");
+  window.scrollTo({ top: 0, behavior: "smooth" });
 }
+
+function openPlace(name) {
+  showSection("places");
+
+  const card = [...document.querySelectorAll(".location")].find(card =>
+    card.dataset.name === name
+  );
+
+  if (card) {
+    card.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+
+  naviMessage("Эй! Ты выбрал: " + name + "!");
+}
+
+/* Нави */
+
+let naviIndex = 0;
+let naviTimer;
+let idleTimer;
 
 function naviMessage(message) {
   const box = document.getElementById("navi-message");
-
-  box.innerHTML = "";
+  box.replaceChildren();
 
   const title = document.createElement("strong");
   title.textContent = "Нави";
@@ -510,44 +726,44 @@ function naviMessage(message) {
 }
 
 function talkToNavi() {
-  const tip = naviTips[naviIndex];
-
-  naviMessage(tip);
-
+  naviMessage(naviTips[naviIndex]);
   naviIndex = (naviIndex + 1) % naviTips.length;
 
-  const navi = document.getElementById("navi");
-
-  navi.animate(
+  document.getElementById("navi").animate(
     [
       { transform: "scale(1) rotate(0deg)" },
-      { transform: "scale(1.25) rotate(-10deg)" },
-      { transform: "scale(1.25) rotate(10deg)" },
+      { transform: "scale(1.2) rotate(-10deg)" },
+      { transform: "scale(1.2) rotate(10deg)" },
       { transform: "scale(1) rotate(0deg)" }
     ],
-    {
-      duration: 500,
-      easing: "ease-in-out"
-    }
+    { duration: 500, easing: "ease-in-out" }
   );
 }
 
-function openPlace(name) {
-  showSection("places");
+const navi = document.getElementById("navi");
 
-  const card = [...document.querySelectorAll(".location")].find(card =>
-    card.dataset.name === name
-  );
-
-  if (card) {
-    card.scrollIntoView({
-      behavior: "smooth",
-      block: "center"
-    });
+navi.addEventListener("click", talkToNavi);
+navi.addEventListener("keydown", event => {
+  if (event.key === "Enter" || event.key === " ") {
+    event.preventDefault();
+    talkToNavi();
   }
+});
 
-  naviMessage("Эй! Ты выбрал: " + name + "!");
+function startNaviIdle() {
+  clearTimeout(idleTimer);
+
+  idleTimer = setTimeout(() => {
+    const greeting = naviGreetings[
+      Math.floor(Math.random() * naviGreetings.length)
+    ];
+
+    naviMessage(greeting);
+    startNaviIdle();
+  }, 45000);
 }
+
+/* Карточки локаций */
 
 function makeLocationCard(place) {
   const card = document.createElement("article");
@@ -565,8 +781,7 @@ function makeLocationCard(place) {
     img.onerror = () => {
       const placeholder = document.createElement("div");
       placeholder.className = "image-placeholder";
-      placeholder.textContent =
-        "Изображение не найдено: " + place.file;
+      placeholder.textContent = "Изображение не найдено: " + place.file;
       img.replaceWith(placeholder);
     };
 
@@ -574,8 +789,7 @@ function makeLocationCard(place) {
   } else {
     const placeholder = document.createElement("div");
     placeholder.className = "image-placeholder";
-    placeholder.textContent =
-      "Изображение Горы Смерти пока не добавлено";
+    placeholder.textContent = "Изображение Горы Смерти пока не добавлено";
     card.appendChild(placeholder);
   }
 
@@ -587,7 +801,6 @@ function makeLocationCard(place) {
 
   const button = document.createElement("button");
   button.textContent = "Исследовать";
-
   button.onclick = () => {
     naviMessage("Нави: " + place.description);
   };
@@ -615,34 +828,138 @@ function renderPlaces() {
   });
 }
 
-function renderChecklist(containerId, entries, storageKey) {
-  const container = document.getElementById(containerId);
+/* Задания с наградами */
 
-  entries.forEach((entry, index) => {
+function renderQuests() {
+  const container = document.getElementById("quest-list");
+
+  quests.forEach((entry, index) => {
+    const key = "hyrule-quest-" + index;
     const label = document.createElement("label");
     label.className = "list-item";
 
     const checkbox = document.createElement("input");
     checkbox.type = "checkbox";
-    checkbox.checked =
-      localStorage.getItem(storageKey + index) === "true";
+    checkbox.checked = isDone(key);
+
+    const text = document.createElement("span");
+    text.textContent = entry + " — награда: 20 💎";
 
     checkbox.addEventListener("change", () => {
-      localStorage.setItem(
-        storageKey + index,
-        checkbox.checked
-      );
+      const wasDone = isDone(key);
+      setDone(key, checkbox.checked);
 
-      if (checkbox.checked) {
-        naviMessage("Молодец! Ещё одно достижение в твоём путешествии!");
+      if (checkbox.checked && !wasDone) {
+        addRupees(20);
+        naviMessage("Задание выполнено! Ты получил 20 рупий!");
+      } else if (!checkbox.checked && wasDone) {
+        addRupees(-20);
+        naviMessage("Отметка снята, награда возвращена.");
       }
     });
 
-    const text = document.createElement("span");
-    text.textContent = entry;
-
     label.append(checkbox, text);
     container.appendChild(label);
+  });
+}
+
+/* Инвентарь */
+
+function renderInventory() {
+  const container = document.getElementById("inventory-list");
+
+  items.forEach((item, index) => {
+    const key = "hyrule-item-" + index;
+    const card = document.createElement("div");
+    card.className = "item-card";
+
+    const icon = document.createElement("div");
+    icon.className = "item-icon";
+    icon.textContent = item.icon;
+
+    const title = document.createElement("h3");
+    title.textContent = item.name;
+
+    const description = document.createElement("p");
+    description.textContent = item.description;
+
+    const button = document.createElement("button");
+
+    function updateButton() {
+      button.textContent = isDone(key) ? "✓ Найдено" : "Отметить найденным";
+    }
+
+    updateButton();
+
+    button.onclick = () => {
+      const newValue = !isDone(key);
+      setDone(key, newValue);
+      updateButton();
+      updateStats();
+
+      naviMessage(
+        newValue
+          ? "Отлично! " + item.name + " добавлен в твой инвентарь!"
+          : item.name + " убран из списка найденных предметов."
+      );
+    };
+
+    card.append(icon, title, description, button);
+    container.appendChild(card);
+  });
+}
+
+/* Подземелья и боссы */
+
+function renderDungeons() {
+  const container = document.getElementById("dungeon-list");
+
+  dungeons.forEach((dungeon, index) => {
+    const key = "hyrule-dungeon-" + index;
+    const card = document.createElement("article");
+    card.className = "dungeon-card";
+
+    const title = document.createElement("h3");
+    title.textContent = "🏯 " + dungeon.name;
+
+    const description = document.createElement("p");
+    description.textContent = dungeon.description;
+
+    const boss = document.createElement("p");
+    boss.textContent = "Босс: " + dungeon.boss;
+
+    const reward = document.createElement("p");
+    reward.className = "reward";
+    reward.textContent = "Награда за прохождение: 50 💎";
+
+    const button = document.createElement("button");
+
+    function updateButton() {
+      const done = isDone(key);
+      button.textContent = done ? "✓ Подземелье пройдено" : "Отметить прохождение";
+      card.classList.toggle("completed", done);
+    }
+
+    updateButton();
+
+    button.onclick = () => {
+      const wasDone = isDone(key);
+      const newValue = !wasDone;
+
+      setDone(key, newValue);
+      addRupees(newValue ? 50 : -50);
+      updateButton();
+      updateStats();
+
+      naviMessage(
+        newValue
+          ? "Победа! Ты прошёл " + dungeon.name + " и получил 50 рупий!"
+          : "Отметка о прохождении снята. Награда возвращена."
+      );
+    };
+
+    card.append(title, description, boss, reward, button);
+    container.appendChild(card);
   });
 }
 
@@ -674,52 +991,13 @@ music.addEventListener("error", () => {
   musicButton.textContent = "Музыкальный файл не найден";
 });
 
-/* Нави реагирует на нажатие и клавиатуру */
-
-const navi = document.getElementById("navi");
-
-navi.addEventListener("click", talkToNavi);
-
-navi.addEventListener("keydown", event => {
-  if (event.key === "Enter" || event.key === " ") {
-    event.preventDefault();
-    talkToNavi();
-  }
-});
-
-/* Иногда Нави сама напоминает о себе */
-
-function startNaviIdle() {
-  clearTimeout(idleTimer);
-
-  idleTimer = setTimeout(() => {
-    const randomGreeting =
-      naviGreetings[
-        Math.floor(Math.random() * naviGreetings.length)
-      ];
-
-    naviMessage(randomGreeting);
-
-    startNaviIdle();
-  }, 45000);
-}
-
-/* Запуск сайта */
+/* Запуск */
 
 renderPlaces();
-
-renderChecklist(
-  "quest-list",
-  quests,
-  "hyrule-quest-"
-);
-
-renderChecklist(
-  "inventory-list",
-  items,
-  "hyrule-item-"
-);
-
+renderQuests();
+renderInventory();
+renderDungeons();
+updateStats();
 startNaviIdle();
 
 </script>
