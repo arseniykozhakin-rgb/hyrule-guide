@@ -4,6 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#101a15">
 <title>Hyrule Guide — Ocarina of Time</title>
 
 <style>
@@ -23,22 +24,28 @@ body {
   font-family:Georgia,serif;
 }
 button {font:inherit;cursor:pointer}
-button:focus-visible {outline:2px solid var(--gold);outline-offset:3px}
-
+button:focus-visible {
+  outline:2px solid var(--gold);
+  outline-offset:3px;
+}
 .hero {
-  min-height:90vh;
+  min-height:85vh;
   display:grid;
   place-items:center;
   text-align:center;
-  padding:30px 18px;
+  padding:35px 18px;
   background:
     linear-gradient(#08140dbb,#08140d99),
-    url("./images/hyrule-field.jpg") center/cover,
+    url("./images/hyrule-field.jpg") center/cover no-repeat,
     linear-gradient(135deg,#31583c,#101a15);
   border-bottom:3px solid var(--gold);
 }
 .hero-content {max-width:750px}
-.eyebrow {color:var(--gold);letter-spacing:5px}
+.eyebrow {
+  color:var(--gold);
+  letter-spacing:4px;
+  font-size:13px;
+}
 h1 {
   font-size:clamp(43px,9vw,85px);
   color:var(--gold);
@@ -56,7 +63,6 @@ h1 {
   margin:10px;
 }
 .gold-button:hover {filter:brightness(1.12)}
-
 nav {
   position:sticky;
   top:0;
@@ -75,10 +81,12 @@ nav button {
   border:1px solid transparent;
   padding:10px;
 }
-nav button:hover {border-color:var(--gold);color:var(--gold)}
-
+nav button:hover {
+  border-color:var(--gold);
+  color:var(--gold);
+}
 main {max-width:1100px;margin:auto;padding:20px}
-section {margin:55px 0;scroll-margin-top:85px}
+section {margin:55px 0;scroll-margin-top:90px}
 h2 {
   color:var(--gold);
   font-size:clamp(26px,5vw,37px);
@@ -109,7 +117,19 @@ p {line-height:1.7}
   height:175px;
   display:block;
   object-fit:cover;
+  background:#294734;
+}
+.image-placeholder {
+  width:100%;
+  height:175px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:15px;
+  color:var(--gold);
   background:linear-gradient(135deg,#355b3e,#17271c);
+  border-bottom:1px solid #94733d;
 }
 .card-body {padding:15px}
 .card h3 {color:var(--gold)}
@@ -121,13 +141,12 @@ p {line-height:1.7}
   padding:9px 13px;
 }
 .small-button:hover {background:#3b6046}
-
 .map {
   min-height:370px;
   position:relative;
   background:
     linear-gradient(#152a1a44,#152a1a44),
-    url("./images/hyrule-map.jpg") center/cover,
+    url("./images/hyrule-map.jpg") center/cover no-repeat,
     #304c32;
   border:1px solid var(--gold);
   border-radius:7px;
@@ -140,12 +159,11 @@ p {line-height:1.7}
   border-radius:20px;
   padding:8px;
   color:var(--gold);
-  background:#15251eeF;
+  background:#15251eef;
   font-size:12px;
 }
 .pin:hover {background:#70552a}
 .detail {margin-top:15px;min-height:90px}
-
 .item {
   display:flex;
   align-items:center;
@@ -160,9 +178,14 @@ p {line-height:1.7}
   padding:12px 0;
   border-bottom:1px solid #62583e;
 }
-.quest input {accent-color:#d9b65f;margin-top:5px}
-.quest.done span {text-decoration:line-through;opacity:.55}
-
+.quest input {
+  accent-color:#d9b65f;
+  margin-top:5px;
+}
+.quest.done span {
+  text-decoration:line-through;
+  opacity:.55;
+}
 .navi {
   display:flex;
   flex-wrap:wrap;
@@ -197,19 +220,11 @@ footer {
   max-width:90%;
   text-align:center;
 }
-.missing-image {
-  display:flex!important;
-  align-items:center;
-  justify-content:center;
-  color:var(--gold);
-  font-size:13px;
-  text-align:center;
-  padding:15px;
-}
 @media(max-width:600px) {
   nav button {font-size:12px;padding:8px}
   .map {min-height:320px}
   .pin {font-size:10px;padding:6px}
+  main {padding:15px}
 }
 </style>
 </head>
@@ -225,7 +240,7 @@ footer {
     <button class="gold-button" onclick="enterHyrule()">
       Войти в Хайрул
     </button>
-    <p id="musicStatus">♫ Музыка загружается...</p>
+    <p id="musicStatus">♫ Нажми кнопку, чтобы включить музыку</p>
   </div>
 </header>
 
@@ -236,7 +251,7 @@ footer {
   <button onclick="go('inventory')">Инвентарь</button>
   <button onclick="go('quests')">Задания</button>
   <button onclick="go('navi')">Нави</button>
-  <button onclick="toggleMusic()" id="musicButton">♫ Музыка: вкл.</button>
+  <button onclick="toggleMusic()" id="musicButton">♫ Включить музыку</button>
 </nav>
 
 <main>
@@ -294,7 +309,7 @@ footer {
 <section id="navi">
   <h2>Совет от Нави</h2>
   <div class="panel navi">
-    <img src="./images/navi.png" alt="Нави" onerror="imageError(this,'Нави')">
+    <img src="./images/navi.png" alt="Нави" id="naviImage">
     <div style="flex:1;min-width:200px">
       <strong style="color:var(--gold)">Нави</strong>
       <p id="naviText">Эй! Слушай! Добро пожаловать в Хайрул!</p>
@@ -319,9 +334,9 @@ footer {
   Путеводитель по миру Ocarina of Time
 </footer>
 
-<div id="status" role="status"></div>
+<div id="status" role="status" aria-live="polite"></div>
 
-<audio id="bgMusic" loop preload="auto">
+<audio id="bgMusic" loop preload="none">
   <source src="./audio/hyrule-theme.mp3" type="audio/mpeg">
 </audio>
 
@@ -330,50 +345,50 @@ const music = document.getElementById("bgMusic");
 const musicButton = document.getElementById("musicButton");
 const musicStatus = document.getElementById("musicStatus");
 
-let musicStarted = false;
-
 function go(id) {
-  document.getElementById(id).scrollIntoView({behavior:"smooth"});
+  const section = document.getElementById(id);
+  if (section) section.scrollIntoView({behavior:"smooth"});
 }
+
+let noticeTimer;
 
 function notify(message) {
   const box = document.getElementById("status");
   box.textContent = message;
   box.style.display = "block";
-  clearTimeout(window.noticeTimer);
-  window.noticeTimer = setTimeout(() => {
+  clearTimeout(noticeTimer);
+  noticeTimer = setTimeout(() => {
     box.style.display = "none";
-  }, 3500);
+  }, 3000);
 }
 
+// Показывает красивую заглушку, если картинка не найдена.
 function imageError(img, name) {
-  img.onerror = null;
-  img.src = "";
-  img.classList.add("missing-image");
-  img.alt = "";
-  img.style.background = "linear-gradient(135deg,#355b3e,#17271c)";
-  img.insertAdjacentText("beforeend", "Изображение не найдено: " + name);
+  if (!img || !img.parentNode) return;
+
+  const placeholder = document.createElement("div");
+  placeholder.className = "image-placeholder";
+  placeholder.textContent = "Изображение не найдено: " + name;
+  img.replaceWith(placeholder);
 }
 
+document.getElementById("naviImage").addEventListener("error", function() {
+  imageError(this, "navi.png");
+}, {once:true});
+
+// Музыка
 async function startMusic() {
   try {
     await music.play();
-    musicStarted = true;
-    musicButton.textContent = "♫ Музыка: вкл.";
+    musicButton.textContent = "♫ Музыка: выкл.";
     musicStatus.textContent = "♫ Музыка играет";
     return true;
   } catch (error) {
     musicButton.textContent = "♫ Включить музыку";
-    musicStatus.textContent = "Нажми «Войти в Хайрул», чтобы включить музыку.";
+    musicStatus.textContent = "Браузер ждёт нажатия для запуска музыки.";
     return false;
   }
 }
-
-// Пробуем включить музыку при загрузке.
-// Если браузер блокирует автозапуск, музыка включится после нажатия.
-window.addEventListener("load", () => {
-  startMusic();
-});
 
 async function enterHyrule() {
   await startMusic();
@@ -385,37 +400,66 @@ async function toggleMusic() {
     await startMusic();
   } else {
     music.pause();
-    musicButton.textContent = "♫ Музыка: выкл.";
+    musicButton.textContent = "♫ Включить музыку";
     musicStatus.textContent = "Музыка выключена";
   }
 }
 
 music.addEventListener("error", () => {
   musicStatus.textContent = "Не найден файл audio/hyrule-theme.mp3";
-  musicButton.textContent = "♫ Ошибка аудио";
+  musicButton.textContent = "♫ Файл музыки не найден";
 });
 
-music.addEventListener("ended", () => {
-  musicButton.textContent = "♫ Музыка: выкл.";
-});
-
+// Локации
 const places = [
-  {id:"field",name:"Поле Хайрула",file:"hyrule-field.jpg",
-   desc:"Большое открытое пространство, соединяющее разные уголки королевства."},
-  {id:"kokiri",name:"Лес Кокири",file:"kokiri-forest.jpg",
-   desc:"Зелёный лес, где начинается приключение юного героя."},
-  {id:"castle",name:"Замок Хайрула",file:"hyrule-castle.jpg",
-   desc:"Королевский замок — важное место в истории Хайрула."},
-  {id:"kakariko",name:"Деревня Какарико",file:"kakariko.jpg",
-   desc:"Тихая деревня у подножия Горы Смерти."},
-  {id:"death",name:"Гора Смерти",file:"death-mountain.jpg",
-   desc:"Вулканическая гора, дом народа горонов."},
-  {id:"zora",name:"Владения Зора",file:"zora-domain.jpg",
-   desc:"Водное королевство народа Зора."},
-  {id:"lake",name:"Озеро Хайлия",file:"lake-hylia.jpg",
-   desc:"Большое озеро с красивыми водными просторами."},
-  {id:"gerudo",name:"Долина Герудо",file:"gerudo-valley.jpg",
-   desc:"Скалистая долина, ведущая к владениям Герудо."}
+  {
+    id:"field",
+    name:"Поле Хайрула",
+    file:"hyrule-field.jpg",
+    desc:"Большое открытое пространство, соединяющее разные уголки королевства."
+  },
+  {
+    id:"kokiri",
+    name:"Лес Кокири",
+    file:"kokiri-forest.jpg",
+    desc:"Зелёный лес, где начинается приключение юного героя."
+  },
+  {
+    id:"castle",
+    name:"Замок Хайрула",
+    file:"hyrule-castle.jpg",
+    desc:"Королевский замок — важное место в истории Хайрула."
+  },
+  {
+    id:"kakariko",
+    name:"Деревня Какарико",
+    file:"kakariko.jpg",
+    desc:"Тихая деревня у подножия Горы Смерти."
+  },
+  {
+    id:"death",
+    name:"Гора Смерти",
+    file:"death-mountain.jpg",
+    desc:"Вулканическая гора, дом народа горонов."
+  },
+  {
+    id:"zora",
+    name:"Владения Зора",
+    file:"zora-domain.jpg",
+    desc:"Водное королевство народа Зора."
+  },
+  {
+    id:"lake",
+    name:"Озеро Хайлия",
+    file:"lake-hylia.jpg",
+    desc:"Большое озеро с красивыми водными просторами."
+  },
+  {
+    id:"gerudo",
+    name:"Долина Герудо",
+    file:"gerudo-valley.jpg",
+    desc:"Скалистая долина, ведущая к владениям Герудо."
+  }
 ];
 
 function renderLocations() {
@@ -430,7 +474,7 @@ function renderLocations() {
     img.src = "./images/" + place.file;
     img.alt = place.name;
     img.loading = "lazy";
-    img.onerror = () => imageError(img, place.file);
+    img.addEventListener("error", () => imageError(img, place.file), {once:true});
 
     const body = document.createElement("div");
     body.className = "card-body";
@@ -459,11 +503,20 @@ function showPlace(id) {
   const place = places.find(p => p.id === id);
   if (!place) return;
 
-  document.getElementById("placeDetail").innerHTML =
-    "<strong style='color:var(--gold)'>" +
-    place.name + "</strong><p>" + place.desc + "</p>";
+  const box = document.getElementById("placeDetail");
+  box.replaceChildren();
+
+  const title = document.createElement("strong");
+  title.style.color = "var(--gold)";
+  title.textContent = place.name;
+
+  const description = document.createElement("p");
+  description.textContent = place.desc;
+
+  box.append(title, description);
 }
 
+// Безопасное сохранение прогресса
 function loadSaved(key, fallback) {
   try {
     const data = localStorage.getItem(key);
@@ -476,18 +529,28 @@ function loadSaved(key, fallback) {
 let inventory = loadSaved("hyruleInventory", []);
 let completed = loadSaved("hyruleQuests", []);
 
+if (!Array.isArray(inventory)) inventory = [];
+if (!Array.isArray(completed)) completed = [];
+
 function save() {
   try {
     localStorage.setItem("hyruleInventory", JSON.stringify(inventory));
     localStorage.setItem("hyruleQuests", JSON.stringify(completed));
   } catch {
-    notify("Не удалось сохранить прогресс.");
+    notify("Браузер не разрешил сохранить прогресс.");
   }
 }
 
+// Инвентарь
 const items = [
-  "Кокири-меч","Щит Деку","Окарина времени",
-  "Семена Деку","Бомбы","Бумеранг","Лук","Крюк-кошка"
+  "Кокири-меч",
+  "Щит Деку",
+  "Окарина времени",
+  "Семена Деку",
+  "Бомбы",
+  "Бумеранг",
+  "Лук",
+  "Крюк-кошка"
 ];
 
 function renderInventory() {
@@ -509,6 +572,7 @@ function renderInventory() {
       inventory = inventory.includes(item)
         ? inventory.filter(x => x !== item)
         : [...inventory, item];
+
       save();
       renderInventory();
     };
@@ -518,6 +582,7 @@ function renderInventory() {
   });
 }
 
+// Задания
 const quests = [
   "Исследовать лес Кокири",
   "Посетить поле Хайрула",
@@ -545,6 +610,7 @@ function renderQuests() {
       completed = checkbox.checked
         ? [...completed, index]
         : completed.filter(x => x !== index);
+
       save();
       renderQuests();
     };
@@ -567,6 +633,7 @@ function resetQuests() {
   renderQuests();
 }
 
+// Нави
 const tips = [
   "Эй! Слушай! Исследуй места внимательно!",
   "Заглядывай в деревни — жители могут дать полезные подсказки.",
@@ -582,6 +649,7 @@ function nextTip() {
   document.getElementById("naviText").textContent = tips[tipIndex];
 }
 
+// Запуск сайта
 renderLocations();
 renderInventory();
 renderQuests();
