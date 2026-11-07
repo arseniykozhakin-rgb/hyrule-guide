@@ -17,7 +17,7 @@ body {
   margin: 0;
   color: #f4edda;
   font-family: Georgia, serif;
-  background: #14211b url("./images/hyrule-field.jpg") center/cover fixed;
+  background: #14211b url("./images/hyrule-field.jpg.webp") center/cover fixed;
   min-height: 100vh;
 }
 body::before {
@@ -61,9 +61,7 @@ button {
   font-family: inherit;
   font-size: 15px;
 }
-button:hover {
-  background: #49663a;
-}
+button:hover { background: #49663a; }
 main {
   width: min(1100px, 94%);
   margin: 25px auto;
@@ -84,7 +82,7 @@ h2, h3 { color: var(--gold); }
   text-align: center;
   background:
     linear-gradient(#09150b88, #09150bdd),
-    url("./images/hyrule-field.jpg") center/cover;
+    url("./images/hyrule-field.jpg.webp") center/cover;
   border: 1px solid var(--gold);
   border-radius: 12px;
   padding: 25px;
@@ -123,7 +121,7 @@ h2, h3 { color: var(--gold); }
   min-height: 340px;
   background:
     linear-gradient(#17271b88, #17271b88),
-    url("./images/hyrule-map.jpg") center/cover;
+    url("./images/hyrule-map.jpg.webp") center/cover;
   border: 2px solid var(--gold);
   border-radius: 10px;
   padding: 20px;
@@ -170,10 +168,6 @@ footer {
   padding: 12px;
   z-index: 10;
   display: none;
-}
-.music-status {
-  color: #c6dcae;
-  margin-left: 8px;
 }
 .hidden { display: none; }
 @media(max-width:600px) {
@@ -259,7 +253,7 @@ footer {
 </main>
 
 <div id="navi-message">Эй! Слушай! Выбери место для путешествия!</div>
-<img id="navi" src="./images/navi.png" alt="Нави">
+<img id="navi" src="./images/navi.png.jpg" alt="Нави">
 
 <footer>
   Hyrule Guide · Фанатский путеводитель по Ocarina of Time
@@ -273,42 +267,42 @@ footer {
 const places = [
   {
     name: "Поле Хайрула",
-    file: "hyrule-field.jpg",
+    file: "hyrule-field.jpg.webp",
     description: "Большое открытое поле, соединяющее многие уголки королевства."
   },
   {
     name: "Лес Кокири",
-    file: "kokiri-forest.jpg",
+    file: "kokiri-forest.jpg.jpg",
     description: "Зелёный лесной дом народа Кокири."
   },
   {
     name: "Замок Хайрула",
-    file: "hyrule-castle.jpg",
+    file: "hyrule-castle.jpg.webp",
     description: "Королевский замок, в котором живёт принцесса Зельда."
   },
   {
     name: "Деревня Какарико",
-    file: "kakariko.jpg",
+    file: "kakariko.jpg.webp",
     description: "Тихая деревня у подножия горы Смерти."
   },
   {
     name: "Гора Смерти",
-    file: "death-mountain.jpg",
+    file: null,
     description: "Высокая вулканическая гора, где живут гороны."
   },
   {
     name: "Владения Зора",
-    file: "zora-domain.jpg",
+    file: "zora-domain.jpg.jpg",
     description: "Водное королевство народа Зора."
   },
   {
     name: "Озеро Хайлия",
-    file: "lake-hylia.jpg",
+    file: "lake-hylia.jpg.webp",
     description: "Большое озеро, окружённое природой."
   },
   {
     name: "Долина Герудо",
-    file: "gerudo-valley.jpg",
+    file: "gerudo-valley.jpg.webp",
     description: "Скалистая долина, ведущая к владениям Герудо."
   }
 ];
@@ -366,18 +360,26 @@ function makeLocationCard(place) {
   card.className = "location";
   card.dataset.name = place.name;
 
-  const img = document.createElement("img");
-  img.src = "./images/" + place.file;
-  img.alt = place.name;
-  img.onerror = () => {
-    const placeholder = document.createElement("div");
-    placeholder.className = "image-placeholder";
-    placeholder.textContent = "Изображение не найдено: " + place.file;
-    img.replaceWith(placeholder);
-  };
-
   const content = document.createElement("div");
   content.className = "location-content";
+
+  if (place.file) {
+    const img = document.createElement("img");
+    img.src = "./images/" + place.file;
+    img.alt = place.name;
+    img.onerror = () => {
+      const placeholder = document.createElement("div");
+      placeholder.className = "image-placeholder";
+      placeholder.textContent = "Изображение не найдено: " + place.file;
+      img.replaceWith(placeholder);
+    };
+    card.appendChild(img);
+  } else {
+    const placeholder = document.createElement("div");
+    placeholder.className = "image-placeholder";
+    placeholder.textContent = "Изображение Горы Смерти пока не добавлено";
+    card.appendChild(placeholder);
+  }
 
   const title = document.createElement("h3");
   title.textContent = place.name;
@@ -390,7 +392,7 @@ function makeLocationCard(place) {
   button.onclick = () => naviMessage("Нави: " + place.description);
 
   content.append(title, description, button);
-  card.append(img, content);
+  card.appendChild(content);
   return card;
 }
 
@@ -461,4 +463,3 @@ renderChecklist("inventory-list", items, "hyrule-item-");
 </script>
 </body>
 </html>
-
