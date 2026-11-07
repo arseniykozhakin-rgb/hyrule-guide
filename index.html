@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -47,10 +48,7 @@ body.night {
     url("./images/hyrule-field.jpg.webp") center/cover fixed;
 }
 
-button {
-  font-family: inherit;
-  cursor: pointer;
-}
+button { font-family: inherit; cursor: pointer; }
 
 button:focus-visible, input:focus-visible {
   outline: 2px solid var(--gold-light);
@@ -149,7 +147,6 @@ p { line-height: 1.6; }
 }
 
 .hero-content { max-width: 620px; }
-
 .hero p { font-size: 18px; color: #eee5cf; }
 
 .gold-button {
@@ -226,8 +223,8 @@ p { line-height: 1.6; }
 
 .card-content { padding: 15px; }
 .card-content h3 { margin-top: 0; }
-
 .muted { color: var(--muted); }
+
 .tag {
   display: inline-block;
   background: #314a4b;
@@ -284,7 +281,7 @@ p { line-height: 1.6; }
 .map-pin {
   position: absolute;
   transform: translate(-50%, -50%);
-  background: #182c34eF;
+  background: #182c34ef;
   border: 2px solid var(--gold);
   color: white;
   border-radius: 30px;
@@ -341,8 +338,8 @@ p { line-height: 1.6; }
 .item-detail .item-icon { font-size: 65px; }
 
 .dungeon-card { margin-bottom: 16px; }
-
 .dungeon-card details { padding: 0 18px 18px; }
+
 .dungeon-card summary {
   cursor: pointer;
   color: var(--gold-light);
@@ -372,7 +369,11 @@ p { line-height: 1.6; }
 
 input[type="checkbox"] { accent-color: #d9b765; width: 18px; height: 18px; }
 
-.npc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; }
+.npc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 15px;
+}
 
 .npc {
   text-align: center;
@@ -394,32 +395,130 @@ input[type="checkbox"] { accent-color: #d9b765; width: 18px; height: 18px; }
   color: #f1e8ce;
 }
 
+/* ОКАРИНА */
+
+.ocarina-stage {
+  max-width: 720px;
+  margin: 20px auto;
+  padding: 25px;
+  text-align: center;
+  background:
+    radial-gradient(ellipse at center, #38545a, #142833 70%);
+  border: 2px solid #a88a4c;
+  border-radius: 16px;
+  box-shadow: inset 0 0 35px #0008, 0 10px 30px #0006;
+}
+
+.ocarina-instrument {
+  position: relative;
+  width: min(100%, 470px);
+  height: 150px;
+  margin: 25px auto;
+  border: 3px solid #d2b66e;
+  border-radius: 48% 45% 42% 50%;
+  background:
+    radial-gradient(ellipse at 30% 25%, #b2a071, #77613c 35%, #403626 75%);
+  box-shadow:
+    inset 0 8px 14px #fff3,
+    inset 0 -15px 25px #0009,
+    0 12px 20px #0008;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 17px;
+}
+
+.ocarina-instrument::before {
+  content: "";
+  position: absolute;
+  width: 70px;
+  height: 25px;
+  background: #332d22;
+  border: 2px solid #c6a55e;
+  border-radius: 50%;
+  left: -35px;
+  top: 57px;
+  transform: rotate(-20deg);
+}
+
+.ocarina-hole {
+  width: 34px;
+  height: 34px;
+  border: 3px solid #d5bd7a;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #29251e, #090b0b);
+  box-shadow: inset 0 3px 8px #000, 0 2px 3px #fff3;
+}
+
 .ocarina-keys {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 12px;
   margin: 20px 0;
 }
 
 .note-button {
-  width: 62px;
-  height: 75px;
+  width: 67px;
+  height: 83px;
   border-radius: 30px 30px 12px 12px;
   background: linear-gradient(#547d85, #172d39);
   color: white;
   border: 2px solid var(--gold);
-  font-size: 22px;
+  font-size: 20px;
+  font-weight: bold;
+  box-shadow: 0 5px 12px #0007;
+  transition: .12s;
+  touch-action: none;
+  user-select: none;
 }
 
-.note-button:active { background: #a78b47; transform: scale(.95); }
+.note-button:hover {
+  border-color: var(--gold-light);
+  filter: brightness(1.2);
+}
+
+.note-button:active, .note-button.playing {
+  background: linear-gradient(#c5a653, #705329);
+  transform: scale(.94);
+  box-shadow: 0 0 20px #e8c56b77;
+}
+
+.note-button small {
+  display: block;
+  font-size: 10px;
+  font-weight: normal;
+  margin-top: 5px;
+}
 
 .note-display {
-  font-size: 23px;
-  letter-spacing: 8px;
+  font-size: 22px;
+  letter-spacing: 3px;
   min-height: 45px;
   color: var(--gold-light);
   text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.ocarina-status {
+  min-height: 25px;
+  color: #cbd9c8;
+  text-align: center;
+}
+
+.keyboard-hint {
+  color: var(--muted);
+  font-size: 13px;
+  text-align: center;
+  line-height: 1.8;
+}
+
+.tune-challenge-box {
+  margin-top: 18px;
+  padding: 18px;
+  border: 1px solid #8d784c;
+  border-radius: 9px;
+  background: #101f29;
 }
 
 .navi {
@@ -519,6 +618,10 @@ input[type="checkbox"] { accent-color: #d9b765; width: 18px; height: 18px; }
   .inventory-grid { grid-template-columns: repeat(3, 1fr); }
   .navi { width: 65px; height: 65px; right: 12px; bottom: 12px; }
   .navi-message { right: 85px; bottom: 18px; max-width: 220px; }
+  .ocarina-stage { padding: 12px; }
+  .ocarina-instrument { height: 120px; gap: 10px; }
+  .ocarina-hole { width: 27px; height: 27px; }
+  .note-button { width: 57px; height: 75px; }
 }
 </style>
 </head>
@@ -690,32 +793,53 @@ input[type="checkbox"] { accent-color: #d9b765; width: 18px; height: 18px; }
 <section id="ocarina" class="page">
   <h1>Музыка окарины</h1>
   <p class="section-intro">
-    Попробуй ноты, создай собственную последовательность и потренируй музыкальную память.
-    Здесь используются учебные последовательности, а не мелодии из игры.
+    Играй на окарине кнопками или клавиатурой, записывай свои мелодии
+    и тренируй музыкальную память.
   </p>
-  <div class="panel">
+
+  <div class="ocarina-stage">
     <h2>Твоя окарина</h2>
-    <div class="ocarina-keys">
-      <button class="note-button" onclick="playNote('До')">До</button>
-      <button class="note-button" onclick="playNote('Ре')">Ре</button>
-      <button class="note-button" onclick="playNote('Ми')">Ми</button>
-      <button class="note-button" onclick="playNote('Соль')">Соль</button>
-      <button class="note-button" onclick="playNote('Ля')">Ля</button>
+    <p class="muted">Нажимай на отверстия окарины или используй клавиши клавиатуры.</p>
+
+    <div class="ocarina-instrument" aria-label="Окарина">
+      <span class="ocarina-hole"></span>
+      <span class="ocarina-hole"></span>
+      <span class="ocarina-hole"></span>
+      <span class="ocarina-hole"></span>
+      <span class="ocarina-hole"></span>
     </div>
+
+    <div class="ocarina-keys">
+      <button class="note-button" data-ocarina-note="До">До<small>W</small></button>
+      <button class="note-button" data-ocarina-note="Ре">Ре<small>A</small></button>
+      <button class="note-button" data-ocarina-note="Ми">Ми<small>S</small></button>
+      <button class="note-button" data-ocarina-note="Соль">Соль<small>J</small></button>
+      <button class="note-button" data-ocarina-note="Ля">Ля<small>K</small></button>
+    </div>
+
     <div class="note-display" id="note-display">♪ ♪ ♪</div>
-    <p style="text-align:center">
-      <button class="gold-button" onclick="clearNotes()">Очистить ноты</button>
+    <p class="ocarina-status" id="ocarina-status">Окарина готова к игре.</p>
+
+    <p>
+      <button class="gold-button" onclick="clearNotes()">Очистить запись</button>
       <button class="gold-button" onclick="saveOwnTune()">Сохранить мелодию</button>
+      <button class="gold-button" onclick="stopOcarina()">Остановить</button>
+    </p>
+
+    <p class="keyboard-hint">
+      Управление: W — До · A — Ре · S — Ми · J — Соль · K — Ля
     </p>
   </div>
-  <div class="panel" style="margin-top:18px">
+
+  <div class="panel tune-challenge-box">
     <h2>Музыкальная тренировка</h2>
-    <p>Запомни последовательность и попробуй повторить её.</p>
-    <p id="tune-challenge">Нажми кнопку, чтобы получить задание.</p>
+    <p>Запомни последовательность нот и повтори её на окарине.</p>
+    <p id="tune-challenge">Нажми «Начать тренировку», чтобы получить задание.</p>
     <button class="gold-button" onclick="startTuneChallenge()">Начать тренировку</button>
     <button class="gold-button" onclick="checkTune()">Проверить ответ</button>
     <p id="tune-result" class="muted"></p>
   </div>
+
   <div class="panel" style="margin-top:18px">
     <h2>Мои мелодии</h2>
     <div id="saved-tunes">Пока нет сохранённых мелодий.</div>
@@ -931,11 +1055,17 @@ function read(key, fallback) {
   try {
     const value = localStorage.getItem(key);
     return value === null ? fallback : JSON.parse(value);
-  } catch(e) { return fallback; }
+  } catch(e) {
+    return fallback;
+  }
 }
 
 function write(key, value) {
-  localStorage.setItem(key, JSON.stringify(value));
+  try {
+    localStorage.setItem(key, JSON.stringify(value));
+  } catch(e) {
+    console.warn("Не удалось сохранить данные:", e);
+  }
 }
 
 let game = {
@@ -977,7 +1107,10 @@ function addJournal(text) {
   game.journal.unshift({
     text,
     date: "День " + game.dayCount,
-    time: new Date().toLocaleTimeString("ru-RU", {hour:"2-digit",minute:"2-digit"})
+    time: new Date().toLocaleTimeString("ru-RU", {
+      hour:"2-digit",
+      minute:"2-digit"
+    })
   });
   game.journal = game.journal.slice(0, 60);
   write("hyrule-journal", game.journal);
@@ -991,16 +1124,23 @@ function addRupees(amount) {
 
 function updateStats() {
   document.getElementById("hearts").textContent =
-    "♥".repeat(Math.max(0, game.hearts)) + "♡".repeat(10 - Math.max(0, game.hearts));
+    "♥".repeat(Math.max(0, game.hearts)) +
+    "♡".repeat(10 - Math.max(0, game.hearts));
+
   document.getElementById("rupees").textContent = game.rupees;
   document.getElementById("magic").textContent = game.magic + "%";
-  document.getElementById("item-count").textContent = game.ownedItems.length + "/" + items.length;
+  document.getElementById("item-count").textContent =
+    game.ownedItems.length + "/" + items.length;
 
   const world = Math.round((game.visited.length / places.length) * 100);
   document.getElementById("world-progress").style.width = world + "%";
-  document.getElementById("world-progress-label").textContent = world + "% исследовано";
+  document.getElementById("world-progress-label").textContent =
+    world + "% исследовано";
 
-  const dungeon = Math.round((game.completedDungeons.length / dungeons.length) * 100);
+  const dungeon = Math.round(
+    (game.completedDungeons.length / dungeons.length) * 100
+  );
+
   document.getElementById("dungeon-progress").style.width = dungeon + "%";
   document.getElementById("dungeon-progress-label").textContent =
     game.completedDungeons.length + " из " + dungeons.length;
@@ -1023,9 +1163,13 @@ function giveItem(id) {
     showToast("Этот предмет уже есть в твоём инвентаре.");
     return;
   }
+
   game.ownedItems.push(id);
   saveGame();
+
   const item = items.find(x => x.id === id);
+  if (!item) return;
+
   addJournal("Получен предмет: " + item.name);
   showToast("✨ Получен предмет: " + item.name);
   renderInventory();
@@ -1043,9 +1187,11 @@ function showPage(page) {
   const target = document.getElementById(page);
   if (target) target.classList.add("active");
 
-  const button = document.querySelector('nav button[data-page="' + page + '"]');
-  if (button) button.classList.add("active");
+  const button = document.querySelector(
+    'nav button[data-page="' + page + '"]'
+  );
 
+  if (button) button.classList.add("active");
   window.scrollTo({top:0, behavior:"smooth"});
 }
 
@@ -1063,12 +1209,14 @@ function renderPlaces() {
 
   places.forEach(place => {
     const visited = game.visited.includes(place.id);
+
     const image = place.image
       ? '<img src="' + place.image + '" alt="' + place.name + '" onerror="this.style.display=\'none\'">'
       : '<div style="height:170px;display:grid;place-items:center;background:linear-gradient(135deg,#493b2b,#172b32);font-size:55px">🌋</div>';
 
     const card = document.createElement("article");
     card.className = "card";
+
     card.innerHTML = image + `
       <div class="card-content">
         <span class="tag">${visited ? "Посещено" : "Не посещено"}</span>
@@ -1080,6 +1228,7 @@ function renderPlaces() {
         </button>
         <button class="small-button" onclick="showPlaceSecret('${place.id}')">Секрет</button>
       </div>`;
+
     grid.appendChild(card);
   });
 }
@@ -1117,7 +1266,8 @@ function selectMapPlace(id) {
   document.getElementById("map-place-title").textContent = place.name;
   document.getElementById("map-place-description").textContent =
     place.description + " Секрет: " + place.secret;
-  document.getElementById("map-place-button").textContent = "Исследовать: " + place.name;
+  document.getElementById("map-place-button").textContent =
+    "Исследовать: " + place.name;
 }
 
 function visitSelectedPlace() {
@@ -1133,13 +1283,15 @@ function renderInventory() {
   const grid = document.getElementById("inventory-grid");
   grid.innerHTML = "";
 
-  items.forEach((item, index) => {
+  items.forEach(item => {
     const owned = game.ownedItems.includes(item.id);
     const button = document.createElement("button");
     button.className = "item-slot";
+
     button.innerHTML = owned
       ? `<span class="item-icon">${item.icon}</span><small>${item.name}</small>`
       : `<span class="item-icon">🔒</span><small>Не найдено</small>`;
+
     button.onclick = () => selectItem(item.id);
     grid.appendChild(button);
   });
@@ -1181,17 +1333,21 @@ const chestRewards = [
 function renderChests() {
   const container = document.getElementById("recent-events");
   const found = game.openedChests.length;
+
   container.innerHTML = `
     <p>Сундуков найдено: <strong>${found}</strong></p>
     <div class="grid">
-      ${places.slice(0,6).map((place,index) => {
+      ${places.slice(0,6).map(place => {
         const opened = game.openedChests.includes(place.id);
+
         return `
           <div class="panel" style="text-align:center">
             <h3>${place.name}</h3>
             <button class="chest ${opened ? "opened" : ""}"
               ${opened ? "disabled" : ""}
-              onclick="openChest('${place.id}')">${opened ? "📦" : "🧰"}</button>
+              onclick="openChest('${place.id}')">
+              ${opened ? "📦" : "🧰"}
+            </button>
             <p class="muted">${opened ? "Сундук открыт" : "Найти сокровище"}</p>
           </div>`;
       }).join("")}
@@ -1203,10 +1359,14 @@ function openChest(placeId) {
 
   game.openedChests.push(placeId);
 
-  const available = chestRewards.filter(id => !game.ownedItems.includes(id));
+  const available = chestRewards.filter(
+    id => !game.ownedItems.includes(id)
+  );
+
   if (available.length > 0) {
     const rewardId = available[Math.floor(Math.random() * available.length)];
     const reward = items.find(item => item.id === rewardId);
+
     game.ownedItems.push(rewardId);
     showToast("🎁 Сундук открыт! Найдено: " + reward.name);
     addJournal("В сундуке найден предмет: " + reward.name);
@@ -1291,6 +1451,7 @@ function renderQuests() {
     const done = game.completedQuests.includes(quest.id);
     const row = document.createElement("div");
     row.className = "quest-row";
+
     row.innerHTML = `
       <div>
         <strong>${quest.name}</strong>
@@ -1302,6 +1463,7 @@ function renderQuests() {
           onchange="toggleQuest('${quest.id}', this.checked)">
         ${done ? "Готово" : "Выполнить"}
       </label>`;
+
     list.appendChild(row);
   });
 }
@@ -1336,11 +1498,13 @@ function renderNPCs() {
   npcs.forEach(npc => {
     const card = document.createElement("div");
     card.className = "npc";
+
     card.innerHTML = `
       <div class="npc-face">${npc.face}</div>
       <h3>${npc.name}</h3>
       <span class="tag">${npc.place}</span>
       <p><button class="gold-button" onclick="talkTo('${npc.id}')">Поговорить</button></p>`;
+
     grid.appendChild(card);
   });
 }
@@ -1350,13 +1514,15 @@ function talkTo(id) {
   if (!npc) return;
 
   const line = npc.lines[Math.floor(Math.random() * npc.lines.length)];
+
   document.getElementById("dialogue-name").textContent = npc.name;
   document.getElementById("dialogue-text").textContent = "«" + line + "»";
+
   addJournal("Ты поговорил с персонажем: " + npc.name);
 }
 
 /* =====================================================
-   ОКАРИНА
+   ОКАРИНА — ЗВУК И УПРАВЛЕНИЕ
 ===================================================== */
 
 const noteFrequencies = {
@@ -1367,71 +1533,261 @@ const noteFrequencies = {
   "Ля":440.00
 };
 
+const noteKeys = {
+  "w":"До",
+  "a":"Ре",
+  "s":"Ми",
+  "j":"Соль",
+  "k":"Ля"
+};
+
 let currentNotes = [];
 let challengeNotes = [];
+let audioContext = null;
+let activeOcarinaNotes = {};
+let melodyTimer = null;
+let challengeCompleted = false;
+
+function getAudioContext() {
+  const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+
+  if (!AudioContextClass) {
+    showToast("Этот браузер не поддерживает Web Audio.");
+    return null;
+  }
+
+  if (!audioContext) {
+    audioContext = new AudioContextClass();
+  }
+
+  if (audioContext.state === "suspended") {
+    audioContext.resume();
+  }
+
+  return audioContext;
+}
+
+function setOcarinaStatus(message) {
+  const status = document.getElementById("ocarina-status");
+  if (status) status.textContent = message;
+}
+
+function playOcarinaNote(note) {
+  if (!noteFrequencies[note] || !game.sound) return;
+
+  const context = getAudioContext();
+  if (!context) return;
+
+  stopActiveNote(note);
+
+  const oscillator = context.createOscillator();
+  const gain = context.createGain();
+  const filter = context.createBiquadFilter();
+
+  oscillator.type = "sine";
+  oscillator.frequency.setValueAtTime(
+    noteFrequencies[note],
+    context.currentTime
+  );
+
+  filter.type = "lowpass";
+  filter.frequency.setValueAtTime(1800, context.currentTime);
+
+  gain.gain.setValueAtTime(0.0001, context.currentTime);
+  gain.gain.exponentialRampToValueAtTime(
+    0.16,
+    context.currentTime + 0.035
+  );
+
+  oscillator.connect(filter);
+  filter.connect(gain);
+  gain.connect(context.destination);
+
+  oscillator.start();
+
+  activeOcarinaNotes[note] = {
+    oscillator,
+    gain
+  };
+
+  const button = document.querySelector(
+    '[data-ocarina-note="' + note + '"]'
+  );
+
+  if (button) button.classList.add("playing");
+
+  setOcarinaStatus("Играет нота: " + note);
+}
+
+function stopActiveNote(note) {
+  const active = activeOcarinaNotes[note];
+  if (!active || !audioContext) return;
+
+  const now = audioContext.currentTime;
+
+  try {
+    active.gain.gain.cancelScheduledValues(now);
+    active.gain.gain.setTargetAtTime(0.0001, now, 0.04);
+    active.oscillator.stop(now + 0.2);
+  } catch(e) {}
+
+  delete activeOcarinaNotes[note];
+
+  const button = document.querySelector(
+    '[data-ocarina-note="' + note + '"]'
+  );
+
+  if (button) button.classList.remove("playing");
+}
+
+function stopOcarina() {
+  Object.keys(activeOcarinaNotes).forEach(stopActiveNote);
+
+  if (melodyTimer) {
+    clearTimeout(melodyTimer);
+    melodyTimer = null;
+  }
+
+  setOcarinaStatus("Игра остановлена.");
+}
 
 function playNote(note) {
+  if (!noteFrequencies[note]) return;
+
   currentNotes.push(note);
-  if (currentNotes.length > 12) currentNotes.shift();
-  document.getElementById("note-display").textContent = currentNotes.join(" · ");
-  playTone(noteFrequencies[note]);
+
+  if (currentNotes.length > 20) {
+    currentNotes.shift();
+  }
+
+  document.getElementById("note-display").textContent =
+    currentNotes.join(" · ");
+
+  playOcarinaNote(note);
+  setOcarinaStatus("Записана нота: " + note);
+}
+
+function releaseNote(note) {
+  stopActiveNote(note);
 }
 
 function clearNotes() {
   currentNotes = [];
   document.getElementById("note-display").textContent = "♪ ♪ ♪";
+  document.getElementById("tune-result").textContent = "";
+  setOcarinaStatus("Запись очищена.");
 }
 
-function playTone(frequency) {
-  if (!game.sound) return;
+function bindOcarinaButtons() {
+  document.querySelectorAll("[data-ocarina-note]").forEach(button => {
+    const note = button.dataset.ocarinaNote;
 
-  try {
-    const AudioContext = window.AudioContext || window.webkitAudioContext;
-    const context = new AudioContext();
-    const oscillator = context.createOscillator();
-    const gain = context.createGain();
+    button.addEventListener("pointerdown", event => {
+      event.preventDefault();
 
-    oscillator.type = "sine";
-    oscillator.frequency.value = frequency;
-    gain.gain.setValueAtTime(.0001, context.currentTime);
-    gain.gain.exponentialRampToValueAtTime(.12, context.currentTime + .03);
-    gain.gain.exponentialRampToValueAtTime(.0001, context.currentTime + .45);
+      if (button.setPointerCapture) {
+        button.setPointerCapture(event.pointerId);
+      }
 
-    oscillator.connect(gain);
-    gain.connect(context.destination);
-    oscillator.start();
-    oscillator.stop(context.currentTime + .46);
-    oscillator.onended = () => context.close();
-  } catch(e) {}
+      playNote(note);
+    });
+
+    button.addEventListener("pointerup", () => releaseNote(note));
+    button.addEventListener("pointercancel", () => releaseNote(note));
+    button.addEventListener("lostpointercapture", () => releaseNote(note));
+    button.addEventListener("contextmenu", event => event.preventDefault());
+  });
 }
+
+document.addEventListener("keydown", event => {
+  if (event.repeat) return;
+
+  const tag = event.target && event.target.tagName;
+  if (tag === "INPUT" || tag === "TEXTAREA") return;
+
+  const key = event.key.toLowerCase();
+  const note = noteKeys[key];
+
+  if (note) {
+    event.preventDefault();
+    playNote(note);
+  }
+});
+
+document.addEventListener("keyup", event => {
+  const note = noteKeys[event.key.toLowerCase()];
+  if (note) releaseNote(note);
+});
+
+window.addEventListener("blur", () => {
+  stopOcarina();
+});
+
+/* =====================================================
+   МУЗЫКАЛЬНАЯ ТРЕНИРОВКА
+===================================================== */
 
 function startTuneChallenge() {
+  stopOcarina();
+
   const notes = Object.keys(noteFrequencies);
-  challengeNotes = Array.from({length:4}, () => notes[Math.floor(Math.random() * notes.length)]);
+
+  challengeNotes = Array.from(
+    {length:4},
+    () => notes[Math.floor(Math.random() * notes.length)]
+  );
+
   currentNotes = [];
+  challengeCompleted = false;
+
   document.getElementById("note-display").textContent = "♪ ♪ ♪";
   document.getElementById("tune-challenge").textContent =
     "Запомни последовательность: " + challengeNotes.join(" · ");
-  document.getElementById("tune-result").textContent = "Теперь повтори её кнопками окарины.";
+
+  document.getElementById("tune-result").textContent =
+    "Теперь повтори её кнопками окарины.";
+
+  setOcarinaStatus("Тренировка началась.");
 }
 
 function checkTune() {
   if (!challengeNotes.length) {
-    document.getElementById("tune-result").textContent = "Сначала начни тренировку.";
+    document.getElementById("tune-result").textContent =
+      "Сначала начни тренировку.";
     return;
   }
 
-  if (currentNotes.join("|") === challengeNotes.join("|")) {
-    document.getElementById("tune-result").textContent = "Отлично! Последовательность повторена верно.";
+  if (challengeCompleted) {
+    document.getElementById("tune-result").textContent =
+      "Эта тренировка уже завершена. Начни новую!";
+    return;
+  }
+
+  const correct = currentNotes.slice(-challengeNotes.length);
+
+  if (
+    currentNotes.length === challengeNotes.length &&
+    correct.join("|") === challengeNotes.join("|")
+  ) {
+    challengeCompleted = true;
+
+    document.getElementById("tune-result").textContent =
+      "Отлично! Ты правильно повторил последовательность!";
+
     game.rupees += 10;
     addJournal("Успешно завершена музыкальная тренировка.");
     saveGame();
+
     showToast("🎵 Верно! +10 рупий");
   } else {
     document.getElementById("tune-result").textContent =
-      "Пока не совпало. Попробуй ещё раз внимательно.";
+      "Пока не совпало. Очисти запись и попробуй ещё раз.";
   }
 }
+
+/* =====================================================
+   СОХРАНЁННЫЕ МЕЛОДИИ
+===================================================== */
 
 function saveOwnTune() {
   if (!currentNotes.length) {
@@ -1442,26 +1798,72 @@ function saveOwnTune() {
   game.tunes.push(currentNotes.slice());
   saveGame();
   renderTunes();
+
+  addJournal("Сохранена новая мелодия окарины.");
   showToast("🎼 Мелодия сохранена!");
 }
 
 function renderTunes() {
   const container = document.getElementById("saved-tunes");
+
   if (!game.tunes.length) {
     container.textContent = "Пока нет сохранённых мелодий.";
     return;
   }
 
-  container.innerHTML = game.tunes.map((tune,index) =>
-    `<div class="journal-row"><span>Мелодия ${index + 1}: ${tune.join(" · ")}</span>
-    <button class="small-button" onclick="playSavedTune(${index})">Прослушать</button></div>`
-  ).join("");
+  container.innerHTML = game.tunes.map((tune, index) => `
+    <div class="journal-row">
+      <span>
+        <strong>Мелодия ${index + 1}</strong><br>
+        <span class="muted">${tune.join(" · ")}</span>
+      </span>
+      <span>
+        <button class="small-button" onclick="playSavedTune(${index})">▶</button>
+        <button class="small-button" onclick="deleteSavedTune(${index})">✕</button>
+      </span>
+    </div>
+  `).join("");
 }
 
 function playSavedTune(index) {
   const tune = game.tunes[index];
-  if (!tune) return;
-  tune.forEach((note, i) => setTimeout(() => playTone(noteFrequencies[note]), i * 450));
+  if (!tune || !tune.length) return;
+
+  stopOcarina();
+  currentNotes = [];
+  document.getElementById("note-display").textContent = tune.join(" · ");
+
+  let position = 0;
+
+  function playNext() {
+    if (position >= tune.length) {
+      melodyTimer = null;
+      setOcarinaStatus("Мелодия завершена.");
+      return;
+    }
+
+    const note = tune[position];
+
+    playOcarinaNote(note);
+
+    melodyTimer = setTimeout(() => {
+      releaseNote(note);
+      position++;
+      melodyTimer = setTimeout(playNext, 100);
+    }, 350);
+  }
+
+  setOcarinaStatus("Играет сохранённая мелодия...");
+  playNext();
+}
+
+function deleteSavedTune(index) {
+  if (!game.tunes[index]) return;
+
+  game.tunes.splice(index, 1);
+  saveGame();
+  renderTunes();
+  showToast("Мелодия удалена.");
 }
 
 /* =====================================================
@@ -1470,16 +1872,22 @@ function playSavedTune(index) {
 
 function renderJournal() {
   const list = document.getElementById("journal-list");
+
   if (!game.journal.length) {
-    list.innerHTML = "<p class='muted'>Записей пока нет. Твоё путешествие только начинается.</p>";
+    list.innerHTML =
+      "<p class='muted'>Записей пока нет. Твоё путешествие только начинается.</p>";
     return;
   }
 
   list.innerHTML = game.journal.map(entry => `
     <div class="journal-row">
-      <div><strong>${entry.text}</strong><div class="muted">${entry.date} · ${entry.time}</div></div>
+      <div>
+        <strong>${entry.text}</strong>
+        <div class="muted">${entry.date} · ${entry.time}</div>
+      </div>
       <span>📜</span>
-    </div>`).join("");
+    </div>
+  `).join("");
 }
 
 function saveNote() {
@@ -1497,27 +1905,74 @@ function loadNote() {
 ===================================================== */
 
 const achievementList = [
-  {id:"first-visit",name:"Первый шаг",description:"Посети свою первую локацию.",check:() => game.visited.length >= 1},
-  {id:"explorer",name:"Путешественник",description:"Посети пять разных локаций.",check:() => game.visited.length >= 5},
-  {id:"all-places",name:"Знаток Хайрула",description:"Посети все локации путеводителя.",check:() => game.visited.length >= places.length},
-  {id:"first-chest",name:"Охотник за сокровищами",description:"Открой первый сундук.",check:() => game.openedChests.length >= 1},
-  {id:"collector",name:"Коллекционер",description:"Найди восемь предметов.",check:() => game.ownedItems.length >= 8},
-  {id:"first-dungeon",name:"Испытание пройдено",description:"Заверши первое подземелье.",check:() => game.completedDungeons.length >= 1},
-  {id:"temple-master",name:"Хранитель храмов",description:"Заверши все шесть подземелий.",check:() => game.completedDungeons.length >= 6},
-  {id:"musician",name:"Музыкант",description:"Сохрани собственную мелодию.",check:() => game.tunes.length >= 1},
-  {id:"quester",name:"Помощник Хайрула",description:"Выполни пять заданий.",check:() => game.completedQuests.length >= 5}
+  {
+    id:"first-visit",
+    name:"Первый шаг",
+    description:"Посети свою первую локацию.",
+    check:() => game.visited.length >= 1
+  },
+  {
+    id:"explorer",
+    name:"Путешественник",
+    description:"Посети пять разных локаций.",
+    check:() => game.visited.length >= 5
+  },
+  {
+    id:"all-places",
+    name:"Знаток Хайрула",
+    description:"Посети все локации путеводителя.",
+    check:() => game.visited.length >= places.length
+  },
+  {
+    id:"first-chest",
+    name:"Охотник за сокровищами",
+    description:"Открой первый сундук.",
+    check:() => game.openedChests.length >= 1
+  },
+  {
+    id:"collector",
+    name:"Коллекционер",
+    description:"Найди восемь предметов.",
+    check:() => game.ownedItems.length >= 8
+  },
+  {
+    id:"first-dungeon",
+    name:"Испытание пройдено",
+    description:"Заверши первое подземелье.",
+    check:() => game.completedDungeons.length >= 1
+  },
+  {
+    id:"temple-master",
+    name:"Хранитель храмов",
+    description:"Заверши все шесть подземелий.",
+    check:() => game.completedDungeons.length >= 6
+  },
+  {
+    id:"musician",
+    name:"Музыкант",
+    description:"Сохрани собственную мелодию.",
+    check:() => game.tunes.length >= 1
+  },
+  {
+    id:"quester",
+    name:"Помощник Хайрула",
+    description:"Выполни пять заданий.",
+    check:() => game.completedQuests.length >= 5
+  }
 ];
 
 function updateAchievements() {
   achievementList.forEach(achievement => {
-    if (achievement.check() && !game.achievements.includes(achievement.id)) {
+    if (
+      achievement.check() &&
+      !game.achievements.includes(achievement.id)
+    ) {
       game.achievements.push(achievement.id);
       write("hyrule-achievements", game.achievements);
-      if (document.getElementById("achievements-list")) {
-        showToast("🏅 Новое достижение: " + achievement.name);
-      }
+      showToast("🏅 Новое достижение: " + achievement.name);
     }
   });
+
   renderAchievements();
 }
 
@@ -1527,6 +1982,7 @@ function renderAchievements() {
 
   list.innerHTML = achievementList.map(achievement => {
     const unlocked = game.achievements.includes(achievement.id);
+
     return `
       <div class="achievement-row">
         <div>
@@ -1549,9 +2005,13 @@ function updateTime() {
 
   const hour = Math.floor(gameMinutes / 60);
   const minute = gameMinutes % 60;
-  const timeText = String(hour).padStart(2,"0") + ":" + String(minute).padStart(2,"0");
+
+  const timeText =
+    String(hour).padStart(2,"0") + ":" +
+    String(minute).padStart(2,"0");
 
   let phase;
+
   if (hour >= 6 && hour < 10) phase = "dawn";
   else if (hour >= 10 && hour < 18) phase = "day";
   else phase = "night";
@@ -1559,15 +2019,23 @@ function updateTime() {
   document.body.classList.remove("day","dawn","night");
   document.body.classList.add(phase);
 
-  const icon = phase === "night" ? "🌙" : phase === "dawn" ? "🌅" : "☀";
-  const name = phase === "night" ? "Ночь" : phase === "dawn" ? "Рассвет" : "День";
+  const icon =
+    phase === "night" ? "🌙" :
+    phase === "dawn" ? "🌅" : "☀";
 
-  document.getElementById("clock").textContent = icon + " " + name + " · " + timeText;
-  document.getElementById("game-date").textContent = "День " + game.dayCount;
+  const name =
+    phase === "night" ? "Ночь" :
+    phase === "dawn" ? "Рассвет" : "День";
+
+  document.getElementById("clock").textContent =
+    icon + " " + name + " · " + timeText;
+
+  document.getElementById("game-date").textContent =
+    "День " + game.dayCount;
 }
 
 /* =====================================================
-   ЗВУКИ
+   ЗВУКИ И МУЗЫКА
 ===================================================== */
 
 function playEffect(type) {
@@ -1579,13 +2047,34 @@ function playEffect(type) {
     click:350
   };
 
-  playTone(frequencies[type] || 400);
+  const context = getAudioContext();
+  if (!context) return;
+
+  const oscillator = context.createOscillator();
+  const gain = context.createGain();
+
+  oscillator.type = "sine";
+  oscillator.frequency.value = frequencies[type] || 400;
+
+  gain.gain.setValueAtTime(0.08, context.currentTime);
+  gain.gain.exponentialRampToValueAtTime(
+    0.001,
+    context.currentTime + 0.18
+  );
+
+  oscillator.connect(gain);
+  gain.connect(context.destination);
+
+  oscillator.start();
+  oscillator.stop(context.currentTime + 0.2);
 }
 
 function toggleSound() {
   game.sound = !game.sound;
   saveGame();
   showToast(game.sound ? "Звуки включены." : "Звуки выключены.");
+
+  if (!game.sound) stopOcarina();
 }
 
 function toggleMusic() {
@@ -1594,6 +2083,7 @@ function toggleMusic() {
 
   if (audio.paused) {
     audio.volume = .25;
+
     audio.play().then(() => {
       button.textContent = "♫ Музыка: вкл.";
     }).catch(() => {
@@ -1629,7 +2119,9 @@ function naviHint() {
   message.textContent = "✨ Navi: " + hint;
   message.style.display = "block";
 
-  setTimeout(() => { message.style.display = "none"; }, 6500);
+  setTimeout(() => {
+    message.style.display = "none";
+  }, 6500);
 }
 
 /* =====================================================
@@ -1644,7 +2136,10 @@ function showToast(message) {
   toast.classList.add("show");
 
   clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => toast.classList.remove("show"), 3000);
+
+  toastTimer = setTimeout(() => {
+    toast.classList.remove("show");
+  }, 3000);
 }
 
 /* =====================================================
@@ -1652,7 +2147,6 @@ function showToast(message) {
 ===================================================== */
 
 function init() {
-  // Проверяем, что сохранённые значения не выходят за допустимые пределы.
   game.hearts = Math.max(0, Math.min(10, Number(game.hearts) || 3));
   game.rupees = Math.max(0, Number(game.rupees) || 0);
   game.magic = Math.max(0, Math.min(100, Number(game.magic) || 100));
@@ -1667,6 +2161,7 @@ function init() {
   renderTunes();
   renderChests();
   loadNote();
+  bindOcarinaButtons();
   updateStats();
   updateTime();
 
@@ -1675,8 +2170,6 @@ function init() {
       ? "Все шесть подземелий пройдены! Исследуй мир и собирай оставшиеся предметы."
       : "Исследуй Хайрул, собирай предметы и готовься к древним храмам.";
 
-  // Старые сохранения продолжают работать: первые восемь предметов
-  // имеют прежние позиции в списке hyrule-item-i.
   if (game.ownedItems.length === 0) {
     document.getElementById("item-detail").innerHTML = `
       <div class="item-icon">🎒</div>
