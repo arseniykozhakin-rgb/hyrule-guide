@@ -3,364 +3,520 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Hyrule Guide — Ocarina of Time</title>
+
 <style>
 :root {
-  --gold: #e7c879;
-  --gold2: #b88b3d;
-  --green: #193c2c;
-  --dark: #101b17;
-  --panel: rgba(12, 25, 20, .91);
-  --cream: #f4e9c9;
+  --gold:#e8ca83;
+  --green:#244a32;
+  --dark:#101a15;
+  --panel:#1b2c21;
+  --cream:#f5edda;
 }
-* { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+* {box-sizing:border-box}
+html {scroll-behavior:smooth}
 body {
-  margin: 0;
-  color: var(--cream);
-  background: var(--dark);
-  font-family: Georgia, "Times New Roman", serif;
+  margin:0;
+  color:var(--cream);
+  background:var(--dark);
+  font-family:Georgia,serif;
 }
-button { font: inherit; }
-button:focus-visible, a:focus-visible {
-  outline: 3px solid var(--gold);
-  outline-offset: 3px;
-}
+button {font:inherit;cursor:pointer}
+button:focus-visible {outline:2px solid var(--gold);outline-offset:3px}
+
 .hero {
-  min-height: 90vh;
-  display: grid;
-  place-items: center;
-  text-align: center;
-  padding: 40px 20px;
+  min-height:90vh;
+  display:grid;
+  place-items:center;
+  text-align:center;
+  padding:30px 18px;
   background:
-    linear-gradient(#08140dbb, #08140d88),
-    url("images/hyrule-field.jpg") center/cover,
-    linear-gradient(135deg, #254c35, #101b17);
-  border-bottom: 3px solid var(--gold2);
+    linear-gradient(#08140dbb,#08140d99),
+    url("./images/hyrule-field.jpg") center/cover,
+    linear-gradient(135deg,#31583c,#101a15);
+  border-bottom:3px solid var(--gold);
 }
-.hero-content { max-width: 760px; }
-.eyebrow {
-  color: var(--gold);
-  letter-spacing: 5px;
-  text-transform: uppercase;
-  font-size: 12px;
-}
+.hero-content {max-width:750px}
+.eyebrow {color:var(--gold);letter-spacing:5px}
 h1 {
-  font-size: clamp(42px, 9vw, 88px);
-  color: var(--gold);
-  text-shadow: 0 4px 20px #000;
-  margin: 18px 0;
+  font-size:clamp(43px,9vw,85px);
+  color:var(--gold);
+  text-shadow:0 4px 20px #000;
+  margin:20px 0;
 }
-.hero p { font-size: 18px; line-height: 1.7; }
+.hero p {font-size:18px;line-height:1.7}
 .gold-button {
-  border: 1px solid var(--gold);
-  color: #20190d;
-  background: linear-gradient(135deg, #f2d995, #b88b3d);
-  padding: 14px 25px;
-  margin-top: 18px;
-  cursor: pointer;
-  border-radius: 4px;
-  font-weight: bold;
-  transition: .2s;
+  background:linear-gradient(135deg,#f3db9e,#b78b3c);
+  color:#211b10;
+  border:1px solid var(--gold);
+  border-radius:5px;
+  padding:14px 25px;
+  font-weight:bold;
+  margin:10px;
 }
-.gold-button:hover { transform: translateY(-2px); filter: brightness(1.1); }
+.gold-button:hover {filter:brightness(1.12)}
+
 nav {
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 6px;
-  padding: 12px;
-  background: #101b17f2;
-  border-bottom: 1px solid var(--gold2);
-  backdrop-filter: blur(10px);
+  position:sticky;
+  top:0;
+  z-index:10;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:5px;
+  padding:10px;
+  background:#101a15f5;
+  border-bottom:1px solid var(--gold);
 }
 nav button {
-  background: transparent;
-  border: 1px solid transparent;
-  color: var(--cream);
-  padding: 10px 13px;
-  cursor: pointer;
+  color:var(--cream);
+  background:transparent;
+  border:1px solid transparent;
+  padding:10px;
 }
-nav button:hover { border-color: var(--gold); color: var(--gold); }
-main { max-width: 1150px; margin: auto; padding: 25px 18px 70px; }
-section { scroll-margin-top: 85px; margin: 55px 0; }
-.section-title {
-  color: var(--gold);
-  font-size: clamp(27px, 5vw, 38px);
-  border-bottom: 1px solid var(--gold2);
-  padding-bottom: 12px;
+nav button:hover {border-color:var(--gold);color:var(--gold)}
+
+main {max-width:1100px;margin:auto;padding:20px}
+section {margin:55px 0;scroll-margin-top:85px}
+h2 {
+  color:var(--gold);
+  font-size:clamp(26px,5vw,37px);
+  border-bottom:1px solid #96743e;
+  padding-bottom:12px;
 }
-.intro { color: #dfd3b2; line-height: 1.8; }
+p {line-height:1.7}
+.intro {color:#ddd2b5}
 .panel {
-  background: var(--panel);
-  border: 1px solid #94733d;
-  border-radius: 8px;
-  padding: 20px;
-  box-shadow: 0 12px 35px #0005;
+  background:var(--panel);
+  border:1px solid #94733d;
+  border-radius:8px;
+  padding:20px;
 }
 .grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-  gap: 18px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:18px;
 }
-.location-card {
-  overflow: hidden;
-  background: #17291f;
-  border: 1px solid #806535;
-  border-radius: 7px;
-  transition: .2s;
+.card {
+  background:#1b2c21;
+  border:1px solid #94733d;
+  border-radius:7px;
+  overflow:hidden;
 }
-.location-card:hover { transform: translateY(-4px); border-color: var(--gold); }
-.location-card img {
-  display: block;
-  width: 100%;
-  height: 165px;
-  object-fit: cover;
-  background: linear-gradient(135deg, #315a3b, #14251c);
+.card img {
+  width:100%;
+  height:175px;
+  display:block;
+  object-fit:cover;
+  background:linear-gradient(135deg,#355b3e,#17271c);
 }
-.location-card .card-body { padding: 15px; }
-.location-card h3 { color: var(--gold); margin: 0 0 8px; }
-.location-card p { line-height: 1.55; color: #d9d0b8; }
+.card-body {padding:15px}
+.card h3 {color:var(--gold)}
 .small-button {
-  background: #294734;
-  border: 1px solid var(--gold2);
-  color: var(--cream);
-  padding: 9px 12px;
-  cursor: pointer;
-  border-radius: 4px;
+  background:#294734;
+  color:var(--cream);
+  border:1px solid var(--gold);
+  border-radius:4px;
+  padding:9px 13px;
 }
-.small-button:hover { background: #3b6046; }
-.map-wrap {
-  padding: 14px;
-  background: #18271e;
-  border: 1px solid var(--gold2);
-  border-radius: 8px;
-}
+.small-button:hover {background:#3b6046}
+
 .map {
-  position: relative;
-  min-height: 390px;
-  overflow: hidden;
-  border-radius: 5px;
+  min-height:370px;
+  position:relative;
   background:
-    linear-gradient(#152a1a55, #152a1a55),
-    url("images/hyrule-map.jpg") center/cover,
-    radial-gradient(ellipse, #5b7944, #233c2a);
+    linear-gradient(#152a1a44,#152a1a44),
+    url("./images/hyrule-map.jpg") center/cover,
+    #304c32;
+  border:1px solid var(--gold);
+  border-radius:7px;
+  overflow:hidden;
 }
-.map-pin {
-  position: absolute;
-  transform: translate(-50%, -50%);
-  background: #17251deF;
-  color: var(--gold);
-  border: 1px solid var(--gold);
-  padding: 8px 10px;
-  border-radius: 20px;
-  cursor: pointer;
-  font-size: 12px;
-  box-shadow: 0 2px 8px #0009;
+.pin {
+  position:absolute;
+  transform:translate(-50%,-50%);
+  border:1px solid var(--gold);
+  border-radius:20px;
+  padding:8px;
+  color:var(--gold);
+  background:#15251eeF;
+  font-size:12px;
 }
-.map-pin:hover { background: #72572a; color: white; }
-.map-note { color: #cfc4a5; font-size: 13px; }
-.detail-box { margin-top: 16px; min-height: 90px; line-height: 1.7; }
-.columns {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 18px;
-}
+.pin:hover {background:#70552a}
+.detail {margin-top:15px;min-height:90px}
+
 .item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-  border-bottom: 1px solid #5e573f;
-  padding: 12px 0;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  padding:12px 0;
+  border-bottom:1px solid #62583e;
 }
-.item button { flex-shrink: 0; }
-.quest { display: flex; gap: 12px; align-items: flex-start; padding: 12px 0; border-bottom: 1px solid #5e573f; }
-.quest input { accent-color: #d8b75f; margin-top: 5px; }
-.quest.done span { text-decoration: line-through; opacity: .55; }
-.navi-area {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  flex-wrap: wrap;
+.quest {
+  display:flex;
+  gap:12px;
+  padding:12px 0;
+  border-bottom:1px solid #62583e;
 }
-.navi-area img {
-  width: 115px;
-  height: 115px;
-  object-fit: contain;
-  background: #203a2a;
-  border-radius: 50%;
-  border: 1px solid var(--gold2);
+.quest input {accent-color:#d9b65f;margin-top:5px}
+.quest.done span {text-decoration:line-through;opacity:.55}
+
+.navi {
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:20px;
 }
-.dialogue { flex: 1; min-width: 220px; }
-.dialogue p { line-height: 1.7; }
+.navi img {
+  width:115px;
+  height:115px;
+  object-fit:contain;
+  border-radius:50%;
+  border:1px solid var(--gold);
+  background:#304c32;
+}
 footer {
-  text-align: center;
-  padding: 30px 15px;
-  border-top: 1px solid var(--gold2);
-  color: #c8b98f;
-  line-height: 1.8;
+  text-align:center;
+  padding:30px;
+  border-top:1px solid var(--gold);
+  color:#c9b98f;
 }
-#toast {
-  position: fixed;
-  bottom: 18px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #203d2b;
-  border: 1px solid var(--gold);
-  color: var(--cream);
-  padding: 12px 18px;
-  border-radius: 6px;
-  display: none;
-  z-index: 30;
-  max-width: 90%;
+#status {
+  position:fixed;
+  bottom:15px;
+  left:50%;
+  transform:translateX(-50%);
+  z-index:20;
+  background:#203c2a;
+  border:1px solid var(--gold);
+  padding:12px 18px;
+  border-radius:6px;
+  display:none;
+  max-width:90%;
+  text-align:center;
+}
+.missing-image {
+  display:flex!important;
+  align-items:center;
+  justify-content:center;
+  color:var(--gold);
+  font-size:13px;
+  text-align:center;
+  padding:15px;
 }
 @media(max-width:600px) {
-  nav { gap: 2px; }
-  nav button { padding: 9px 8px; font-size: 13px; }
-  .hero { min-height: 75vh; }
-  .map { min-height: 320px; }
-  .map-pin { font-size: 10px; padding: 6px 7px; }
+  nav button {font-size:12px;padding:8px}
+  .map {min-height:320px}
+  .pin {font-size:10px;padding:6px}
 }
 </style>
 </head>
+
 <body>
 
 <header class="hero" id="top">
   <div class="hero-content">
-    <div class="eyebrow">A fan-made adventure guide</div>
+    <div class="eyebrow">A FAN-MADE ADVENTURE GUIDE</div>
     <h1>HYRULE GUIDE</h1>
-    <p>Путеводитель по миру The Legend of Zelda: Ocarina of Time</p>
-    <p>Исследуй королевство, открывай новые места и собирай собственную историю приключения.</p>
-    <button class="gold-button" onclick="document.getElementById('world').scrollIntoView({behavior:'smooth'})">
+    <p>Путешествие по волшебному королевству Хайрул</p>
+    <p>Исследуй локации, собирай предметы и открывай тайны мира.</p>
+    <button class="gold-button" onclick="enterHyrule()">
       Войти в Хайрул
     </button>
+    <p id="musicStatus">♫ Музыка загружается...</p>
   </div>
 </header>
 
-<nav aria-label="Главное меню">
-  <button onclick="go('world')">Мир</button>
-  <button onclick="go('map-section')">Карта</button>
+<nav>
+  <button onclick="go('world')">Главная</button>
+  <button onclick="go('mapSection')">Карта</button>
+  <button onclick="go('locations')">Локации</button>
   <button onclick="go('inventory')">Инвентарь</button>
   <button onclick="go('quests')">Задания</button>
-  <button onclick="go('navi-section')">Нави</button>
-  <button onclick="toggleMusic()" id="musicButton">♫ Музыка: выкл.</button>
+  <button onclick="go('navi')">Нави</button>
+  <button onclick="toggleMusic()" id="musicButton">♫ Музыка: вкл.</button>
 </nav>
 
 <main>
+
 <section id="world">
-  <h2 class="section-title">Добро пожаловать в Хайрул</h2>
+  <h2>Добро пожаловать в Хайрул</h2>
   <p class="intro">
-    Перед тобой большое королевство, полное тайн, древних храмов и удивительных персонажей.
-    Выбери локацию, чтобы узнать о ней больше. Прогресс заданий и инвентарь сохраняются в этом браузере.
+    Перед тобой мир древних храмов, лесов, гор и загадочных существ.
+    Выбирай направление и отправляйся исследовать королевство!
   </p>
   <div class="panel">
     <strong style="color:var(--gold)">Совет путешественнику</strong>
-    <p>Не забывай исследовать каждый уголок мира. Иногда самые интересные секреты спрятаны совсем рядом с дорогой.</p>
+    <p>Изучай каждую локацию внимательно. В Хайруле много секретов!</p>
   </div>
 </section>
 
-<section id="map-section">
-  <h2 class="section-title">Карта королевства</h2>
-  <p class="intro">Нажимай на названия мест на карте. Это стилизованная карта-путеводитель, а не точная игровая карта.</p>
-  <div class="map-wrap">
-    <div class="map" aria-label="Схематичная карта Хайрула">
-      <button class="map-pin" style="left:48%;top:48%" onclick="showPlace('field')">Поле Хайрула</button>
-      <button class="map-pin" style="left:19%;top:23%" onclick="showPlace('kokiri')">Лес Кокири</button>
-      <button class="map-pin" style="left:72%;top:17%" onclick="showPlace('castle')">Замок</button>
-      <button class="map-pin" style="left:83%;top:47%" onclick="showPlace('kakariko')">Какарико</button>
-      <button class="map-pin" style="left:69%;top:78%" onclick="showPlace('death')">Гора Смерти</button>
-      <button class="map-pin" style="left:23%;top:76%" onclick="showPlace('lake')">Озеро Хайлия</button>
-      <button class="map-pin" style="left:45%;top:15%" onclick="showPlace('zora')">Владения Зора</button>
-      <button class="map-pin" style="left:13%;top:51%" onclick="showPlace('gerudo')">Долина Герудо</button>
-    </div>
-    <p class="map-note">Выбери точку, чтобы открыть описание.</p>
-    <div class="panel detail-box" id="placeDetail" aria-live="polite">
-      <strong style="color:var(--gold)">Твоё путешествие начинается!</strong>
-      <p>Выбери место на карте.</p>
-    </div>
+<section id="mapSection">
+  <h2>Карта Хайрула</h2>
+  <p class="intro">Нажимай на названия мест, чтобы узнать о них больше.</p>
+
+  <div class="map">
+    <button class="pin" style="left:48%;top:48%" onclick="showPlace('field')">Поле</button>
+    <button class="pin" style="left:19%;top:23%" onclick="showPlace('kokiri')">Лес Кокири</button>
+    <button class="pin" style="left:72%;top:17%" onclick="showPlace('castle')">Замок</button>
+    <button class="pin" style="left:83%;top:47%" onclick="showPlace('kakariko')">Какарико</button>
+    <button class="pin" style="left:69%;top:78%" onclick="showPlace('death')">Гора</button>
+    <button class="pin" style="left:23%;top:76%" onclick="showPlace('lake')">Озеро</button>
+    <button class="pin" style="left:45%;top:15%" onclick="showPlace('zora')">Зора</button>
+    <button class="pin" style="left:13%;top:51%" onclick="showPlace('gerudo')">Герудо</button>
+  </div>
+
+  <div class="panel detail" id="placeDetail">
+    Выбери место на карте!
   </div>
 </section>
 
 <section id="locations">
-  <h2 class="section-title">Локации Хайрула</h2>
+  <h2>Локации</h2>
   <div class="grid" id="locationGrid"></div>
 </section>
 
 <section id="inventory">
-  <h2 class="section-title">Инвентарь путешественника</h2>
-  <p class="intro">Отмечай предметы, которые ты уже нашёл в своём приключении.</p>
+  <h2>Инвентарь</h2>
+  <p class="intro">Отмечай предметы, которые уже нашёл.</p>
   <div class="panel" id="inventoryList"></div>
 </section>
 
 <section id="quests">
-  <h2 class="section-title">Журнал заданий</h2>
-  <p class="intro">Отмечай выполненные цели. Состояние сохраняется автоматически в браузере.</p>
+  <h2>Журнал заданий</h2>
   <div class="panel" id="questList"></div>
-  <p id="questProgress" style="color:var(--gold)"></p>
-  <button class="small-button" onclick="resetQuests()">Сбросить отметки заданий</button>
+  <p id="progress" style="color:var(--gold)"></p>
+  <button class="small-button" onclick="resetQuests()">Сбросить задания</button>
 </section>
 
-<section id="navi-section">
-  <h2 class="section-title">Совет от Нави</h2>
-  <div class="panel navi-area">
-    <img src="images/navi.png" alt="Изображение Нави" onerror="this.style.display='none'">
-    <div class="dialogue">
+<section id="navi">
+  <h2>Совет от Нави</h2>
+  <div class="panel navi">
+    <img src="./images/navi.png" alt="Нави" onerror="imageError(this,'Нави')">
+    <div style="flex:1;min-width:200px">
       <strong style="color:var(--gold)">Нави</strong>
-      <p id="naviText">Эй! Слушай! Пора отправляться в приключение!</p>
+      <p id="naviText">Эй! Слушай! Добро пожаловать в Хайрул!</p>
       <button class="small-button" onclick="nextTip()">Получить совет</button>
     </div>
   </div>
 </section>
 
-<section id="about">
-  <h2 class="section-title">О проекте</h2>
+<section>
+  <h2>О проекте</h2>
   <div class="panel">
-    <p>Hyrule Guide — фанатский неофициальный сайт-путеводитель, созданный поклонником The Legend of Zelda: Ocarina of Time.</p>
-    <p>Это не официальный продукт Nintendo и не новая версия игры. Все права на оригинальную игру и её персонажей принадлежат их правообладателям.</p>
+    Hyrule Guide — фанатский неофициальный путеводитель по
+    The Legend of Zelda: Ocarina of Time.
+    Проект не связан с Nintendo.
   </div>
 </section>
+
 </main>
 
 <footer>
   HYRULE GUIDE · FAN PROJECT<br>
-  Создано поклонником The Legend of Zelda: Ocarina of Time
+  Путеводитель по миру Ocarina of Time
 </footer>
 
-<div id="toast" role="status" aria-live="polite"></div>
+<div id="status" role="status"></div>
 
-<audio id="bgMusic" loop preload="none">
-  <source src="audio/hyrule-theme.mp3" type="audio/mpeg">
+<audio id="bgMusic" loop preload="auto">
+  <source src="./audio/hyrule-theme.mp3" type="audio/mpeg">
 </audio>
 
 <script>
+const music = document.getElementById("bgMusic");
+const musicButton = document.getElementById("musicButton");
+const musicStatus = document.getElementById("musicStatus");
+
+let musicStarted = false;
+
+function go(id) {
+  document.getElementById(id).scrollIntoView({behavior:"smooth"});
+}
+
+function notify(message) {
+  const box = document.getElementById("status");
+  box.textContent = message;
+  box.style.display = "block";
+  clearTimeout(window.noticeTimer);
+  window.noticeTimer = setTimeout(() => {
+    box.style.display = "none";
+  }, 3500);
+}
+
+function imageError(img, name) {
+  img.onerror = null;
+  img.src = "";
+  img.classList.add("missing-image");
+  img.alt = "";
+  img.style.background = "linear-gradient(135deg,#355b3e,#17271c)";
+  img.insertAdjacentText("beforeend", "Изображение не найдено: " + name);
+}
+
+async function startMusic() {
+  try {
+    await music.play();
+    musicStarted = true;
+    musicButton.textContent = "♫ Музыка: вкл.";
+    musicStatus.textContent = "♫ Музыка играет";
+    return true;
+  } catch (error) {
+    musicButton.textContent = "♫ Включить музыку";
+    musicStatus.textContent = "Нажми «Войти в Хайрул», чтобы включить музыку.";
+    return false;
+  }
+}
+
+// Пробуем включить музыку при загрузке.
+// Если браузер блокирует автозапуск, музыка включится после нажатия.
+window.addEventListener("load", () => {
+  startMusic();
+});
+
+async function enterHyrule() {
+  await startMusic();
+  go("world");
+}
+
+async function toggleMusic() {
+  if (music.paused) {
+    await startMusic();
+  } else {
+    music.pause();
+    musicButton.textContent = "♫ Музыка: выкл.";
+    musicStatus.textContent = "Музыка выключена";
+  }
+}
+
+music.addEventListener("error", () => {
+  musicStatus.textContent = "Не найден файл audio/hyrule-theme.mp3";
+  musicButton.textContent = "♫ Ошибка аудио";
+});
+
+music.addEventListener("ended", () => {
+  musicButton.textContent = "♫ Музыка: выкл.";
+});
+
 const places = [
-  {id:"kokiri", name:"Лес Кокири", file:"kokiri-forest.jpg",
-   desc:"Зелёный лесной дом народа Кокири. Здесь начинается история юного героя."},
-  {id:"field", name:"Поле Хайрула", file:"hyrule-field.jpg",
-   desc:"Большое открытое поле, соединяющее многие уголки королевства. Отсюда удобно начинать исследование."},
-  {id:"castle", name:"Замок Хайрула", file:"hyrule-castle.jpg",
-   desc:"Королевский замок — важное место в истории Хайрула. Здесь можно узнать больше о королевской семье."},
-  {id:"kakariko", name:"Деревня Какарико", file:"kakariko.jpg",
-   desc:"Тихая деревня у подножия горы. Здесь живут разные жители и скрываются свои маленькие истории."},
-  {id:"death", name:"Гора Смерти", file:"death-mountain.jpg",
-   desc:"Высокая вулканическая гора, связанная с народом гордых горонов."},
-  {id:"zora", name:"Владения Зора", file:"zora-domain.jpg",
-   desc:"Водное королевство народа Зора с красивыми водопадами и чистой водой."},
-  {id:"lake", name:"Озеро Хайлия", file:"lake-hylia.jpg",
-   desc:"Большое озеро, где можно наслаждаться спокойствием и исследовать водные просторы."},
-  {id:"gerudo", name:"Долина Герудо", file:"gerudo-valley.jpg",
-   desc:"Скалистая долина, ведущая к владениям народа Герудо."}
+  {id:"field",name:"Поле Хайрула",file:"hyrule-field.jpg",
+   desc:"Большое открытое пространство, соединяющее разные уголки королевства."},
+  {id:"kokiri",name:"Лес Кокири",file:"kokiri-forest.jpg",
+   desc:"Зелёный лес, где начинается приключение юного героя."},
+  {id:"castle",name:"Замок Хайрула",file:"hyrule-castle.jpg",
+   desc:"Королевский замок — важное место в истории Хайрула."},
+  {id:"kakariko",name:"Деревня Какарико",file:"kakariko.jpg",
+   desc:"Тихая деревня у подножия Горы Смерти."},
+  {id:"death",name:"Гора Смерти",file:"death-mountain.jpg",
+   desc:"Вулканическая гора, дом народа горонов."},
+  {id:"zora",name:"Владения Зора",file:"zora-domain.jpg",
+   desc:"Водное королевство народа Зора."},
+  {id:"lake",name:"Озеро Хайлия",file:"lake-hylia.jpg",
+   desc:"Большое озеро с красивыми водными просторами."},
+  {id:"gerudo",name:"Долина Герудо",file:"gerudo-valley.jpg",
+   desc:"Скалистая долина, ведущая к владениям Герудо."}
 ];
 
-const inventoryItems = [
-  "Кокири-меч","Щит Деку","Окарина времени","Семена Деку",
-  "Бомбы","Бумеранг","Лук","Крюк-кошка"
+function renderLocations() {
+  const grid = document.getElementById("locationGrid");
+  grid.innerHTML = "";
+
+  places.forEach(place => {
+    const card = document.createElement("article");
+    card.className = "card";
+
+    const img = document.createElement("img");
+    img.src = "./images/" + place.file;
+    img.alt = place.name;
+    img.loading = "lazy";
+    img.onerror = () => imageError(img, place.file);
+
+    const body = document.createElement("div");
+    body.className = "card-body";
+
+    const title = document.createElement("h3");
+    title.textContent = place.name;
+
+    const description = document.createElement("p");
+    description.textContent = place.desc;
+
+    const button = document.createElement("button");
+    button.className = "small-button";
+    button.textContent = "Изучить место";
+    button.onclick = () => {
+      showPlace(place.id);
+      go("mapSection");
+    };
+
+    body.append(title, description, button);
+    card.append(img, body);
+    grid.append(card);
+  });
+}
+
+function showPlace(id) {
+  const place = places.find(p => p.id === id);
+  if (!place) return;
+
+  document.getElementById("placeDetail").innerHTML =
+    "<strong style='color:var(--gold)'>" +
+    place.name + "</strong><p>" + place.desc + "</p>";
+}
+
+function loadSaved(key, fallback) {
+  try {
+    const data = localStorage.getItem(key);
+    return data ? JSON.parse(data) : fallback;
+  } catch {
+    return fallback;
+  }
+}
+
+let inventory = loadSaved("hyruleInventory", []);
+let completed = loadSaved("hyruleQuests", []);
+
+function save() {
+  try {
+    localStorage.setItem("hyruleInventory", JSON.stringify(inventory));
+    localStorage.setItem("hyruleQuests", JSON.stringify(completed));
+  } catch {
+    notify("Не удалось сохранить прогресс.");
+  }
+}
+
+const items = [
+  "Кокири-меч","Щит Деку","Окарина времени",
+  "Семена Деку","Бомбы","Бумеранг","Лук","Крюк-кошка"
 ];
+
+function renderInventory() {
+  const box = document.getElementById("inventoryList");
+  box.innerHTML = "";
+
+  items.forEach(item => {
+    const row = document.createElement("div");
+    row.className = "item";
+
+    const name = document.createElement("span");
+    name.textContent = item + (inventory.includes(item) ? " ✓" : "");
+
+    const button = document.createElement("button");
+    button.className = "small-button";
+    button.textContent = inventory.includes(item) ? "Убрать" : "Нашёл";
+
+    button.onclick = () => {
+      inventory = inventory.includes(item)
+        ? inventory.filter(x => x !== item)
+        : [...inventory, item];
+      save();
+      renderInventory();
+    };
+
+    row.append(name, button);
+    box.append(row);
+  });
+}
 
 const quests = [
   "Исследовать лес Кокири",
@@ -373,109 +529,52 @@ const quests = [
   "Открыть путь в долину Герудо"
 ];
 
-function go(id) {
-  document.getElementById(id).scrollIntoView({behavior:"smooth"});
-}
-
-function showPlace(id) {
-  const place = places.find(p => p.id === id);
-  if (!place) return;
-  document.getElementById("placeDetail").innerHTML =
-    "<strong style='color:var(--gold)'>" + place.name + "</strong><p>" +
-    place.desc + "</p>";
-}
-
-function renderLocations() {
-  document.getElementById("locationGrid").innerHTML = places.map(p => `
-    <article class="location-card">
-      <img src="images/${p.file}" alt="${p.name}" loading="lazy"
-           onerror="this.style.display='none'">
-      <div class="card-body">
-        <h3>${p.name}</h3>
-        <p>${p.desc}</p>
-        <button class="small-button" onclick="showPlace('${p.id}');go('map-section')">
-          Изучить место
-        </button>
-      </div>
-    </article>
-  `).join("");
-}
-
-function getSaved(key, fallback) {
-  try {
-    const value = localStorage.getItem(key);
-    return value ? JSON.parse(value) : fallback;
-  } catch (error) {
-    return fallback;
-  }
-}
-
-let inventory = getSaved("hyruleInventory", []);
-let completed = getSaved("hyruleQuests", []);
-
-function saveData() {
-  try {
-    localStorage.setItem("hyruleInventory", JSON.stringify(inventory));
-    localStorage.setItem("hyruleQuests", JSON.stringify(completed));
-  } catch (error) {
-    showToast("Не удалось сохранить прогресс в этом браузере.");
-  }
-}
-
-function renderInventory() {
-  document.getElementById("inventoryList").innerHTML = inventoryItems.map(item => {
-    const found = inventory.includes(item);
-    return `<div class="item">
-      <span>${item} ${found ? "✓" : ""}</span>
-      <button class="small-button" onclick="toggleItem('${item}')">
-        ${found ? "Убрать отметку" : "Нашёл"}
-      </button>
-    </div>`;
-  }).join("");
-}
-
-function toggleItem(item) {
-  inventory = inventory.includes(item)
-    ? inventory.filter(x => x !== item)
-    : [...inventory, item];
-  saveData();
-  renderInventory();
-}
-
 function renderQuests() {
-  document.getElementById("questList").innerHTML = quests.map((quest, i) => `
-    <label class="quest ${completed.includes(i) ? "done" : ""}">
-      <input type="checkbox" ${completed.includes(i) ? "checked" : ""}
-             onchange="toggleQuest(${i})">
-      <span>${quest}</span>
-    </label>
-  `).join("");
-  document.getElementById("questProgress").textContent =
-    "Выполнено заданий: " + completed.length + " из " + quests.length;
-}
+  const box = document.getElementById("questList");
+  box.innerHTML = "";
 
-function toggleQuest(i) {
-  completed = completed.includes(i)
-    ? completed.filter(x => x !== i)
-    : [...completed, i];
-  saveData();
-  renderQuests();
+  quests.forEach((quest, index) => {
+    const label = document.createElement("label");
+    label.className = "quest" + (completed.includes(index) ? " done" : "");
+
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.checked = completed.includes(index);
+
+    checkbox.onchange = () => {
+      completed = checkbox.checked
+        ? [...completed, index]
+        : completed.filter(x => x !== index);
+      save();
+      renderQuests();
+    };
+
+    const span = document.createElement("span");
+    span.textContent = quest;
+
+    label.append(checkbox, span);
+    box.append(label);
+  });
+
+  document.getElementById("progress").textContent =
+    "Выполнено: " + completed.length + " из " + quests.length;
 }
 
 function resetQuests() {
-  if (!confirm("Сбросить все отметки заданий?")) return;
+  if (!confirm("Сбросить отметки заданий?")) return;
   completed = [];
-  saveData();
+  save();
   renderQuests();
 }
 
 const tips = [
-  "Эй! Слушай! Исследуй места внимательно — иногда секреты совсем рядом.",
-  "Не забывай заглядывать в деревни. У жителей могут быть полезные подсказки.",
-  "Попробуй изучить карту и выбрать следующую цель путешествия.",
-  "Некоторые предметы помогают открывать новые пути. Береги найденные вещи!",
-  "Не торопись. В Хайруле много интересных уголков!"
+  "Эй! Слушай! Исследуй места внимательно!",
+  "Заглядывай в деревни — жители могут дать полезные подсказки.",
+  "Изучай карту и выбирай следующую цель.",
+  "Не забывай проверять новые предметы!",
+  "В Хайруле много секретов. Не торопись!"
 ];
+
 let tipIndex = 0;
 
 function nextTip() {
@@ -483,34 +582,11 @@ function nextTip() {
   document.getElementById("naviText").textContent = tips[tipIndex];
 }
 
-function showToast(message) {
-  const toast = document.getElementById("toast");
-  toast.textContent = message;
-  toast.style.display = "block";
-  clearTimeout(window.toastTimer);
-  window.toastTimer = setTimeout(() => toast.style.display = "none", 2600);
-}
-
-async function toggleMusic() {
-  const music = document.getElementById("bgMusic");
-  const button = document.getElementById("musicButton");
-  if (music.paused) {
-    try {
-      await music.play();
-      button.textContent = "♫ Музыка: вкл.";
-    } catch (error) {
-      showToast("Не удалось включить музыку. Проверь файл audio/hyrule-theme.mp3");
-    }
-  } else {
-    music.pause();
-    button.textContent = "♫ Музыка: выкл.";
-  }
-}
-
 renderLocations();
 renderInventory();
 renderQuests();
 </script>
+
 </body>
 </html>
 
