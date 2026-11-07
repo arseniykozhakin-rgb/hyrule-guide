@@ -2,1690 +2,482 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hyrule Guide — Путешествие по Хайрулу</title>
-
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hyrule Guide — Ocarina of Time</title>
 <style>
-:root {
-  --gold: #d9b765;
-  --gold-light: #ffe5a0;
-  --dark: #101b25;
-  --panel: rgba(13, 29, 39, .94);
-  --panel-light: rgba(30, 55, 64, .94);
-  --text: #f4edda;
-  --muted: #b9c4bd;
-  --green: #729b68;
-  --blue: #5c9db5;
-}
-
-* { box-sizing: border-box; }
-
-body {
-  margin: 0;
-  color: var(--text);
-  font-family: Georgia, "Times New Roman", serif;
-  background: #101b25;
-  min-height: 100vh;
-  transition: background 2s, filter 2s;
-}
-
-body.day {
-  background:
-    linear-gradient(rgba(20,42,43,.48), rgba(10,24,30,.88)),
-    url("./images/hyrule-field.jpg.webp") center/cover fixed;
-}
-
-body.dawn {
-  background:
-    linear-gradient(rgba(112,74,60,.48), rgba(12,24,32,.88)),
-    url("./images/hyrule-field.jpg.webp") center/cover fixed;
-}
-
-body.night {
-  background:
-    linear-gradient(rgba(5,12,32,.78), rgba(4,10,23,.94)),
-    url("./images/hyrule-field.jpg.webp") center/cover fixed;
-}
-
-button {
-  font-family: inherit;
-  cursor: pointer;
-}
-
-button:focus-visible, input:focus-visible {
-  outline: 2px solid var(--gold-light);
-  outline-offset: 3px;
-}
-
-header {
-  position: sticky;
-  top: 0;
-  z-index: 20;
-  background: rgba(8,18,25,.96);
-  border-bottom: 2px solid var(--gold);
-  box-shadow: 0 5px 25px #0008;
-  backdrop-filter: blur(12px);
-}
-
-.header-inner {
-  max-width: 1450px;
-  margin: auto;
-  padding: 13px 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 15px;
-  flex-wrap: wrap;
-}
-
-.logo {
-  color: var(--gold-light);
-  font-size: 25px;
-  letter-spacing: 2px;
-  font-weight: bold;
-}
-
-.logo small {
-  display: block;
-  color: var(--muted);
-  font-size: 10px;
-  letter-spacing: 4px;
-  margin-top: 3px;
-}
-
-nav {
-  display: flex;
-  gap: 6px;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-nav button, .small-button {
-  background: linear-gradient(#344c50, #172c34);
-  border: 1px solid #927d4c;
-  color: var(--text);
-  padding: 9px 12px;
-  border-radius: 5px;
-  transition: .2s;
-}
-
-nav button:hover, nav button.active, .small-button:hover {
-  background: linear-gradient(#8d7440, #554522);
-  color: white;
-  border-color: var(--gold-light);
-  transform: translateY(-1px);
-}
-
-main {
-  max-width: 1450px;
-  margin: auto;
-  padding: 24px 20px 90px;
-}
-
-.page { display: none; animation: appear .35s ease; }
-.page.active { display: block; }
-
-@keyframes appear {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-h1, h2, h3 { color: var(--gold-light); }
-h1 { font-size: clamp(30px, 5vw, 52px); }
-h2 { border-bottom: 1px solid #9c824e; padding-bottom: 10px; }
-p { line-height: 1.6; }
-
-.hero {
-  min-height: 390px;
-  padding: 55px 30px;
-  display: flex;
-  align-items: center;
-  border: 2px solid var(--gold);
-  border-radius: 12px;
-  background:
-    linear-gradient(90deg, rgba(5,18,24,.92), rgba(5,18,24,.25)),
-    url("./images/hyrule-castle.jpg.webp") center/cover;
-  box-shadow: 0 15px 45px #0008;
-}
-
-.hero-content { max-width: 620px; }
-
-.hero p { font-size: 18px; color: #eee5cf; }
-
-.gold-button {
-  border: 1px solid var(--gold-light);
-  background: linear-gradient(#c7a653, #755a25);
-  color: #17180f;
-  padding: 12px 20px;
-  border-radius: 5px;
-  font-weight: bold;
-  margin: 5px 5px 5px 0;
-  box-shadow: 0 3px 10px #0006;
-}
-
-.gold-button:hover { filter: brightness(1.15); transform: translateY(-2px); }
-
-.panel {
-  background: var(--panel);
-  border: 1px solid #88764d;
-  border-radius: 9px;
-  padding: 20px;
-  box-shadow: 0 8px 25px #0005;
-}
-
-.stats {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
-  margin: 18px 0;
-}
-
-.stat {
-  background: var(--panel);
-  border: 1px solid #8c784c;
-  border-radius: 8px;
-  padding: 15px;
-  text-align: center;
-}
-
-.stat strong {
-  display: block;
-  color: var(--gold-light);
-  font-size: 24px;
-  margin-top: 6px;
-}
-
-.heart { color: #ed6d72; }
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-  gap: 17px;
-}
-
-.card {
-  background: var(--panel);
-  border: 1px solid #81734f;
-  border-radius: 9px;
-  overflow: hidden;
-  transition: .25s;
-}
-
-.card:hover {
-  transform: translateY(-4px);
-  border-color: var(--gold-light);
-  box-shadow: 0 10px 25px #0007;
-}
-
-.card img {
-  width: 100%;
-  height: 170px;
-  object-fit: cover;
-  display: block;
-}
-
-.card-content { padding: 15px; }
-.card-content h3 { margin-top: 0; }
-
-.muted { color: var(--muted); }
-.tag {
-  display: inline-block;
-  background: #314a4b;
-  border: 1px solid #718b71;
-  color: #dce8ce;
-  border-radius: 20px;
-  padding: 4px 9px;
-  font-size: 12px;
-  margin: 3px;
-}
-
-.progress {
-  height: 10px;
-  background: #0b1118;
-  border: 1px solid #716444;
-  border-radius: 20px;
-  overflow: hidden;
-  margin: 8px 0;
-}
-
-.progress span {
-  display: block;
-  height: 100%;
-  background: linear-gradient(90deg, #779d62, #d8c06e);
-  width: 0;
-  transition: width .5s;
-}
-
-.section-intro { color: #d6d4c7; max-width: 850px; }
-
-.map-layout {
-  display: grid;
-  grid-template-columns: minmax(0, 1.5fr) minmax(250px, .8fr);
-  gap: 18px;
-}
-
-.map-picture {
-  position: relative;
-  min-height: 420px;
-  border: 2px solid var(--gold);
-  border-radius: 10px;
-  overflow: hidden;
-  background: #1b302d;
-}
-
-.map-picture img {
-  width: 100%;
-  height: 100%;
-  min-height: 420px;
-  object-fit: cover;
-  display: block;
-}
-
-.map-pin {
-  position: absolute;
-  transform: translate(-50%, -50%);
-  background: #182c34eF;
-  border: 2px solid var(--gold);
-  color: white;
-  border-radius: 30px;
-  padding: 7px 10px;
-  font-size: 12px;
-  box-shadow: 0 3px 12px #000a;
-}
-
-.map-pin:hover { background: #987b39; }
-
-.map-info { min-height: 250px; }
-
-.item-menu {
-  display: grid;
-  grid-template-columns: minmax(0, 1.2fr) minmax(250px, .8fr);
-  gap: 20px;
-}
-
-.inventory-grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(65px, 1fr));
-  gap: 9px;
-}
-
-.item-slot {
-  min-height: 105px;
-  border: 2px solid #766644;
-  border-radius: 7px;
-  background: linear-gradient(145deg, #263d48, #101e2a);
-  color: white;
-  padding: 8px 4px;
-  text-align: center;
-  transition: .2s;
-}
-
-.item-slot:hover, .item-slot.selected {
-  border-color: var(--gold-light);
-  background: linear-gradient(145deg, #6c603d, #293b3d);
-  box-shadow: 0 0 15px #d8b65b55;
-}
-
-.item-icon { display: block; font-size: 32px; margin-bottom: 5px; }
-.item-slot small { font-size: 11px; }
-
-.item-detail {
-  min-height: 260px;
-  background: linear-gradient(145deg, #263e49, #111d29);
-  border: 2px solid #a58c51;
-  border-radius: 9px;
-  padding: 20px;
-  text-align: center;
-}
-
-.item-detail .item-icon { font-size: 65px; }
-
-.dungeon-card { margin-bottom: 16px; }
-
-.dungeon-card details { padding: 0 18px 18px; }
-.dungeon-card summary {
-  cursor: pointer;
-  color: var(--gold-light);
-  font-size: 19px;
-  padding: 18px 0;
-}
-
-.dungeon-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-  margin: 8px 0;
-}
-
-.dungeon-card p { margin: 8px 0; }
-
-.quest-row, .achievement-row, .journal-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  border-bottom: 1px solid #635b43;
-  padding: 12px 0;
-}
-
-.quest-row:last-child { border-bottom: 0; }
-
-input[type="checkbox"] { accent-color: #d9b765; width: 18px; height: 18px; }
-
-.npc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; }
-
-.npc {
-  text-align: center;
-  padding: 18px;
-  background: var(--panel);
-  border: 1px solid #8b784c;
-  border-radius: 9px;
-}
-
-.npc-face { font-size: 55px; }
-
-.dialogue {
-  min-height: 90px;
-  padding: 15px;
-  background: #0d1a24;
-  border: 1px solid #9a824e;
-  border-radius: 8px;
-  margin: 12px 0;
-  color: #f1e8ce;
-}
-
-.ocarina-keys {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin: 20px 0;
-}
-
-.note-button {
-  width: 62px;
-  height: 75px;
-  border-radius: 30px 30px 12px 12px;
-  background: linear-gradient(#547d85, #172d39);
-  color: white;
-  border: 2px solid var(--gold);
-  font-size: 22px;
-}
-
-.note-button:active { background: #a78b47; transform: scale(.95); }
-
-.note-display {
-  font-size: 23px;
-  letter-spacing: 8px;
-  min-height: 45px;
-  color: var(--gold-light);
-  text-align: center;
-}
-
-.navi {
-  position: fixed;
-  right: 20px;
-  bottom: 20px;
-  z-index: 30;
-  width: 82px;
-  height: 82px;
-  border-radius: 50%;
-  background: #b7f6ff22;
-  border: 2px solid #a9f2ff;
-  box-shadow: 0 0 25px #7ceaff99;
-  cursor: pointer;
-  animation: float 3s ease-in-out infinite;
-  overflow: hidden;
-}
-
-.navi img { width: 100%; height: 100%; object-fit: contain; }
-
-@keyframes float {
-  0%,100% { transform: translateY(0); }
-  50% { transform: translateY(-9px); }
-}
-
-.navi-message {
-  position: fixed;
-  right: 112px;
-  bottom: 30px;
-  z-index: 31;
-  max-width: 280px;
-  background: #102632;
-  border: 1px solid #a9eaff;
-  padding: 13px;
-  border-radius: 9px;
-  box-shadow: 0 5px 20px #0009;
-  display: none;
-}
-
-.toast {
-  position: fixed;
-  top: 90px;
-  left: 50%;
-  transform: translateX(-50%) translateY(-20px);
-  z-index: 50;
-  opacity: 0;
-  pointer-events: none;
-  background: linear-gradient(#273e43, #101d27);
-  border: 2px solid var(--gold);
-  border-radius: 10px;
-  padding: 15px 22px;
-  text-align: center;
-  min-width: 240px;
-  box-shadow: 0 8px 30px #000b;
-  transition: .35s;
-}
-
-.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-
-.chest {
-  font-size: 65px;
-  cursor: pointer;
-  background: none;
-  border: 0;
-  filter: drop-shadow(0 5px 7px #0008);
-  transition: .2s;
-}
-
-.chest:hover { transform: scale(1.12); }
-.chest.opened { filter: grayscale(1); opacity: .55; cursor: default; }
-
-.time-box {
-  color: var(--gold-light);
-  text-align: center;
-  font-size: 13px;
-  min-width: 110px;
-}
-
-.footer {
-  text-align: center;
-  color: #b7b6a7;
-  padding: 25px;
-  border-top: 1px solid #88764d;
-  background: #09141c;
-}
-
-.hidden { display: none !important; }
-
-@media(max-width: 760px) {
-  .stats { grid-template-columns: repeat(2, 1fr); }
-  .map-layout, .item-menu { grid-template-columns: 1fr; }
-  .hero { min-height: 330px; padding: 30px 20px; }
-  .header-inner { justify-content: center; }
-  .logo { text-align: center; }
-  nav button { font-size: 12px; padding: 8px; }
-  main { padding: 15px 12px 70px; }
-  .inventory-grid { grid-template-columns: repeat(3, 1fr); }
-  .navi { width: 65px; height: 65px; right: 12px; bottom: 12px; }
-  .navi-message { right: 85px; bottom: 18px; max-width: 220px; }
-}
+:root{--gold:#d9b45b;--bg:#101b18;--panel:#1b2b25;--text:#f1ead5}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(ellipse at top,#294438,var(--bg) 65%);color:var(--text);font:16px Georgia,serif;line-height:1.55}
+header{text-align:center;padding:35px 15px;background:linear-gradient(#09110fe8,#15271fe8),url('./images/hyrule-castle.jpg.webp') center/cover;border-bottom:2px solid var(--gold)}
+header h1{margin:0;color:#f4d98a;font-size:clamp(2rem,6vw,3.5rem);letter-spacing:3px}
+nav{position:sticky;top:0;z-index:5;display:flex;flex-wrap:wrap;justify-content:center;gap:7px;padding:10px;background:#101b18ed}
+nav a{color:#f1ead5;text-decoration:none;padding:7px 10px;border:1px solid #806d42;border-radius:18px}
+nav a:hover{background:#465b3e}
+main{max-width:1150px;margin:auto;padding:18px}
+section{scroll-margin-top:75px;margin:22px 0;padding:20px;background:#182720;border:1px solid #806d42;border-radius:13px}
+h2,h3{color:#f4d98a}
+h2{border-bottom:1px solid #806d42;padding-bottom:8px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:13px}
+.card{background:#263a30;padding:13px;border:1px solid #66734f;border-radius:10px}
+.card img{width:100%;height:140px;object-fit:cover;border-radius:7px}
+.stats{display:flex;gap:9px;flex-wrap:wrap}
+.stat{background:#263a30;padding:9px 13px;border:1px solid #806d42;border-radius:8px}
+button{background:#8c7138;color:#fff4d4;border:1px solid #e0c477;border-radius:8px;padding:8px 13px;cursor:pointer;font:inherit}
+button:hover{background:#a68a4b}
+button:disabled{opacity:.5}
+.event{margin:18px auto;padding:18px;text-align:center;border:2px solid var(--gold);border-radius:12px;background:linear-gradient(135deg,#14251e,#354333);animation:appear .6s}
+.event-icon{font-size:48px}
+.event h2{border:0;margin:4px}
+.event-label{font-size:12px;letter-spacing:3px;color:#b8d5a2;text-transform:uppercase}
+@keyframes appear{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.progress{height:12px;background:#09110e;border-radius:12px;overflow:hidden}
+.progress span{display:block;height:100%;background:#a8bd70;width:0}
+.dialogue{background:#101b18;padding:12px;border-radius:8px}
+.toast{position:fixed;right:15px;bottom:15px;background:#293d30;border:1px solid var(--gold);padding:12px;border-radius:8px;opacity:0;transition:.2s;pointer-events:none}
+.toast.show{opacity:1}
+footer{text-align:center;padding:25px;color:#b9bea8}
 </style>
 </head>
-
-<body class="day">
+<body>
 
 <header>
-  <div class="header-inner">
-    <div class="logo">
-      HYRULE GUIDE
-      <small>THE LEGEND OF ZELDA</small>
-    </div>
-
-    <nav>
-      <button class="active" data-page="home">Главная</button>
-      <button data-page="locations">Локации</button>
-      <button data-page="map">Карта</button>
-      <button data-page="inventory">Инвентарь</button>
-      <button data-page="dungeons">Подземелья</button>
-      <button data-page="quests">Задания</button>
-      <button data-page="people">Жители</button>
-      <button data-page="ocarina">Окарина</button>
-      <button data-page="journal">Дневник</button>
-      <button data-page="achievements">Достижения</button>
-    </nav>
-
-    <div class="time-box">
-      <div id="clock">☀ День</div>
-      <div id="game-date">День 1</div>
-    </div>
-
-    <button class="small-button" id="music-button" onclick="toggleMusic()">♫ Музыка: выкл.</button>
-  </div>
+<h1>HYRULE GUIDE</h1>
+<p>Путеводитель по миру The Legend of Zelda: Ocarina of Time</p>
 </header>
+
+<nav>
+<a href="#home">Главная</a>
+<a href="#locations">Локации</a>
+<a href="#map">Карта</a>
+<a href="#inventory">Инвентарь</a>
+<a href="#dungeons">Подземелья</a>
+<a href="#quests">Задания</a>
+<a href="#people">Жители</a>
+<a href="#ocarina">Окарина</a>
+<a href="#journal">Дневник</a>
+<a href="#achievements">Достижения</a>
+</nav>
 
 <main>
 
-<!-- ГЛАВНАЯ -->
-<section id="home" class="page active">
-  <div class="hero">
-    <div class="hero-content">
-      <span class="tag">Путеводитель по Хайрулу</span>
-      <h1>Добро пожаловать в Хайрул</h1>
-      <p>
-        Перед тобой открывается огромный мир приключений.
-        Исследуй земли королевства, находи сокровища,
-        знакомься с жителями и раскрывай тайны древних храмов.
-      </p>
-      <button class="gold-button" onclick="showPage('locations')">Исследовать мир</button>
-      <button class="gold-button" onclick="showPage('inventory')">Открыть инвентарь</button>
-    </div>
-  </div>
+<div id="hyrule-event" class="event" aria-live="polite">
+<div class="event-label">Событие Хайрула</div>
+<div class="event-icon">🌤️</div>
+<h2>Добро пожаловать!</h2>
+<p>Твоё приключение начинается.</p>
+</div>
 
-  <div class="stats">
-    <div class="stat">❤️ Здоровье<strong id="hearts">♥♥♥</strong></div>
-    <div class="stat">💎 Рупии<strong id="rupees">0</strong></div>
-    <div class="stat">✨ Магия<strong id="magic">100%</strong></div>
-    <div class="stat">🎒 Предметы<strong id="item-count">0</strong></div>
-  </div>
+<section id="home">
+<h2>🏡 Главная</h2>
 
-  <div class="grid">
-    <div class="panel">
-      <h3>Путешествие</h3>
-      <p class="muted">Твой общий прогресс исследования Хайрула.</p>
-      <div class="progress"><span id="world-progress"></span></div>
-      <strong id="world-progress-label">0% исследовано</strong>
-    </div>
-    <div class="panel">
-      <h3>Подземелья</h3>
-      <p class="muted">Сколько древних испытаний уже пройдено.</p>
-      <div class="progress"><span id="dungeon-progress"></span></div>
-      <strong id="dungeon-progress-label">0 из 6</strong>
-    </div>
-    <div class="panel">
-      <h3>Следующая цель</h3>
-      <p id="next-goal">Исследуй лес Кокири и найди первые сокровища.</p>
-      <button class="gold-button" onclick="showPage('quests')">Посмотреть задания</button>
-    </div>
-  </div>
+<div class="stats">
+<div class="stat">❤️ Здоровье: <b id="health">5</b>/10</div>
+<div class="stat">🟡 Рупии: <b id="rupees">25</b></div>
+<div class="stat">✨ Магия: <b id="magic">30</b>/100</div>
+<div class="stat">🕒 Время: <b id="game-time">Утро</b></div>
+</div>
 
-  <h2>Последние события</h2>
-  <div class="panel" id="recent-events">Твоё путешествие только начинается...</div>
+<h3>Прогресс путешествия</h3>
+<div class="progress"><span id="progress-bar"></span></div>
+<p><b id="progress-text">0</b>% завершено</p>
 
-  <h2>Отдых у костра</h2>
-  <div class="panel">
-    <p>Передохни после долгого путешествия. Отдых восстановит здоровье и магию.</p>
-    <button class="gold-button" onclick="restAtHome()">Отдохнуть</button>
-  </div>
+<div class="grid">
+<div class="card">
+<h3>Последние события</h3>
+<div id="recent-events">Ты прибыл в Хайрул.</div>
+</div>
+
+<div class="card">
+<h3>Передышка</h3>
+<p>Восстанови здоровье и магию.</p>
+<button onclick="rest()">Отдохнуть</button>
+</div>
+
+<div class="card">
+<h3>🧚 Нави</h3>
+<p id="navi-message">Слушай внимательно!</p>
+<button onclick="naviHint()">Спросить Нави</button>
+</div>
+</div>
 </section>
 
-<!-- ЛОКАЦИИ -->
-<section id="locations" class="page">
-  <h1>Земли Хайрула</h1>
-  <p class="section-intro">Каждая область королевства хранит свои истории, секреты и сокровища.</p>
-  <div class="grid" id="places-grid"></div>
+<section id="locations">
+<h2>🗺️ Локации Хайрула</h2>
+<div class="grid">
+
+<article class="card">
+<img src="./images/kokiri-forest.jpg.jpg" alt="Лес Кокири">
+<h3>Лес Кокири</h3>
+<p>Зелёный дом детства Линка.</p>
+<button onclick="visit('Лес Кокири')">Посетить</button>
+</article>
+
+<article class="card">
+<img src="./images/hyrule-field.jpg.webp" alt="Поле Хайрула">
+<h3>Поле Хайрула</h3>
+<p>Большая равнина королевства.</p>
+<button onclick="visit('Поле Хайрула')">Посетить</button>
+</article>
+
+<article class="card">
+<img src="./images/kakariko.jpg.webp" alt="Какарико">
+<h3>Деревня Какарико</h3>
+<p>Тихая деревня у горы Смерти.</p>
+<button onclick="visit('Деревня Какарико')">Посетить</button>
+</article>
+
+<article class="card">
+<img src="./images/zora-domain.jpg.jpg" alt="Владения Зора">
+<h3>Владения Зора</h3>
+<p>Водный дом народа Зора.</p>
+<button onclick="visit('Владения Зора')">Посетить</button>
+</article>
+
+<article class="card">
+<img src="./images/gerudo-valley.jpg.webp" alt="Долина Герудо">
+<h3>Долина Герудо</h3>
+<p>Жаркая долина на западе.</p>
+<button onclick="visit('Долина Герудо')">Посетить</button>
+</article>
+
+<article class="card">
+<img src="./images/lake-hylia.jpg.webp" alt="Озеро Хайлия">
+<h3>Озеро Хайлия</h3>
+<p>Озеро, полное тайн.</p>
+<button onclick="visit('Озеро Хайлия')">Посетить</button>
+</article>
+
+</div>
 </section>
 
-<!-- КАРТА -->
-<section id="map" class="page">
-  <h1>Карта Хайрула</h1>
-  <p class="section-intro">Выбери область, чтобы узнать о ней больше.</p>
-  <div class="map-layout">
-    <div class="map-picture">
-      <img src="./images/hyrule-map.jpg.webp" alt="Карта Хайрула">
-      <button class="map-pin" style="left:24%;top:22%" onclick="selectMapPlace('kokiri')">Лес Кокири</button>
-      <button class="map-pin" style="left:48%;top:17%" onclick="selectMapPlace('castle')">Замок</button>
-      <button class="map-pin" style="left:75%;top:22%" onclick="selectMapPlace('zora')">Зора</button>
-      <button class="map-pin" style="left:47%;top:49%" onclick="selectMapPlace('field')">Поле</button>
-      <button class="map-pin" style="left:22%;top:69%" onclick="selectMapPlace('kakariko')">Какарико</button>
-      <button class="map-pin" style="left:79%;top:72%" onclick="selectMapPlace('gerudo')">Герудо</button>
-      <button class="map-pin" style="left:52%;top:84%" onclick="selectMapPlace('lake')">Озеро</button>
-    </div>
-    <div class="panel map-info">
-      <h2 id="map-place-title">Хайрул</h2>
-      <p id="map-place-description">Выбери точку на карте, чтобы открыть описание региона.</p>
-      <button class="gold-button" id="map-place-button" onclick="visitSelectedPlace()">Открыть локацию</button>
-    </div>
-  </div>
+<section id="map">
+<h2>📍 Карта королевства</h2>
+
+<div class="grid">
+<button onclick="visit('Замок Хайрул')">🏰 Замок Хайрул</button>
+<button onclick="visit('Лес Кокири')">🌳 Лес Кокири</button>
+<button onclick="visit('Поле Хайрула')">🌾 Поле Хайрула</button>
+<button onclick="visit('Какарико')">🏘️ Какарико</button>
+<button onclick="visit('Владения Зора')">💧 Владения Зора</button>
+<button onclick="visit('Долина Герудо')">🏜️ Долина Герудо</button>
+</div>
+
+<img src="./images/hyrule-map.jpg.webp" alt="Карта Хайрула" style="width:100%;max-height:430px;object-fit:contain;margin-top:15px">
 </section>
 
-<!-- ИНВЕНТАРЬ -->
-<section id="inventory" class="page">
-  <h1>Инвентарь Линка</h1>
-  <p class="section-intro">Выбирай предметы, изучай их свойства и следи за своей коллекцией.</p>
-  <div class="item-menu">
-    <div class="panel">
-      <h2>Предметы</h2>
-      <div class="inventory-grid" id="inventory-grid"></div>
-    </div>
-    <div class="item-detail" id="item-detail">
-      <div class="item-icon">🎒</div>
-      <h2>Твоя сумка</h2>
-      <p>Выбери предмет слева, чтобы прочитать его описание.</p>
-    </div>
-  </div>
+<section id="inventory">
+<h2>🎒 Инвентарь</h2>
+<div class="grid">
+<div class="card">🗡️ Меч Кокири ×1</div>
+<div class="card">🛡️ Щит Деку ×1</div>
+<div class="card">🎵 Окарина времени ×1</div>
+<div class="card">💚 Зелья: <b id="potions">1</b></div>
+</div>
 </section>
 
-<!-- ПОДЗЕМЕЛЬЯ -->
-<section id="dungeons" class="page">
-  <h1>Древние подземелья</h1>
-  <p class="section-intro">
-    Шесть великих испытаний ждут героя. Изучай механизмы,
-    собирай ключи и готовься к встрече с хранителями храмов.
-  </p>
-  <div id="dungeons-list"></div>
+<section id="dungeons">
+<h2>🏰 Подземелья</h2>
+<div class="grid">
+
+<div class="card">
+<h3>🌳 Древо Деку</h3>
+<p>Первое испытание героя.</p>
+<button onclick="completeDungeon(this)">Пройти</button>
+</div>
+
+<div class="card">
+<h3>⛰️ Пещера Додонго</h3>
+<p>Лабиринт в горе Смерти.</p>
+<button onclick="completeDungeon(this)">Пройти</button>
+</div>
+
+<div class="card">
+<h3>💧 Внутри Джабу-Джабу</h3>
+<p>Испытание водного царства.</p>
+<button onclick="completeDungeon(this)">Пройти</button>
+</div>
+
+<div class="card">
+<h3>🌲 Лесной храм</h3>
+<p>Таинственный храм.</p>
+<button onclick="completeDungeon(this)">Пройти</button>
+</div>
+
+</div>
 </section>
 
-<!-- ЗАДАНИЯ -->
-<section id="quests" class="page">
-  <h1>Задания путешественника</h1>
-  <p class="section-intro">Выполняй поручения, получай награды и открывай новые страницы своей истории.</p>
-  <div class="panel">
-    <div id="quests-list"></div>
-  </div>
+<section id="quests">
+<h2>📜 Задания</h2>
+<div id="quest-list">
+<p><label><input type="checkbox" onchange="questChanged(this)"> Найти меч Кокири</label></p>
+<p><label><input type="checkbox" onchange="questChanged(this)"> Познакомиться с Зельдой</label></p>
+<p><label><input type="checkbox" onchange="questChanged(this)"> Помочь жителям Какарико</label></p>
+<p><label><input type="checkbox" onchange="questChanged(this)"> Исследовать озеро Хайлия</label></p>
+</div>
 </section>
 
-<!-- ЖИТЕЛИ -->
-<section id="people" class="page">
-  <h1>Жители Хайрула</h1>
-  <p class="section-intro">Поговори с жителями королевства. Возможно, они знают что-то важное.</p>
-  <div class="npc-grid" id="npc-grid"></div>
-  <div class="panel" style="margin-top:20px">
-    <h2 id="dialogue-name">Разговор</h2>
-    <div class="dialogue" id="dialogue-text">Выбери персонажа, чтобы начать разговор.</div>
-  </div>
+<section id="people">
+<h2>🧝 Жители Хайрула</h2>
+<div class="grid">
+
+<div class="card">
+<h3>🧚 Нави</h3>
+<p>Фея-проводник Линка.</p>
+<button onclick="talk('Нави','Эй! Слушай! Исследуй каждый уголок!')">Поговорить</button>
+</div>
+
+<div class="card">
+<h3>🦉 Каэпора Гаэбора</h3>
+<p>Мудрая сова.</p>
+<button onclick="talk('Сова','Не торопись и внимательно смотри вокруг.')">Поговорить</button>
+</div>
+
+<div class="card">
+<h3>👑 Принцесса Зельда</h3>
+<p>Принцесса Хайрула.</p>
+<button onclick="talk('Зельда','Помоги защитить Хайрул.')">Поговорить</button>
+</div>
+
+<div class="card">
+<h3>🌳 Большой Деку</h3>
+<p>Хранитель леса.</p>
+<button onclick="talk('Деку','Слушай зов леса, юный герой.')">Поговорить</button>
+</div>
+
+</div>
+<div class="dialogue" id="dialogue">Выбери жителя, чтобы поговорить.</div>
 </section>
 
-<!-- ОКАРИНА -->
-<section id="ocarina" class="page">
-  <h1>Музыка окарины</h1>
-  <p class="section-intro">
-    Попробуй ноты, создай собственную последовательность и потренируй музыкальную память.
-    Здесь используются учебные последовательности, а не мелодии из игры.
-  </p>
-  <div class="panel">
-    <h2>Твоя окарина</h2>
-    <div class="ocarina-keys">
-      <button class="note-button" onclick="playNote('До')">До</button>
-      <button class="note-button" onclick="playNote('Ре')">Ре</button>
-      <button class="note-button" onclick="playNote('Ми')">Ми</button>
-      <button class="note-button" onclick="playNote('Соль')">Соль</button>
-      <button class="note-button" onclick="playNote('Ля')">Ля</button>
-    </div>
-    <div class="note-display" id="note-display">♪ ♪ ♪</div>
-    <p style="text-align:center">
-      <button class="gold-button" onclick="clearNotes()">Очистить ноты</button>
-      <button class="gold-button" onclick="saveOwnTune()">Сохранить мелодию</button>
-    </p>
-  </div>
-  <div class="panel" style="margin-top:18px">
-    <h2>Музыкальная тренировка</h2>
-    <p>Запомни последовательность и попробуй повторить её.</p>
-    <p id="tune-challenge">Нажми кнопку, чтобы получить задание.</p>
-    <button class="gold-button" onclick="startTuneChallenge()">Начать тренировку</button>
-    <button class="gold-button" onclick="checkTune()">Проверить ответ</button>
-    <p id="tune-result" class="muted"></p>
-  </div>
-  <div class="panel" style="margin-top:18px">
-    <h2>Мои мелодии</h2>
-    <div id="saved-tunes">Пока нет сохранённых мелодий.</div>
-  </div>
+<section id="ocarina">
+<h2>🎶 Окарина</h2>
+<p>Выбери мелодию:</p>
+<div class="grid">
+<button onclick="playSong('Колыбельная Зельды','← ↑ → ← ↑ →')">Колыбельная Зельды</button>
+<button onclick="playSong('Песня Эпоны','↑ ← → ↑ ← →')">Песня Эпоны</button>
+<button onclick="playSong('Песня Сарии','↓ → ← ↓ → ←')">Песня Сарии</button>
+<button onclick="playSong('Песня Солнца','→ ↓ ↑ → ↓ ↑')">Песня Солнца</button>
+</div>
+<div class="dialogue" id="song-result">Мелодия появится здесь.</div>
 </section>
 
-<!-- ДНЕВНИК -->
-<section id="journal" class="page">
-  <h1>Дневник путешествия</h1>
-  <p class="section-intro">Здесь записываются важные события твоего приключения.</p>
-  <div class="panel">
-    <h2>История</h2>
-    <div id="journal-list"></div>
-  </div>
-  <div class="panel" style="margin-top:18px">
-    <h2>Личная заметка</h2>
-    <textarea id="personal-note" rows="4" style="width:100%;padding:12px;background:#10212b;color:white;border:1px solid #9b824e;border-radius:6px" placeholder="Запиши свою подсказку или план..."></textarea>
-    <button class="gold-button" onclick="saveNote()">Сохранить заметку</button>
-    <p id="note-status" class="muted"></p>
-  </div>
+<section id="journal">
+<h2>📖 Дневник</h2>
+<ul id="journal-list">
+<li>Ты начал путешествие по Хайрулу.</li>
+</ul>
 </section>
 
-<!-- ДОСТИЖЕНИЯ -->
-<section id="achievements" class="page">
-  <h1>Коллекция достижений</h1>
-  <p class="section-intro">Собирай памятные знаки за исследование мира и прохождение испытаний.</p>
-  <div class="panel">
-    <div id="achievements-list"></div>
-  </div>
+<section id="achievements">
+<h2>🏆 Достижения</h2>
+<div id="achievement-list">
+<p>🔒 Первые шаги — посетить первую локацию.</p>
+<p>🔒 Искатель приключений — выполнить задание.</p>
+<p>🔒 Покоритель подземелий — пройти подземелье.</p>
+</div>
 </section>
 
 </main>
 
-<footer class="footer">
-  <p>HYRULE GUIDE · Фанатский проект по мотивам The Legend of Zelda: Ocarina of Time</p>
-  <p>Неофициальный сайт, созданный поклонником игры.</p>
-</footer>
-
-<button class="navi" onclick="naviHint()" aria-label="Спросить Navi">
-  <img src="./images/navi.png.jpg" alt="Navi">
-</button>
-<div class="navi-message" id="navi-message"></div>
-<div class="toast" id="toast"></div>
+<footer>HYRULE GUIDE · Фанатский путеводитель по Ocarina of Time</footer>
+<div id="toast" class="toast"></div>
 
 <audio id="background-music" loop preload="auto">
-  <source src="./audio/hyrule-theme.mp3.mp3" type="audio/mpeg">
+<source src="./audio/hyrule-theme.mp3.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-/* =====================================================
-   ДАННЫЕ ИГРЫ
-===================================================== */
-
-const places = [
-  {
-    id:"field", name:"Поле Хайрула",
-    image:"./images/hyrule-field.jpg.webp",
-    description:"Огромная равнина соединяет разные уголки королевства. Днём здесь можно встретить путешественников, а ночью стоит быть внимательнее.",
-    secret:"Исследуй окрестности и обращай внимание на необычные места.",
-    atmosphere:"Открытые просторы и ветер"
-  },
-  {
-    id:"kokiri", name:"Лес Кокири",
-    image:"./images/kokiri-forest.jpg.jpg",
-    description:"Зелёный лесной дом маленького народа Кокири. Здесь начинается история юного героя.",
-    secret:"Поищи полезные предметы и поговори с местными жителями.",
-    atmosphere:"Пение птиц и шелест листьев"
-  },
-  {
-    id:"castle", name:"Замок Хайрула",
-    image:"./images/hyrule-castle.jpg.webp",
-    description:"Величественный замок королевской семьи. Его стены хранят историю королевства и множество тайн.",
-    secret:"Попробуй узнать больше о королевской семье.",
-    atmosphere:"Королевская музыка и древние стены"
-  },
-  {
-    id:"kakariko", name:"Деревня Какарико",
-    image:"./images/kakariko.jpg.webp",
-    description:"Спокойная деревня у подножия гор. Здесь живут ремесленники и хранители старых историй.",
-    secret:"Общайся с жителями: у каждого может быть своя история.",
-    atmosphere:"Тихая деревенская жизнь"
-  },
-  {
-    id:"zora", name:"Владения Зора",
-    image:"./images/zora-domain.jpg.jpg",
-    description:"Водное королевство народа Зора. Кристально чистая вода и необычная архитектура создают волшебную атмосферу.",
-    secret:"Изучи водопады и поговори с жителями.",
-    atmosphere:"Вода и прохладный воздух"
-  },
-  {
-    id:"lake", name:"Озеро Хайлия",
-    image:"./images/lake-hylia.jpg.webp",
-    description:"Большое озеро, окружённое природой. Отличное место для спокойного исследования.",
-    secret:"Обрати внимание на островки и постройки у воды.",
-    atmosphere:"Волны и простор"
-  },
-  {
-    id:"gerudo", name:"Долина Герудо",
-    image:"./images/gerudo-valley.jpg.webp",
-    description:"Жаркая каменистая долина, где живёт народ Герудо. Здесь встречаются сложные переходы и необычные испытания.",
-    secret:"Изучи мосты, ущелья и окрестности крепости.",
-    atmosphere:"Ветер пустыни"
-  },
-  {
-    id:"death", name:"Гора Смерти",
-    image:"",
-    description:"Высокая вулканическая гора, связанная с народом горонов. Это суровый регион с горячими потоками и каменными тропами.",
-    secret:"Будь готов к испытаниям, связанным с огнём и жарой.",
-    atmosphere:"Грохот вулкана"
-  }
-];
-
-const items = [
-  {id:"sword",name:"Меч Кокири",icon:"🗡️",type:"Оружие",description:"Небольшой меч, которым пользуются жители леса. Надёжный спутник в начале путешествия."},
-  {id:"shield",name:"Щит Деку",icon:"🛡️",type:"Защита",description:"Лёгкий деревянный щит. Помогает защищаться от некоторых опасностей, но требует бережного обращения."},
-  {id:"ocarina-item",name:"Окарина времени",icon:"🎵",type:"Особый предмет",description:"Загадочный музыкальный инструмент. Его мелодии связаны с древними тайнами Хайрула."},
-  {id:"bombs",name:"Бомбы",icon:"💣",type:"Снаряжение",description:"Полезный инструмент для открытия некоторых проходов и решения задач с разрушаемыми препятствиями."},
-  {id:"bow",name:"Лук",icon:"🏹",type:"Оружие",description:"Дальний инструмент, позволяющий попадать по удалённым переключателям и целям."},
-  {id:"boomerang",name:"Бумеранг",icon:"🪃",type:"Инструмент",description:"Возвращающийся предмет, который помогает взаимодействовать с удалёнными объектами."},
-  {id:"hookshot",name:"Крюк-кошка",icon:"🪝",type:"Инструмент",description:"Позволяет цепляться за специальные поверхности и преодолевать некоторые препятствия."},
-  {id:"arrows",name:"Магические стрелы",icon:"✨",type:"Магия",description:"Особые стрелы с необычными свойствами. Использование некоторых из них расходует магическую энергию."},
-  {id:"slingshot",name:"Рогатка фей",icon:"🎯",type:"Оружие",description:"Подходит для попадания по небольшим целям и переключателям на расстоянии."},
-  {id:"deku-nuts",name:"Орехи Деку",icon:"🌰",type:"Предмет",description:"Полезный предмет, который может ненадолго отвлечь некоторых противников."},
-  {id:"bottle",name:"Пустая бутылка",icon:"🍶",type:"Контейнер",description:"Удобная ёмкость для хранения различных полезных находок."},
-  {id:"beans",name:"Волшебные бобы",icon:"🫘",type:"Особый предмет",description:"Необычные семена, которые можно использовать в определённых местах."},
-  {id:"iron-boots",name:"Железные сапоги",icon:"🥾",type:"Экипировка",description:"Тяжёлая обувь, помогающая погружаться под воду."},
-  {id:"hammer",name:"Мегатонный молот",icon:"🔨",type:"Инструмент",description:"Мощный молот для взаимодействия с некоторыми тяжёлыми механизмами."},
-  {id:"lens",name:"Линза правды",icon:"🔍",type:"Особый предмет",description:"Помогает замечать скрытые объекты и иллюзии."},
-  {id:"fairy",name:"Фея в бутылке",icon:"🧚",type:"Помощь",description:"Редкая находка, связанная с волшебными источниками Хайрула."}
-];
-
-const dungeons = [
-  {
-    id:"deku",name:"Внутри дерева Деку",era:"Детство",difficulty:"Лёгкая",
-    boss:"Королева Гома",reward:"Медальон Кокири и сюжетная награда",
-    items:"Меч Кокири, щит Деку, рогатка",
-    challenge:"Внимательно осматривай комнаты, ищи паутины, переключатели и места, куда можно попасть с верхних уровней.",
-    puzzles:"Используй огонь и переключатели, чтобы открывать новые проходы. Некоторые препятствия требуют правильного выбора пути.",
-    strategy:"Следи за моментом, когда босс становится уязвимым. Рогатка помогает действовать на расстоянии.",
-    description:"Первое большое подземелье. Оно знакомит героя с основными принципами исследования комнат и решения загадок."
-  },
-  {
-    id:"dodongo",name:"Пещера Додонго",era:"Детство",difficulty:"Лёгкая / средняя",
-    boss:"Король Додонго",reward:"Рубиновый камень Горонов",
-    items:"Бомбы, цветы-бомбы, щит",
-    challenge:"Нужно изучать этажи пещеры, искать взрываемые проходы и правильно использовать окружающие предметы.",
-    puzzles:"Обращай внимание на глаза статуй и механизмы, связанные с огнём. Некоторые двери открываются после взаимодействия с нужными объектами.",
-    strategy:"Наблюдай за поведением босса и используй подходящий момент для ответного действия.",
-    description:"Каменистая пещера с опасными дорожками, тяжёлыми дверями и механизмами."
-  },
-  {
-    id:"jabu",name:"Внутри живота Джабу-Джабу",era:"Детство",difficulty:"Средняя",
-    boss:"БариНейд",reward:"Сапфир Зора",
-    items:"Бумеранг, бутылка, рогатка",
-    challenge:"Некоторые проходы зависят от того, как ты взаимодействуешь с окружением и сопровождаемым персонажем.",
-    puzzles:"Изучай необычные поверхности, переключатели и коридоры. Бумеранг помогает взаимодействовать с удалёнными объектами.",
-    strategy:"Сначала обрати внимание на защитные элементы босса, затем ищи возможность действовать по его уязвимым частям.",
-    description:"Необычное подземелье, которое сильно отличается от обычных пещер и храмов."
-  },
-  {
-    id:"forest",name:"Лесной храм",era:"Взросление",difficulty:"Сложная",
-    boss:"Фантом Ганон",reward:"Медальон Леса",
-    items:"Лук, крюк-кошка, ключи",
-    challenge:"Храм известен запутанными коридорами, комнатами с призраками и меняющейся архитектурой.",
-    puzzles:"Следи за картинами, исследуй боковые комнаты и не забывай возвращаться к ранее закрытым дверям.",
-    strategy:"Во время битвы наблюдай за перемещениями противника и выбирай правильный момент для ответного действия.",
-    description:"Старинный храм, в котором пространство словно играет с путешественником."
-  },
-  {
-    id:"fire",name:"Огненный храм",era:"Взросление",difficulty:"Сложная",
-    boss:"Вольвагия",reward:"Медальон Огня",
-    items:"Мегатонный молот, бомбы, огнестойкое снаряжение",
-    challenge:"Большая часть испытаний связана с вертикальными уровнями, горячими помещениями и поиском пленённых горонов.",
-    puzzles:"Используй переключатели и внимательно изучай карту этажей. Некоторые маршруты становятся доступными после изменения механизмов.",
-    strategy:"Наблюдай за появлением босса и используй подходящий инструмент в нужный момент.",
-    description:"Жаркий храм с массивными механизмами, решётками и сложными переходами."
-  },
-  {
-    id:"water",name:"Водный храм",era:"Взросление",difficulty:"Очень сложная",
-    boss:"Морфа",reward:"Медальон Воды",
-    items:"Железные сапоги, крюк-кошка, туника Зора",
-    challenge:"Главная трудность — управление уровнем воды и поиск проходов на разных высотах.",
-    puzzles:"Запоминай расположение переключателей и дверей. Если путь закрыт, проверь, не нужно ли изменить уровень воды.",
-    strategy:"Следи за движениями водных элементов и выбирай безопасный момент для взаимодействия.",
-    description:"Один из самых запутанных храмов. Здесь особенно важны внимательность и хорошая ориентация."
-  }
-];
-
-const quests = [
-  {id:"q1",name:"Исследовать лес Кокири",description:"Познакомься с лесом, его тропами и жителями.",reward:20},
-  {id:"q2",name:"Посетить замок Хайрула",description:"Найди дорогу к королевскому замку.",reward:25},
-  {id:"q3",name:"Побывать в деревне Какарико",description:"Поговори с жителями старой деревни.",reward:20},
-  {id:"q4",name:"Найти владения Зора",description:"Исследуй водное королевство.",reward:25},
-  {id:"q5",name:"Посетить озеро Хайлия",description:"Открой для себя берега большого озера.",reward:20},
-  {id:"q6",name:"Исследовать долину Герудо",description:"Пройди по каменистым тропам долины.",reward:30},
-  {id:"q7",name:"Найти сокровище",description:"Открой хотя бы один сундук.",reward:20}
-];
-
-const npcs = [
-  {id:"navi",name:"Navi",face:"🧚",place:"Лес Кокири",lines:["Эй! Слушай! Внимательно исследуй каждую комнату.","Не забывай проверять карту подземелья.","Иногда нужный путь находится совсем рядом.","Следи за подсказками жителей Хайрула."]},
-  {id:"kokiri",name:"Житель Кокири",face:"🧝",place:"Лес Кокири",lines:["Наш лес полон маленьких секретов.","Не торопись покидать родные тропинки.","Поговори с другими жителями — они любят рассказывать истории."]},
-  {id:"guard",name:"Стражник",face:"🛡️",place:"Замок Хайрула",lines:["Замок хранит много старых историй.","Королевская семья заботится о безопасности королевства.","Будь внимателен на дороге к замку."]},
-  {id:"zora",name:"Житель Зора",face:"🐟",place:"Владения Зора",lines:["Вода здесь чиста и спокойна.","Наш народ тесно связан с озером Хайлия.","Исследуй водопады — они скрывают красивые места."]},
-  {id:"goron",name:"Горон",face:"🪨",place:"Гора Смерти",lines:["Гора Смерти — суровое место!","Гороны ценят дружбу и смелость.","В Огненном храме придётся внимательно изучать механизмы."]},
-  {id:"gerudo",name:"Воительница Герудо",face:"⚔️",place:"Долина Герудо",lines:["В долине ценят ловкость и внимательность.","Не каждый путь виден с первого взгляда.","Исследователь должен уважать местные правила."]}
-];
-
-/* =====================================================
-   СОХРАНЕНИЕ
-===================================================== */
-
-function read(key, fallback) {
-  try {
-    const value = localStorage.getItem(key);
-    return value === null ? fallback : JSON.parse(value);
-  } catch(e) { return fallback; }
-}
-
-function write(key, value) {
-  localStorage.setItem(key, JSON.stringify(value));
-}
-
-let game = {
-  hearts: read("hyrule-hearts", 3),
-  rupees: read("hyrule-rupees", 0),
-  magic: read("hyrule-magic", 100),
-  completedQuests: read("hyrule-quest-i", []),
-  ownedItems: read("hyrule-item-i", []),
-  completedDungeons: read("hyrule-dungeon-i", []),
-  visited: read("hyrule-visited", []),
-  openedChests: read("hyrule-chests", []),
-  achievements: read("hyrule-achievements", []),
-  journal: read("hyrule-journal", []),
-  note: read("hyrule-note", ""),
-  tunes: read("hyrule-tunes", []),
-  dayCount: read("hyrule-day", 1),
-  sound: read("hyrule-sound", true)
+const initial = {
+rupees:25,
+health:5,
+magic:30,
+potions:1,
+progress:0,
+visited:[],
+journal:['Ты начал путешествие по Хайрулу.'],
+completed:[]
 };
 
+let state;
+
+try {
+state = {
+...initial,
+...JSON.parse(localStorage.getItem('hyruleGuideSave') || '{}')
+};
+} catch(e) {
+state = {...initial};
+}
+
 function saveGame() {
-  write("hyrule-hearts", game.hearts);
-  write("hyrule-rupees", game.rupees);
-  write("hyrule-magic", game.magic);
-  write("hyrule-quest-i", game.completedQuests);
-  write("hyrule-item-i", game.ownedItems);
-  write("hyrule-dungeon-i", game.completedDungeons);
-  write("hyrule-visited", game.visited);
-  write("hyrule-chests", game.openedChests);
-  write("hyrule-achievements", game.achievements);
-  write("hyrule-journal", game.journal);
-  write("hyrule-note", game.note);
-  write("hyrule-tunes", game.tunes);
-  write("hyrule-day", game.dayCount);
-  write("hyrule-sound", game.sound);
-  updateStats();
-}
-
-function addJournal(text) {
-  game.journal.unshift({
-    text,
-    date: "День " + game.dayCount,
-    time: new Date().toLocaleTimeString("ru-RU", {hour:"2-digit",minute:"2-digit"})
-  });
-  game.journal = game.journal.slice(0, 60);
-  write("hyrule-journal", game.journal);
-  renderJournal();
-}
-
-function addRupees(amount) {
-  game.rupees += amount;
-  saveGame();
+localStorage.setItem('hyruleGuideSave',JSON.stringify(state));
+updateStats();
 }
 
 function updateStats() {
-  document.getElementById("hearts").textContent =
-    "♥".repeat(Math.max(0, game.hearts)) + "♡".repeat(10 - Math.max(0, game.hearts));
-  document.getElementById("rupees").textContent = game.rupees;
-  document.getElementById("magic").textContent = game.magic + "%";
-  document.getElementById("item-count").textContent = game.ownedItems.length + "/" + items.length;
-
-  const world = Math.round((game.visited.length / places.length) * 100);
-  document.getElementById("world-progress").style.width = world + "%";
-  document.getElementById("world-progress-label").textContent = world + "% исследовано";
-
-  const dungeon = Math.round((game.completedDungeons.length / dungeons.length) * 100);
-  document.getElementById("dungeon-progress").style.width = dungeon + "%";
-  document.getElementById("dungeon-progress-label").textContent =
-    game.completedDungeons.length + " из " + dungeons.length;
-
-  updateAchievements();
-}
-
-function restAtHome() {
-  game.hearts = 10;
-  game.magic = 100;
-  game.dayCount++;
-  saveGame();
-  addJournal("Ты отдохнул и восстановил силы. Начался новый день.");
-  showToast("🌅 Новый день! Здоровье и магия восстановлены.");
-  updateTime();
-}
-
-function giveItem(id) {
-  if (game.ownedItems.includes(id)) {
-    showToast("Этот предмет уже есть в твоём инвентаре.");
-    return;
-  }
-  game.ownedItems.push(id);
-  saveGame();
-  const item = items.find(x => x.id === id);
-  addJournal("Получен предмет: " + item.name);
-  showToast("✨ Получен предмет: " + item.name);
-  renderInventory();
-  playEffect("item");
-}
-
-/* =====================================================
-   НАВИГАЦИЯ
-===================================================== */
-
-function showPage(page) {
-  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
-  document.querySelectorAll("nav button").forEach(b => b.classList.remove("active"));
-
-  const target = document.getElementById(page);
-  if (target) target.classList.add("active");
-
-  const button = document.querySelector('nav button[data-page="' + page + '"]');
-  if (button) button.classList.add("active");
-
-  window.scrollTo({top:0, behavior:"smooth"});
-}
-
-document.querySelectorAll("nav button[data-page]").forEach(button => {
-  button.addEventListener("click", () => showPage(button.dataset.page));
+['rupees','health','magic','potions'].forEach(k => {
+document.getElementById(k).textContent = state[k];
 });
 
-/* =====================================================
-   ЛОКАЦИИ И КАРТА
-===================================================== */
+document.getElementById('progress-text').textContent = state.progress;
+document.getElementById('progress-bar').style.width = state.progress + '%';
 
-function renderPlaces() {
-  const grid = document.getElementById("places-grid");
-  grid.innerHTML = "";
-
-  places.forEach(place => {
-    const visited = game.visited.includes(place.id);
-    const image = place.image
-      ? '<img src="' + place.image + '" alt="' + place.name + '" onerror="this.style.display=\'none\'">'
-      : '<div style="height:170px;display:grid;place-items:center;background:linear-gradient(135deg,#493b2b,#172b32);font-size:55px">🌋</div>';
-
-    const card = document.createElement("article");
-    card.className = "card";
-    card.innerHTML = image + `
-      <div class="card-content">
-        <span class="tag">${visited ? "Посещено" : "Не посещено"}</span>
-        <h3>${place.name}</h3>
-        <p>${place.description}</p>
-        <p class="muted"><strong>Атмосфера:</strong> ${place.atmosphere}</p>
-        <button class="gold-button" onclick="visitPlace('${place.id}')">
-          ${visited ? "Посетить снова" : "Исследовать"}
-        </button>
-        <button class="small-button" onclick="showPlaceSecret('${place.id}')">Секрет</button>
-      </div>`;
-    grid.appendChild(card);
-  });
+document.getElementById('journal-list').innerHTML =
+state.journal.slice(-50).reverse().map(x => '<li>' + safe(x) + '</li>').join('');
 }
 
-function visitPlace(id) {
-  const place = places.find(p => p.id === id);
-  if (!place) return;
-
-  if (!game.visited.includes(id)) {
-    game.visited.push(id);
-    addJournal("Ты впервые посетил место: " + place.name);
-    addRupees(5);
-    showToast("🧭 Новая локация! +5 рупий");
-  } else {
-    showToast("Ты снова в месте: " + place.name);
-  }
-
-  saveGame();
-  renderPlaces();
-  selectMapPlace(id);
+function safe(s) {
+return String(s).replace(/[&<>"]/g,c => ({
+'&':'&amp;',
+'<':'&lt;',
+'>':'&gt;',
+'"':'&quot;'
+}[c]));
 }
 
-function showPlaceSecret(id) {
-  const place = places.find(p => p.id === id);
-  if (place) showToast("🔎 " + place.secret);
+function toast(s) {
+let t = document.getElementById('toast');
+t.textContent = s;
+t.classList.add('show');
+setTimeout(() => t.classList.remove('show'),2300);
 }
 
-let selectedMapPlace = "field";
-
-function selectMapPlace(id) {
-  const place = places.find(p => p.id === id);
-  if (!place) return;
-
-  selectedMapPlace = id;
-  document.getElementById("map-place-title").textContent = place.name;
-  document.getElementById("map-place-description").textContent =
-    place.description + " Секрет: " + place.secret;
-  document.getElementById("map-place-button").textContent = "Исследовать: " + place.name;
+function addJournal(s) {
+state.journal.push(
+new Date().toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit'}) + ' — ' + s
+);
+state.journal = state.journal.slice(-60);
+saveGame();
 }
 
-function visitSelectedPlace() {
-  visitPlace(selectedMapPlace);
-  showPage("locations");
+function visit(p) {
+if(!state.visited.includes(p)) {
+state.visited.push(p);
+state.progress = Math.min(100,state.progress + 5);
+addJournal('Посещено место: ' + p);
+checkAchievements();
+} else {
+toast('Ты уже был здесь.');
 }
 
-/* =====================================================
-   ИНВЕНТАРЬ
-===================================================== */
-
-function renderInventory() {
-  const grid = document.getElementById("inventory-grid");
-  grid.innerHTML = "";
-
-  items.forEach((item, index) => {
-    const owned = game.ownedItems.includes(item.id);
-    const button = document.createElement("button");
-    button.className = "item-slot";
-    button.innerHTML = owned
-      ? `<span class="item-icon">${item.icon}</span><small>${item.name}</small>`
-      : `<span class="item-icon">🔒</span><small>Не найдено</small>`;
-    button.onclick = () => selectItem(item.id);
-    grid.appendChild(button);
-  });
+document.getElementById('recent-events').textContent = 'Ты посетил: ' + p + '.';
 }
 
-function selectItem(id) {
-  const item = items.find(x => x.id === id);
-  const owned = game.ownedItems.includes(id);
-  const detail = document.getElementById("item-detail");
-
-  if (!item) return;
-
-  if (!owned) {
-    detail.innerHTML = `
-      <div class="item-icon">🔒</div>
-      <h2>Неизвестный предмет</h2>
-      <p>Ты ещё не нашёл этот предмет. Исследуй Хайрул и открывай сундуки.</p>`;
-    return;
-  }
-
-  detail.innerHTML = `
-    <div class="item-icon">${item.icon}</div>
-    <span class="tag">${item.type}</span>
-    <h2>${item.name}</h2>
-    <p>${item.description}</p>
-    <p class="muted">Предмет находится в твоём инвентаре.</p>`;
+function rest() {
+state.health = Math.min(10,state.health + 3);
+state.magic = Math.min(100,state.magic + 15);
+addJournal('Ты отдохнул и восстановил силы.');
+toast('Силы восстановлены!');
 }
-
-/* =====================================================
-   СУНДУКИ
-===================================================== */
-
-const chestRewards = [
-  "sword","shield","ocarina-item","bombs","bow","boomerang",
-  "hookshot","arrows","slingshot","deku-nuts","bottle","beans",
-  "iron-boots","hammer","lens","fairy"
-];
-
-function renderChests() {
-  const container = document.getElementById("recent-events");
-  const found = game.openedChests.length;
-  container.innerHTML = `
-    <p>Сундуков найдено: <strong>${found}</strong></p>
-    <div class="grid">
-      ${places.slice(0,6).map((place,index) => {
-        const opened = game.openedChests.includes(place.id);
-        return `
-          <div class="panel" style="text-align:center">
-            <h3>${place.name}</h3>
-            <button class="chest ${opened ? "opened" : ""}"
-              ${opened ? "disabled" : ""}
-              onclick="openChest('${place.id}')">${opened ? "📦" : "🧰"}</button>
-            <p class="muted">${opened ? "Сундук открыт" : "Найти сокровище"}</p>
-          </div>`;
-      }).join("")}
-    </div>`;
-}
-
-function openChest(placeId) {
-  if (game.openedChests.includes(placeId)) return;
-
-  game.openedChests.push(placeId);
-
-  const available = chestRewards.filter(id => !game.ownedItems.includes(id));
-  if (available.length > 0) {
-    const rewardId = available[Math.floor(Math.random() * available.length)];
-    const reward = items.find(item => item.id === rewardId);
-    game.ownedItems.push(rewardId);
-    showToast("🎁 Сундук открыт! Найдено: " + reward.name);
-    addJournal("В сундуке найден предмет: " + reward.name);
-  } else {
-    game.rupees += 30;
-    showToast("💎 В сундуке найдено 30 рупий!");
-    addJournal("В сундуке найдено 30 рупий.");
-  }
-
-  saveGame();
-  renderInventory();
-  renderChests();
-  playEffect("chest");
-}
-
-/* =====================================================
-   ПОДЗЕМЕЛЬЯ
-===================================================== */
-
-function renderDungeons() {
-  const list = document.getElementById("dungeons-list");
-  list.innerHTML = "";
-
-  dungeons.forEach((dungeon, index) => {
-    const completed = game.completedDungeons.includes(dungeon.id);
-    const article = document.createElement("article");
-    article.className = "card dungeon-card";
-
-    article.innerHTML = `
-      <details ${index === 0 ? "open" : ""}>
-        <summary>
-          ${completed ? "✅ " : "🏛️ "}
-          ${dungeon.name}
-        </summary>
-        <div class="dungeon-meta">
-          <span class="tag">${dungeon.era}</span>
-          <span class="tag">Сложность: ${dungeon.difficulty}</span>
-          <span class="tag">Босс: ${dungeon.boss}</span>
-        </div>
-        <p>${dungeon.description}</p>
-        <p><strong>Что взять с собой:</strong> ${dungeon.items}</p>
-        <p><strong>Что может быть сложно:</strong> ${dungeon.challenge}</p>
-        <p><strong>Загадки и механизмы:</strong> ${dungeon.puzzles}</p>
-        <p><strong>Совет для встречи с боссом:</strong> ${dungeon.strategy}</p>
-        <p><strong>Награда:</strong> ${dungeon.reward}</p>
-        <button class="gold-button" onclick="completeDungeon('${dungeon.id}')"
-          ${completed ? "disabled" : ""}>
-          ${completed ? "Подземелье пройдено" : "Отметить как пройденное"}
-        </button>
-      </details>`;
-
-    list.appendChild(article);
-  });
-}
-
-function completeDungeon(id) {
-  if (game.completedDungeons.includes(id)) return;
-
-  const dungeon = dungeons.find(d => d.id === id);
-  if (!dungeon) return;
-
-  game.completedDungeons.push(id);
-  game.rupees += 50;
-  game.magic = Math.min(100, game.magic + 10);
-
-  addJournal("Пройдено подземелье: " + dungeon.name);
-  saveGame();
-  renderDungeons();
-  showToast("🏆 Подземелье пройдено! +50 рупий");
-  playEffect("item");
-}
-
-/* =====================================================
-   ЗАДАНИЯ
-===================================================== */
-
-function renderQuests() {
-  const list = document.getElementById("quests-list");
-  list.innerHTML = "";
-
-  quests.forEach(quest => {
-    const done = game.completedQuests.includes(quest.id);
-    const row = document.createElement("div");
-    row.className = "quest-row";
-    row.innerHTML = `
-      <div>
-        <strong>${quest.name}</strong>
-        <p class="muted">${quest.description}</p>
-        <span class="tag">Награда: ${quest.reward} рупий</span>
-      </div>
-      <label>
-        <input type="checkbox" ${done ? "checked" : ""}
-          onchange="toggleQuest('${quest.id}', this.checked)">
-        ${done ? "Готово" : "Выполнить"}
-      </label>`;
-    list.appendChild(row);
-  });
-}
-
-function toggleQuest(id, checked) {
-  const quest = quests.find(q => q.id === id);
-  if (!quest) return;
-
-  if (checked && !game.completedQuests.includes(id)) {
-    game.completedQuests.push(id);
-    game.rupees += quest.reward;
-    addJournal("Выполнено задание: " + quest.name);
-    showToast("⭐ Задание выполнено! +" + quest.reward + " рупий");
-  } else if (!checked && game.completedQuests.includes(id)) {
-    game.completedQuests = game.completedQuests.filter(x => x !== id);
-    game.rupees = Math.max(0, game.rupees - quest.reward);
-    addJournal("Задание возвращено в список: " + quest.name);
-  }
-
-  saveGame();
-  renderQuests();
-}
-
-/* =====================================================
-   ЖИТЕЛИ И ДИАЛОГИ
-===================================================== */
-
-function renderNPCs() {
-  const grid = document.getElementById("npc-grid");
-  grid.innerHTML = "";
-
-  npcs.forEach(npc => {
-    const card = document.createElement("div");
-    card.className = "npc";
-    card.innerHTML = `
-      <div class="npc-face">${npc.face}</div>
-      <h3>${npc.name}</h3>
-      <span class="tag">${npc.place}</span>
-      <p><button class="gold-button" onclick="talkTo('${npc.id}')">Поговорить</button></p>`;
-    grid.appendChild(card);
-  });
-}
-
-function talkTo(id) {
-  const npc = npcs.find(n => n.id === id);
-  if (!npc) return;
-
-  const line = npc.lines[Math.floor(Math.random() * npc.lines.length)];
-  document.getElementById("dialogue-name").textContent = npc.name;
-  document.getElementById("dialogue-text").textContent = "«" + line + "»";
-  addJournal("Ты поговорил с персонажем: " + npc.name);
-}
-
-/* =====================================================
-   ОКАРИНА
-===================================================== */
-
-const noteFrequencies = {
-  "До":261.63,
-  "Ре":293.66,
-  "Ми":329.63,
-  "Соль":392.00,
-  "Ля":440.00
-};
-
-let currentNotes = [];
-let challengeNotes = [];
-
-function playNote(note) {
-  currentNotes.push(note);
-  if (currentNotes.length > 12) currentNotes.shift();
-  document.getElementById("note-display").textContent = currentNotes.join(" · ");
-  playTone(noteFrequencies[note]);
-}
-
-function clearNotes() {
-  currentNotes = [];
-  document.getElementById("note-display").textContent = "♪ ♪ ♪";
-}
-
-function playTone(frequency) {
-  if (!game.sound) return;
-
-  try {
-    const AudioContext = window.AudioContext || window.webkitAudioContext;
-    const context = new AudioContext();
-    const oscillator = context.createOscillator();
-    const gain = context.createGain();
-
-    oscillator.type = "sine";
-    oscillator.frequency.value = frequency;
-    gain.gain.setValueAtTime(.0001, context.currentTime);
-    gain.gain.exponentialRampToValueAtTime(.12, context.currentTime + .03);
-    gain.gain.exponentialRampToValueAtTime(.0001, context.currentTime + .45);
-
-    oscillator.connect(gain);
-    gain.connect(context.destination);
-    oscillator.start();
-    oscillator.stop(context.currentTime + .46);
-    oscillator.onended = () => context.close();
-  } catch(e) {}
-}
-
-function startTuneChallenge() {
-  const notes = Object.keys(noteFrequencies);
-  challengeNotes = Array.from({length:4}, () => notes[Math.floor(Math.random() * notes.length)]);
-  currentNotes = [];
-  document.getElementById("note-display").textContent = "♪ ♪ ♪";
-  document.getElementById("tune-challenge").textContent =
-    "Запомни последовательность: " + challengeNotes.join(" · ");
-  document.getElementById("tune-result").textContent = "Теперь повтори её кнопками окарины.";
-}
-
-function checkTune() {
-  if (!challengeNotes.length) {
-    document.getElementById("tune-result").textContent = "Сначала начни тренировку.";
-    return;
-  }
-
-  if (currentNotes.join("|") === challengeNotes.join("|")) {
-    document.getElementById("tune-result").textContent = "Отлично! Последовательность повторена верно.";
-    game.rupees += 10;
-    addJournal("Успешно завершена музыкальная тренировка.");
-    saveGame();
-    showToast("🎵 Верно! +10 рупий");
-  } else {
-    document.getElementById("tune-result").textContent =
-      "Пока не совпало. Попробуй ещё раз внимательно.";
-  }
-}
-
-function saveOwnTune() {
-  if (!currentNotes.length) {
-    showToast("Сначала сыграй несколько нот.");
-    return;
-  }
-
-  game.tunes.push(currentNotes.slice());
-  saveGame();
-  renderTunes();
-  showToast("🎼 Мелодия сохранена!");
-}
-
-function renderTunes() {
-  const container = document.getElementById("saved-tunes");
-  if (!game.tunes.length) {
-    container.textContent = "Пока нет сохранённых мелодий.";
-    return;
-  }
-
-  container.innerHTML = game.tunes.map((tune,index) =>
-    `<div class="journal-row"><span>Мелодия ${index + 1}: ${tune.join(" · ")}</span>
-    <button class="small-button" onclick="playSavedTune(${index})">Прослушать</button></div>`
-  ).join("");
-}
-
-function playSavedTune(index) {
-  const tune = game.tunes[index];
-  if (!tune) return;
-  tune.forEach((note, i) => setTimeout(() => playTone(noteFrequencies[note]), i * 450));
-}
-
-/* =====================================================
-   ДНЕВНИК
-===================================================== */
-
-function renderJournal() {
-  const list = document.getElementById("journal-list");
-  if (!game.journal.length) {
-    list.innerHTML = "<p class='muted'>Записей пока нет. Твоё путешествие только начинается.</p>";
-    return;
-  }
-
-  list.innerHTML = game.journal.map(entry => `
-    <div class="journal-row">
-      <div><strong>${entry.text}</strong><div class="muted">${entry.date} · ${entry.time}</div></div>
-      <span>📜</span>
-    </div>`).join("");
-}
-
-function saveNote() {
-  game.note = document.getElementById("personal-note").value;
-  saveGame();
-  document.getElementById("note-status").textContent = "Заметка сохранена.";
-}
-
-function loadNote() {
-  document.getElementById("personal-note").value = game.note || "";
-}
-
-/* =====================================================
-   ДОСТИЖЕНИЯ
-===================================================== */
-
-const achievementList = [
-  {id:"first-visit",name:"Первый шаг",description:"Посети свою первую локацию.",check:() => game.visited.length >= 1},
-  {id:"explorer",name:"Путешественник",description:"Посети пять разных локаций.",check:() => game.visited.length >= 5},
-  {id:"all-places",name:"Знаток Хайрула",description:"Посети все локации путеводителя.",check:() => game.visited.length >= places.length},
-  {id:"first-chest",name:"Охотник за сокровищами",description:"Открой первый сундук.",check:() => game.openedChests.length >= 1},
-  {id:"collector",name:"Коллекционер",description:"Найди восемь предметов.",check:() => game.ownedItems.length >= 8},
-  {id:"first-dungeon",name:"Испытание пройдено",description:"Заверши первое подземелье.",check:() => game.completedDungeons.length >= 1},
-  {id:"temple-master",name:"Хранитель храмов",description:"Заверши все шесть подземелий.",check:() => game.completedDungeons.length >= 6},
-  {id:"musician",name:"Музыкант",description:"Сохрани собственную мелодию.",check:() => game.tunes.length >= 1},
-  {id:"quester",name:"Помощник Хайрула",description:"Выполни пять заданий.",check:() => game.completedQuests.length >= 5}
-];
-
-function updateAchievements() {
-  achievementList.forEach(achievement => {
-    if (achievement.check() && !game.achievements.includes(achievement.id)) {
-      game.achievements.push(achievement.id);
-      write("hyrule-achievements", game.achievements);
-      if (document.getElementById("achievements-list")) {
-        showToast("🏅 Новое достижение: " + achievement.name);
-      }
-    }
-  });
-  renderAchievements();
-}
-
-function renderAchievements() {
-  const list = document.getElementById("achievements-list");
-  if (!list) return;
-
-  list.innerHTML = achievementList.map(achievement => {
-    const unlocked = game.achievements.includes(achievement.id);
-    return `
-      <div class="achievement-row">
-        <div>
-          <strong>${unlocked ? "🏅" : "🔒"} ${achievement.name}</strong>
-          <p class="muted">${achievement.description}</p>
-        </div>
-        <span class="tag">${unlocked ? "Получено" : "Не получено"}</span>
-      </div>`;
-  }).join("");
-}
-
-/* =====================================================
-   ВРЕМЯ И АТМОСФЕРА
-===================================================== */
-
-let gameMinutes = 9 * 60;
-
-function updateTime() {
-  gameMinutes = (gameMinutes + 10) % (24 * 60);
-
-  const hour = Math.floor(gameMinutes / 60);
-  const minute = gameMinutes % 60;
-  const timeText = String(hour).padStart(2,"0") + ":" + String(minute).padStart(2,"0");
-
-  let phase;
-  if (hour >= 6 && hour < 10) phase = "dawn";
-  else if (hour >= 10 && hour < 18) phase = "day";
-  else phase = "night";
-
-  document.body.classList.remove("day","dawn","night");
-  document.body.classList.add(phase);
-
-  const icon = phase === "night" ? "🌙" : phase === "dawn" ? "🌅" : "☀";
-  const name = phase === "night" ? "Ночь" : phase === "dawn" ? "Рассвет" : "День";
-
-  document.getElementById("clock").textContent = icon + " " + name + " · " + timeText;
-  document.getElementById("game-date").textContent = "День " + game.dayCount;
-}
-
-/* =====================================================
-   ЗВУКИ
-===================================================== */
-
-function playEffect(type) {
-  if (!game.sound) return;
-
-  const frequencies = {
-    item:660,
-    chest:520,
-    click:350
-  };
-
-  playTone(frequencies[type] || 400);
-}
-
-function toggleSound() {
-  game.sound = !game.sound;
-  saveGame();
-  showToast(game.sound ? "Звуки включены." : "Звуки выключены.");
-}
-
-function toggleMusic() {
-  const audio = document.getElementById("background-music");
-  const button = document.getElementById("music-button");
-
-  if (audio.paused) {
-    audio.volume = .25;
-    audio.play().then(() => {
-      button.textContent = "♫ Музыка: вкл.";
-    }).catch(() => {
-      showToast("Браузер не разрешил запуск. Нажми кнопку ещё раз.");
-    });
-  } else {
-    audio.pause();
-    button.textContent = "♫ Музыка: выкл.";
-  }
-}
-
-/* =====================================================
-   NAVI
-===================================================== */
-
-const naviHints = [
-  "Эй! Слушай! Не забывай исследовать боковые комнаты.",
-  "Некоторые предметы помогают открывать новые пути.",
-  "Поговори с жителями. Они могут дать полезные советы.",
-  "Следи за уровнем воды в Водном храме.",
-  "Если не знаешь, куда идти, загляни на карту.",
-  "Не забывай отдыхать и восстанавливать магию.",
-  "Попробуй открыть сундуки в разных регионах.",
-  "Внимательно изучай картины в Лесном храме.",
-  "Некоторые переключатели можно активировать на расстоянии.",
-  "Проверяй дневник, чтобы не забыть важные события."
-];
 
 function naviHint() {
-  const message = document.getElementById("navi-message");
-  const hint = naviHints[Math.floor(Math.random() * naviHints.length)];
+let a = [
+'Исследуй каждый уголок Хайрула.',
+'Поговори с местными жителями.',
+'Не забывай выполнять задания.',
+'Попробуй сыграть мелодию на окарине.'
+];
 
-  message.textContent = "✨ Navi: " + hint;
-  message.style.display = "block";
-
-  setTimeout(() => { message.style.display = "none"; }, 6500);
+document.getElementById('navi-message').textContent =
+a[Math.floor(Math.random() * a.length)];
 }
 
-/* =====================================================
-   УВЕДОМЛЕНИЯ
-===================================================== */
-
-let toastTimer;
-
-function showToast(message) {
-  const toast = document.getElementById("toast");
-  toast.textContent = message;
-  toast.classList.add("show");
-
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => toast.classList.remove("show"), 3000);
+function talk(n,s) {
+document.getElementById('dialogue').textContent = n + ': «' + s + '»';
+addJournal('Ты поговорил с ' + n + '.');
 }
 
-/* =====================================================
-   ИНИЦИАЛИЗАЦИЯ
-===================================================== */
-
-function init() {
-  // Проверяем, что сохранённые значения не выходят за допустимые пределы.
-  game.hearts = Math.max(0, Math.min(10, Number(game.hearts) || 3));
-  game.rupees = Math.max(0, Number(game.rupees) || 0);
-  game.magic = Math.max(0, Math.min(100, Number(game.magic) || 100));
-
-  renderPlaces();
-  renderInventory();
-  renderDungeons();
-  renderQuests();
-  renderNPCs();
-  renderJournal();
-  renderAchievements();
-  renderTunes();
-  renderChests();
-  loadNote();
-  updateStats();
-  updateTime();
-
-  document.getElementById("next-goal").textContent =
-    game.completedDungeons.length === 6
-      ? "Все шесть подземелий пройдены! Исследуй мир и собирай оставшиеся предметы."
-      : "Исследуй Хайрул, собирай предметы и готовься к древним храмам.";
-
-  // Старые сохранения продолжают работать: первые восемь предметов
-  // имеют прежние позиции в списке hyrule-item-i.
-  if (game.ownedItems.length === 0) {
-    document.getElementById("item-detail").innerHTML = `
-      <div class="item-icon">🎒</div>
-      <h2>Твоя сумка</h2>
-      <p>Пока здесь пусто. Найди первый сундук, чтобы получить предмет.</p>`;
-  }
+function playSong(n,s) {
+document.getElementById('song-result').textContent = '🎵 ' + n + ': ' + s;
+toast('Ты сыграл: ' + n);
 }
 
-init();
+function questChanged(b) {
+if(b.checked) {
+state.progress = Math.min(100,state.progress + 5);
+addJournal('Выполнено задание.');
+checkAchievements();
+}
+}
+
+function completeDungeon(b) {
+let n = b.parentElement.querySelector('h3').textContent;
+
+if(!state.completed.includes(n)) {
+state.completed.push(n);
+state.progress = Math.min(100,state.progress + 10);
+b.textContent = 'Пройдено ✓';
+b.disabled = true;
+addJournal('Пройдено подземелье: ' + n);
+checkAchievements();
+}
+}
+
+function checkAchievements() {
+let a = [
+['Первые шаги',state.visited.length > 0],
+['Искатель приключений',state.progress >= 10],
+['Покоритель подземелий',state.completed.length > 0]
+];
+
+document.getElementById('achievement-list').innerHTML =
+a.map(x => '<p>' + (x[1] ? '🏆 ' : '🔒 ') + x[0] + (x[1] ? ' ✓' : '') + '</p>').join('');
+}
+
+/* СЛУЧАЙНЫЕ СОБЫТИЯ ХАЙРУЛА */
+
+const events = [
+['🐎','Эпона скачет по полю!','Ты замечаешь Эпону на просторах Хайрула. Она радостно приветствует тебя.'],
+['🧚','Маленькая фея!','Фея кружится рядом и оставляет тебе 5 рупий.',5],
+['🦉','Совет мудрой совы','Сова напоминает: внимательно смотри вокруг.'],
+['🟡','Блестящая находка','Ты находишь рупии в высокой траве.',10],
+['🌧️','Дождь в Хайруле','Над королевством собираются облака.'],
+['🌌','Звёздная ночь','Небо усыпано звёздами. Хайрул сегодня тихий.'],
+['🌈','Радуга над полем','После дождя над полем появляется яркая радуга.'],
+['🦋','Танец бабочек','Вокруг тебя порхают разноцветные бабочки.'],
+['🐸','Лягушка у воды','Маленькая лягушка прыгает в озеро.'],
+['🌫️','Утренний туман','Лёгкий туман окутывает тропинки.'],
+['☀️','Солнечный день','Солнце освещает замок Хайрул.'],
+['✨','Вспышка магии','В воздухе мерцают золотистые искры.']
+];
+
+let lastEvent = -1;
+
+function showRandomHyruleEvent() {
+let i = Math.floor(Math.random() * events.length);
+
+if(i === lastEvent) {
+i = (i + 1) % events.length;
+}
+
+lastEvent = i;
+
+let e = events[i];
+
+document.getElementById('hyrule-event').innerHTML =
+'<div class="event-label">Случайное событие Хайрула</div>' +
+'<div class="event-icon">' + e[0] + '</div>' +
+'<h2>' + e[1] + '</h2>' +
+'<p>' + e[2] + '</p>';
+
+if(e[3]) {
+state.rupees += e[3];
+saveGame();
+toast('Ты получил ' + e[3] + ' рупий!');
+}
+
+if(e[3] || i === 0) {
+addJournal(e[1]);
+}
+}
+
+updateStats();
+checkAchievements();
+
+/* Событие при входе на сайт */
+showRandomHyruleEvent();
+
+/* Новое случайное событие каждую минуту */
+setInterval(showRandomHyruleEvent,60000);
 </script>
 
 </body>
