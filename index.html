@@ -5,14 +5,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Hyrule Guide — Ocarina of Time</title>
+
 <style>
 :root {
   --gold: #e7c66b;
-  --dark: #101a18;
   --panel: rgba(12, 25, 23, .92);
   --green: #91bd78;
 }
+
 * { box-sizing: border-box; }
+
 body {
   margin: 0;
   color: #f4edda;
@@ -20,6 +22,7 @@ body {
   background: #14211b url("./images/hyrule-field.jpg.webp") center/cover fixed;
   min-height: 100vh;
 }
+
 body::before {
   content: "";
   position: fixed;
@@ -27,19 +30,23 @@ body::before {
   background: rgba(5, 13, 10, .72);
   z-index: -1;
 }
+
 header {
   text-align: center;
   padding: 35px 16px 25px;
   background: linear-gradient(#07120de8, #10251acc);
   border-bottom: 2px solid var(--gold);
 }
+
 h1 {
   color: var(--gold);
   font-size: clamp(30px, 6vw, 52px);
   margin: 5px 0;
   text-shadow: 0 3px 12px #000;
 }
+
 .subtitle { color: #d8d0b5; }
+
 nav {
   display: flex;
   justify-content: center;
@@ -51,6 +58,7 @@ nav {
   top: 0;
   z-index: 5;
 }
+
 button {
   cursor: pointer;
   border: 1px solid var(--gold);
@@ -61,11 +69,16 @@ button {
   font-family: inherit;
   font-size: 15px;
 }
-button:hover { background: #49663a; }
+
+button:hover {
+  background: #49663a;
+}
+
 main {
   width: min(1100px, 94%);
   margin: 25px auto;
 }
+
 .panel {
   background: var(--panel);
   border: 1px solid #a58b4b;
@@ -74,7 +87,9 @@ main {
   margin-bottom: 22px;
   box-shadow: 0 8px 25px #0007;
 }
+
 h2, h3 { color: var(--gold); }
+
 .hero {
   min-height: 260px;
   display: grid;
@@ -87,24 +102,32 @@ h2, h3 { color: var(--gold); }
   border-radius: 12px;
   padding: 25px;
 }
-.hero p { max-width: 650px; line-height: 1.7; }
+
+.hero p {
+  max-width: 650px;
+  line-height: 1.7;
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 16px;
 }
+
 .location {
   background: #17291feF;
   border: 1px solid #8b7948;
   border-radius: 9px;
   overflow: hidden;
 }
+
 .location img {
   width: 100%;
   height: 145px;
   object-fit: cover;
   display: block;
 }
+
 .image-placeholder {
   height: 145px;
   display: grid;
@@ -114,9 +137,11 @@ h2, h3 { color: var(--gold); }
   background: #25372a;
   padding: 15px;
 }
+
 .location-content { padding: 14px; }
 .location-content h3 { margin-top: 0; }
 .location-content p { line-height: 1.5; }
+
 .map {
   min-height: 340px;
   background:
@@ -131,7 +156,9 @@ h2, h3 { color: var(--gold); }
   justify-content: center;
   gap: 12px;
 }
+
 .map button { background: #253d29ed; }
+
 .list-item {
   display: flex;
   align-items: center;
@@ -141,48 +168,116 @@ h2, h3 { color: var(--gold); }
   background: #203428;
   border-radius: 7px;
 }
+
 .list-item input { accent-color: #a9d17b; }
+
 footer {
   text-align: center;
   padding: 25px;
   color: #c7bd9e;
 }
+
+.hidden { display: none; }
+
+/* Живая Нави */
+
 #navi {
   position: fixed;
-  right: 18px;
-  bottom: 18px;
-  width: 75px;
-  height: 75px;
+  right: 22px;
+  bottom: 20px;
+  width: 85px;
+  height: 85px;
   object-fit: contain;
-  z-index: 10;
+  z-index: 11;
+  cursor: pointer;
   filter: drop-shadow(0 0 12px #a8eaff);
+  animation: navi-float 2.5s ease-in-out infinite,
+             navi-glow 2s ease-in-out infinite alternate;
+  transition: transform .25s;
 }
+
+#navi:hover {
+  transform: scale(1.18);
+}
+
+#navi:focus-visible {
+  outline: 2px solid #a8eaff;
+  outline-offset: 5px;
+  border-radius: 50%;
+}
+
 #navi-message {
   position: fixed;
-  right: 105px;
-  bottom: 30px;
-  max-width: 230px;
-  background: #10291feF;
+  right: 120px;
+  bottom: 35px;
+  width: min(260px, calc(100vw - 145px));
+  background: #10291fef;
   border: 1px solid #9bd8e8;
-  border-radius: 10px;
-  padding: 12px;
+  border-radius: 12px;
+  padding: 14px;
   z-index: 10;
   display: none;
+  box-shadow: 0 0 18px #80dfff55;
+  line-height: 1.5;
+  animation: bubble-in .25s ease-out;
 }
-.hidden { display: none; }
+
+#navi-message strong {
+  display: block;
+  color: #a8eaff;
+  margin-bottom: 5px;
+}
+
+@keyframes navi-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-13px); }
+}
+
+@keyframes navi-glow {
+  from {
+    filter: drop-shadow(0 0 7px #83dfff);
+  }
+  to {
+    filter: drop-shadow(0 0 19px #b8f3ff);
+  }
+}
+
+@keyframes bubble-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.music-status {
+  color: #c6dcae;
+  margin-left: 8px;
+}
+
 @media(max-width:600px) {
   nav { position: static; }
   .panel { padding: 15px; }
-  #navi { width: 58px; height: 58px; }
-  #navi-message { right: 75px; max-width: 190px; }
+  #navi { width: 65px; height: 65px; }
+  #navi-message {
+    right: 90px;
+    bottom: 25px;
+    width: min(230px, calc(100vw - 110px));
+  }
 }
 </style>
 </head>
+
 <body>
 
 <header>
   <h1>Hyrule Guide</h1>
-  <div class="subtitle">Путеводитель по The Legend of Zelda: Ocarina of Time</div>
+  <div class="subtitle">
+    Путеводитель по The Legend of Zelda: Ocarina of Time
+  </div>
 </header>
 
 <nav>
@@ -191,10 +286,13 @@ footer {
   <button onclick="showSection('map-section')">Карта</button>
   <button onclick="showSection('quests')">Задания</button>
   <button onclick="showSection('inventory')">Инвентарь</button>
-  <button onclick="toggleMusic()" id="music-button">♫ Включить музыку</button>
+  <button onclick="toggleMusic()" id="music-button">
+    ♫ Включить музыку
+  </button>
 </nav>
 
 <main>
+
   <section id="home" class="page">
     <div class="hero">
       <div>
@@ -204,7 +302,9 @@ footer {
           места, выполняй задания и собирай полезные предметы.
           Пусть твоя Окарина укажет путь!
         </p>
-        <button onclick="showSection('places')">Начать путешествие</button>
+        <button onclick="showSection('places')">
+          Начать путешествие
+        </button>
       </div>
     </div>
 
@@ -250,20 +350,36 @@ footer {
       <div id="inventory-list"></div>
     </div>
   </section>
+
 </main>
 
-<div id="navi-message">Эй! Слушай! Выбери место для путешествия!</div>
-<img id="navi" src="./images/navi.png.jpg" alt="Нави">
+<!-- Окошко Нави -->
+<div id="navi-message" role="status" aria-live="polite">
+  <strong>Нави</strong>
+  Эй! Слушай!
+</div>
+
+<!-- Нави -->
+<img
+  id="navi"
+  src="./images/navi.png.jpg"
+  alt="Нави — нажми, чтобы поговорить"
+  role="button"
+  tabindex="0"
+  title="Поговорить с Нави"
+>
 
 <footer>
   Hyrule Guide · Фанатский путеводитель по Ocarina of Time
 </footer>
 
+<!-- Музыка сохранена -->
 <audio id="background-music" loop preload="auto">
   <source src="./audio/hyrule-theme.mp3.mp3" type="audio/mpeg">
 </audio>
 
 <script>
+
 const places = [
   {
     name: "Поле Хайрула",
@@ -328,31 +444,109 @@ const items = [
   "Магические стрелы"
 ];
 
+/* Реплики Нави */
+
+const naviTips = [
+  "Эй! Слушай! Не забудь исследовать лес Кокири!",
+  "Линк, попробуй заглянуть в замок Хайрула!",
+  "Знаешь ли ты, что в деревне Какарико живут интересные персонажи?",
+  "Не забудь проверить свою карту!",
+  "Владения Зора скрывают много интересного!",
+  "Озеро Хайлия — прекрасное место для исследования!",
+  "Эй! Не забудь отмечать выполненные задания!",
+  "Посмотри в инвентарь! Может быть, ты уже нашёл новый предмет?",
+  "Хорошее путешествие начинается с любопытства!",
+  "Линк! Может, пора отправиться в новое приключение?",
+  "Не забывай слушать мелодии своей окарины!",
+  "Хайрул полон секретов. Продолжай исследовать!"
+];
+
+const naviGreetings = [
+  "Эй! Слушай!",
+  "Линк! Я здесь!",
+  "Привет, герой Хайрула!",
+  "У меня есть для тебя подсказка!",
+  "Давай отправимся в приключение!"
+];
+
+let naviIndex = 0;
+let naviTimer;
+let idleTimer;
+
 function showSection(id) {
   document.querySelectorAll(".page").forEach(page => {
     page.classList.add("hidden");
   });
-  document.getElementById(id).classList.remove("hidden");
-  window.scrollTo({ top: 0, behavior: "smooth" });
-}
 
-function openPlace(name) {
-  showSection("places");
-  const card = [...document.querySelectorAll(".location")].find(card =>
-    card.dataset.name === name
-  );
-  if (card) card.scrollIntoView({ behavior: "smooth", block: "center" });
-  naviMessage("Эй! Ты выбрал: " + name + "!");
+  document.getElementById(id).classList.remove("hidden");
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+
+  naviMessage("Отлично! Давай исследуем этот раздел!");
 }
 
 function naviMessage(message) {
   const box = document.getElementById("navi-message");
-  box.textContent = message;
+
+  box.innerHTML = "";
+
+  const title = document.createElement("strong");
+  title.textContent = "Нави";
+
+  const text = document.createElement("span");
+  text.textContent = message;
+
+  box.append(title, text);
   box.style.display = "block";
-  clearTimeout(window.naviTimer);
-  window.naviTimer = setTimeout(() => {
+
+  clearTimeout(naviTimer);
+
+  naviTimer = setTimeout(() => {
     box.style.display = "none";
-  }, 4000);
+  }, 5500);
+}
+
+function talkToNavi() {
+  const tip = naviTips[naviIndex];
+
+  naviMessage(tip);
+
+  naviIndex = (naviIndex + 1) % naviTips.length;
+
+  const navi = document.getElementById("navi");
+
+  navi.animate(
+    [
+      { transform: "scale(1) rotate(0deg)" },
+      { transform: "scale(1.25) rotate(-10deg)" },
+      { transform: "scale(1.25) rotate(10deg)" },
+      { transform: "scale(1) rotate(0deg)" }
+    ],
+    {
+      duration: 500,
+      easing: "ease-in-out"
+    }
+  );
+}
+
+function openPlace(name) {
+  showSection("places");
+
+  const card = [...document.querySelectorAll(".location")].find(card =>
+    card.dataset.name === name
+  );
+
+  if (card) {
+    card.scrollIntoView({
+      behavior: "smooth",
+      block: "center"
+    });
+  }
+
+  naviMessage("Эй! Ты выбрал: " + name + "!");
 }
 
 function makeLocationCard(place) {
@@ -367,17 +561,21 @@ function makeLocationCard(place) {
     const img = document.createElement("img");
     img.src = "./images/" + place.file;
     img.alt = place.name;
+
     img.onerror = () => {
       const placeholder = document.createElement("div");
       placeholder.className = "image-placeholder";
-      placeholder.textContent = "Изображение не найдено: " + place.file;
+      placeholder.textContent =
+        "Изображение не найдено: " + place.file;
       img.replaceWith(placeholder);
     };
+
     card.appendChild(img);
   } else {
     const placeholder = document.createElement("div");
     placeholder.className = "image-placeholder";
-    placeholder.textContent = "Изображение Горы Смерти пока не добавлено";
+    placeholder.textContent =
+      "Изображение Горы Смерти пока не добавлено";
     card.appendChild(placeholder);
   }
 
@@ -389,18 +587,26 @@ function makeLocationCard(place) {
 
   const button = document.createElement("button");
   button.textContent = "Исследовать";
-  button.onclick = () => naviMessage("Нави: " + place.description);
+
+  button.onclick = () => {
+    naviMessage("Нави: " + place.description);
+  };
 
   content.append(title, description, button);
   card.appendChild(content);
+
   return card;
 }
 
 function renderPlaces() {
   const container = document.getElementById("locations");
-  places.forEach(place => container.appendChild(makeLocationCard(place)));
+
+  places.forEach(place => {
+    container.appendChild(makeLocationCard(place));
+  });
 
   const map = document.getElementById("map-buttons");
+
   places.forEach(place => {
     const button = document.createElement("button");
     button.textContent = place.name;
@@ -411,16 +617,25 @@ function renderPlaces() {
 
 function renderChecklist(containerId, entries, storageKey) {
   const container = document.getElementById(containerId);
+
   entries.forEach((entry, index) => {
     const label = document.createElement("label");
     label.className = "list-item";
 
     const checkbox = document.createElement("input");
     checkbox.type = "checkbox";
-    checkbox.checked = localStorage.getItem(storageKey + index) === "true";
+    checkbox.checked =
+      localStorage.getItem(storageKey + index) === "true";
 
     checkbox.addEventListener("change", () => {
-      localStorage.setItem(storageKey + index, checkbox.checked);
+      localStorage.setItem(
+        storageKey + index,
+        checkbox.checked
+      );
+
+      if (checkbox.checked) {
+        naviMessage("Молодец! Ещё одно достижение в твоём путешествии!");
+      }
     });
 
     const text = document.createElement("span");
@@ -430,6 +645,8 @@ function renderChecklist(containerId, entries, storageKey) {
     container.appendChild(label);
   });
 }
+
+/* Музыка */
 
 const music = document.getElementById("background-music");
 const musicButton = document.getElementById("music-button");
@@ -457,9 +674,54 @@ music.addEventListener("error", () => {
   musicButton.textContent = "Музыкальный файл не найден";
 });
 
+/* Нави реагирует на нажатие и клавиатуру */
+
+const navi = document.getElementById("navi");
+
+navi.addEventListener("click", talkToNavi);
+
+navi.addEventListener("keydown", event => {
+  if (event.key === "Enter" || event.key === " ") {
+    event.preventDefault();
+    talkToNavi();
+  }
+});
+
+/* Иногда Нави сама напоминает о себе */
+
+function startNaviIdle() {
+  clearTimeout(idleTimer);
+
+  idleTimer = setTimeout(() => {
+    const randomGreeting =
+      naviGreetings[
+        Math.floor(Math.random() * naviGreetings.length)
+      ];
+
+    naviMessage(randomGreeting);
+
+    startNaviIdle();
+  }, 45000);
+}
+
+/* Запуск сайта */
+
 renderPlaces();
-renderChecklist("quest-list", quests, "hyrule-quest-");
-renderChecklist("inventory-list", items, "hyrule-item-");
+
+renderChecklist(
+  "quest-list",
+  quests,
+  "hyrule-quest-"
+);
+
+renderChecklist(
+  "inventory-list",
+  items,
+  "hyrule-item-"
+);
+
+startNaviIdle();
+
 </script>
 </body>
 </html>
